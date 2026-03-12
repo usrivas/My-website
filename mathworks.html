@@ -1295,6 +1295,107 @@
       letter-spacing: 0.03em;
     }
 
+    /* ─── SIDEBAR & SECTIONS ─────────────────────────────── */
+    .sections-wrapper {
+      position: relative;
+    }
+
+    .sidebar-track {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    .case-sidebar {
+      position: sticky;
+      top: 120px;
+      width: 220px;
+      margin-top: 96px;
+      /* Align with section padding */
+      pointer-events: auto;
+    }
+
+    .toc-title {
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--n500);
+      margin-bottom: 32px;
+    }
+
+    .toc-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .toc-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--n500);
+      text-decoration: none;
+      transition: all 0.2s var(--ease-out);
+    }
+
+    .toc-link .line {
+      display: block;
+      width: 18px;
+      height: 1px;
+      background: var(--n300);
+      transition: all 0.2s var(--ease-out);
+    }
+
+    .toc-link:hover {
+      color: var(--n700);
+    }
+
+    .toc-link:hover .line {
+      background: var(--n500);
+      width: 22px;
+    }
+
+    .toc-link.active {
+      color: var(--black);
+      font-weight: 500;
+    }
+
+    .toc-link.active .line {
+      background: var(--black);
+      width: 32px;
+      height: 1.5px;
+    }
+
+    @media (min-width: 1140px) {
+      .sections-wrapper .container {
+        max-width: 1380px;
+        padding-left: 280px;
+      }
+
+      .sections-wrapper .container-narrow {
+        max-width: 1020px;
+        padding-left: 280px;
+      }
+
+      .sidebar-track .container {
+        padding-left: 40px !important;
+      }
+    }
+
+    @media (max-width: 1139px) {
+      .sidebar-track {
+        display: none;
+      }
+    }
+
     /* ─── SCROLL ANIMATIONS ──────────────────────────────── */
     .js-ready .reveal {
       opacity: 0;
@@ -1463,7 +1564,7 @@
 
   <!-- ANNOUNCEMENT BAR -->
   <div class="announcement-bar" role="banner">
-    Available for new opportunities · <a href="index.html#contact">Let's talk</a>
+    Available for new opportunities · <a href="https://www.linkedin.com/in/unnati-srivastava/">Let's talk</a>
   </div>
 
   <!-- NAV -->
@@ -1485,7 +1586,7 @@
       </ul>
 
       <div class="nav-actions">
-        <a href="index.html#contact" class="btn btn-ghost">Say hello</a>
+        <a href="https://www.linkedin.com/in/unnati-srivastava/" class="btn btn-ghost">Say hello</a>
         <a href="index.html#work" class="btn btn-primary-nav">View work</a>
       </div>
     </div>
@@ -1576,485 +1677,524 @@
   <!-- ═══════════════════════════════════════════════════════════
        OVERVIEW
   ═══════════════════════════════════════════════════════════ -->
-  <section class="section">
-    <div class="container">
-      <div class="two-col-wide">
-        <div>
-          <p class="section-label reveal">Project Overview</p>
-          <h2 class="section-title reveal">Designing a scalable future for MATLAB's app-building tool</h2>
-          <p class="section-body reveal">App Designer is a visual development environment (VDE) used in conjunction with
-            MATLAB. It enables users to design interactive applications using drag-and-drop components and integrated
-            code logic — supporting over <strong>3 million users</strong>, from researchers and scientists to students.
-          </p>
-          <p class="section-body reveal">As the sole UX Design Intern on the App Designer team during my 11-week summer
-            internship, I was tasked with modernizing the tool to make it more intuitive, visually appealing, and
-            competitive with modern prototyping tools like Figma and Adobe XD.</p>
-        </div>
-        <div class="reveal reveal-delay-2">
-          <div class="img-block">
-            <img src="Assets/Hero/MathWorks/app-designer-original.png" alt="App Designer — Current State Overview"
-              style="width:100%;height:auto;display:block;max-width:900px;" />
-          </div>
-          <p class="img-caption">App Designer's existing interface — the starting point for this redesign.</p>
-        </div>
+  <div class="sections-wrapper">
+    <div class="sidebar-track" aria-hidden="true">
+      <div class="container" style="height: 100%; position: relative;">
+        <aside class="case-sidebar">
+          <h3 class="toc-title">Contents</h3>
+          <ul class="toc-list">
+            <li><a href="#overview" class="toc-link active"><span class="line"></span>Overview</a></li>
+            <li><a href="#problem" class="toc-link"><span class="line"></span>Problem</a></li>
+            <li><a href="#research" class="toc-link"><span class="line"></span>Research</a></li>
+            <li><a href="#solution" class="toc-link"><span class="line"></span>Solution</a></li>
+            <li><a href="#impact" class="toc-link"><span class="line"></span>Impact</a></li>
+          </ul>
+        </aside>
       </div>
     </div>
-  </section>
 
-  <!-- ═══════════════════════════════════════════════════════════
+    <section class="section" id="overview">
+      <div class="container">
+        <div class="two-col-wide">
+          <div>
+            <p class="section-label reveal">Project Overview</p>
+            <h2 class="section-title reveal">Designing a scalable future for MATLAB's app-building tool</h2>
+            <p class="section-body reveal">App Designer is a visual development environment (VDE) used in conjunction
+              with
+              MATLAB. It enables users to design interactive applications using drag-and-drop components and integrated
+              code logic — supporting over <strong>3 million users</strong>, from researchers and scientists to
+              students.
+            </p>
+            <p class="section-body reveal">As the sole UX Design Intern on the App Designer team during my 11-week
+              summer
+              internship, I was tasked with modernizing the tool to make it more intuitive, visually appealing, and
+              competitive with modern prototyping tools like Figma and Adobe XD.</p>
+          </div>
+          <div class="reveal reveal-delay-2">
+            <div class="img-block">
+              <img src="Assets/Hero/MathWorks/app-designer-original.png" alt="App Designer — Current State Overview"
+                style="width:100%;height:auto;display:block;max-width:900px;" />
+            </div>
+            <p class="img-caption">App Designer's existing interface — the starting point for this redesign.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
        SCOPE
   ═══════════════════════════════════════════════════════════ -->
-  <section class="section">
-    <div class="container">
-      <div class="two-col">
-        <div>
-          <p class="section-label reveal">Scope</p>
-          <h2 class="section-title reveal">Uncovering the 'Why' behind the redesign</h2>
-          <p class="section-body reveal">The prompt to "modernize App Designer" was intentionally broad. Rather than
-            jumping into solutions, I reframed the problem by asking <em>"Why?"</em> and conducted stakeholder
-            interviews to uncover the real drivers behind this initiative — connecting the team's day-to-day pain to
-            MATLAB's five-year product vision.</p>
-          <p class="section-body reveal" style="margin-top:16px;">This early reframing shaped everything that followed:
-            it moved us from a surface-level visual refresh to a purposeful, systems-level redesign.</p>
-        </div>
-        <div class="scope-cards-grid reveal reveal-delay-2">
-          <div class="scope-card">
-            <div class="scope-card-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
-                <circle cx="12" cy="12" r="3" />
-                <path
-                  d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12" />
-              </svg>
-            </div>
-            <p class="scope-card-text">Users seek a modern, intuitive interface for a better app development experience.
-            </p>
+    <section class="section" id="problem">
+      <div class="container">
+        <div class="two-col">
+          <div>
+            <p class="section-label reveal">Scope</p>
+            <h2 class="section-title reveal">Uncovering the 'Why' behind the redesign</h2>
+            <p class="section-body reveal">The prompt to "modernize App Designer" was intentionally broad. Rather than
+              jumping into solutions, I reframed the problem by asking <em>"Why?"</em> and conducted stakeholder
+              interviews to uncover the real drivers behind this initiative — connecting the team's day-to-day pain to
+              MATLAB's five-year product vision.</p>
+            <p class="section-body reveal" style="margin-top:16px;">This early reframing shaped everything that
+              followed:
+              it moved us from a surface-level visual refresh to a purposeful, systems-level redesign.</p>
           </div>
-          <div class="scope-card">
-            <div class="scope-card-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
-                <rect x="3" y="3" width="4" height="4" rx="1" />
-                <rect x="10" y="3" width="4" height="4" rx="1" />
-                <rect x="17" y="3" width="4" height="4" rx="1" />
-                <rect x="3" y="10" width="4" height="4" rx="1" />
-                <rect x="10" y="10" width="4" height="4" rx="1" />
-                <rect x="17" y="10" width="4" height="4" rx="1" />
-                <rect x="3" y="17" width="4" height="4" rx="1" />
-                <rect x="10" y="17" width="4" height="4" rx="1" />
-                <rect x="17" y="17" width="4" height="4" rx="1" />
-              </svg>
+          <div class="scope-cards-grid reveal reveal-delay-2">
+            <div class="scope-card">
+              <div class="scope-card-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                  <circle cx="12" cy="12" r="3" />
+                  <path
+                    d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12" />
+                </svg>
+              </div>
+              <p class="scope-card-text">Users seek a modern, intuitive interface for a better app development
+                experience.
+              </p>
             </div>
-            <p class="scope-card-text">Align with the MathWorks design system, Parula.</p>
-          </div>
-          <div class="scope-card">
-            <div class="scope-card-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
-                <path d="M4 4l4 4-4 4 4 4-4 4" />
-                <path d="M20 4l-4 4 4 4-4 4 4 4" />
-                <path d="M12 4v16" />
-              </svg>
+            <div class="scope-card">
+              <div class="scope-card-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                  <rect x="3" y="3" width="4" height="4" rx="1" />
+                  <rect x="10" y="3" width="4" height="4" rx="1" />
+                  <rect x="17" y="3" width="4" height="4" rx="1" />
+                  <rect x="3" y="10" width="4" height="4" rx="1" />
+                  <rect x="10" y="10" width="4" height="4" rx="1" />
+                  <rect x="17" y="10" width="4" height="4" rx="1" />
+                  <rect x="3" y="17" width="4" height="4" rx="1" />
+                  <rect x="10" y="17" width="4" height="4" rx="1" />
+                  <rect x="17" y="17" width="4" height="4" rx="1" />
+                </svg>
+              </div>
+              <p class="scope-card-text">Align with the MathWorks design system, Parula.</p>
             </div>
-            <p class="scope-card-text">Streamline integration between App Designer and MATLAB.</p>
-          </div>
-          <div class="scope-card">
-            <div class="scope-card-icon">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
-                <rect x="2" y="3" width="20" height="14" rx="2" />
-                <path d="M8 21h8M12 17v4" />
-                <path d="M7 8l3 3 5-5" />
-              </svg>
+            <div class="scope-card">
+              <div class="scope-card-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                  <path d="M4 4l4 4-4 4 4 4-4 4" />
+                  <path d="M20 4l-4 4 4 4-4 4 4 4" />
+                  <path d="M12 4v16" />
+                </svg>
+              </div>
+              <p class="scope-card-text">Streamline integration between App Designer and MATLAB.</p>
             </div>
-            <p class="scope-card-text">App Designer aims to market itself as a versatile prototyping tool with modern
-              design to match advanced competitors.</p>
+            <div class="scope-card">
+              <div class="scope-card-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                  <rect x="2" y="3" width="20" height="14" rx="2" />
+                  <path d="M8 21h8M12 17v4" />
+                  <path d="M7 8l3 3 5-5" />
+                </svg>
+              </div>
+              <p class="scope-card-text">App Designer aims to market itself as a versatile prototyping tool with modern
+                design to match advanced competitors.</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ═══════════════════════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════════════════════
        HMW
   ═══════════════════════════════════════════════════════════ -->
-  <div class="container-narrow">
-    <div class="hmw-block reveal">
-      <div class="hmw-label">How Might We</div>
-      <p class="hmw-text">How might we <strong>modernize App Designer</strong> so that it becomes the default
-        prototyping and app-building tool for over <strong>3 million MATLAB users</strong>?</p>
+    <div class="container-narrow">
+      <div class="hmw-block reveal">
+        <div class="hmw-label">How Might We</div>
+        <p class="hmw-text">How might we <strong>modernize App Designer</strong> so that it becomes the default
+          prototyping and app-building tool for over <strong>3 million MATLAB users</strong>?</p>
+      </div>
     </div>
-  </div>
 
-  <!-- ═══════════════════════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════════════════════
        RESEARCH
   ═══════════════════════════════════════════════════════════ -->
-  <section class="section section-alt">
-    <div class="container">
-      <p class="section-label reveal">Primary Research</p>
-      <h2 class="section-title reveal">Exploring the Research Landscape</h2>
-      <p class="section-body reveal">Once the 'Why' was established, I led a comprehensive research phase covering
-        multiple methods to build a grounded understanding of users, the competitive landscape, and existing system
-        health.</p>
+    <section class="section section-alt" id="research">
+      <div class="container">
+        <p class="section-label reveal">Primary Research</p>
+        <h2 class="section-title reveal">Exploring the Research Landscape</h2>
+        <p class="section-body reveal">Once the 'Why' was established, I led a comprehensive research phase covering
+          multiple methods to build a grounded understanding of users, the competitive landscape, and existing system
+          health.</p>
 
-      <div class="research-grid">
-        <div class="research-card reveal">
-          <div class="research-card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <path d="M9 11l3 3L22 4" />
-              <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
-            </svg>
+        <div class="research-grid">
+          <div class="research-card reveal">
+            <div class="research-card-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M9 11l3 3L22 4" />
+                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
+              </svg>
+            </div>
+            <div class="research-card-title">System Audit</div>
+            <div class="research-card-desc">Comprehensive audit of the existing App Designer interface — cataloguing
+              inconsistencies, outdated patterns, and friction points across the full tool.</div>
           </div>
-          <div class="research-card-title">System Audit</div>
-          <div class="research-card-desc">Comprehensive audit of the existing App Designer interface — cataloguing
-            inconsistencies, outdated patterns, and friction points across the full tool.</div>
-        </div>
-        <div class="research-card reveal reveal-delay-1">
-          <div class="research-card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-              <circle cx="9" cy="7" r="4" />
-              <path d="M23 21v-2a4 4 0 00-3-3.87" />
-              <path d="M16 3.13a4 4 0 010 7.75" />
-            </svg>
+          <div class="research-card reveal reveal-delay-1">
+            <div class="research-card-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 00-3-3.87" />
+                <path d="M16 3.13a4 4 0 010 7.75" />
+              </svg>
+            </div>
+            <div class="research-card-title">User Interviews</div>
+            <div class="research-card-desc">Spoke directly with App Designer users — researchers, engineers, and
+              students
+              — to understand real workflow challenges and unmet expectations.</div>
           </div>
-          <div class="research-card-title">User Interviews</div>
-          <div class="research-card-desc">Spoke directly with App Designer users — researchers, engineers, and students
-            — to understand real workflow challenges and unmet expectations.</div>
-        </div>
-        <div class="research-card reveal reveal-delay-2">
-          <div class="research-card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <circle cx="11" cy="11" r="8" />
-              <path d="M21 21l-4.35-4.35" />
-            </svg>
+          <div class="research-card reveal reveal-delay-2">
+            <div class="research-card-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <circle cx="11" cy="11" r="8" />
+                <path d="M21 21l-4.35-4.35" />
+              </svg>
+            </div>
+            <div class="research-card-title">Competitive Analysis</div>
+            <div class="research-card-desc">Analyzed 4 direct competitors — including Figma and Adobe XD — mapping
+              feature
+              parity, UI conventions, and onboarding approaches.</div>
           </div>
-          <div class="research-card-title">Competitive Analysis</div>
-          <div class="research-card-desc">Analyzed 4 direct competitors — including Figma and Adobe XD — mapping feature
-            parity, UI conventions, and onboarding approaches.</div>
-        </div>
-        <div class="research-card reveal">
-          <div class="research-card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
-              <polyline points="14 2 14 8 20 8" />
-              <line x1="16" y1="13" x2="8" y2="13" />
-              <line x1="16" y1="17" x2="8" y2="17" />
-            </svg>
+          <div class="research-card reveal">
+            <div class="research-card-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+                <line x1="16" y1="13" x2="8" y2="13" />
+                <line x1="16" y1="17" x2="8" y2="17" />
+              </svg>
+            </div>
+            <div class="research-card-title">300+ Bug Reports</div>
+            <div class="research-card-desc">Leveraged LLMs to synthesize over 300 internal customer complaint reports,
+              surfacing recurring themes and high-frequency pain points at scale.</div>
           </div>
-          <div class="research-card-title">300+ Bug Reports</div>
-          <div class="research-card-desc">Leveraged LLMs to synthesize over 300 internal customer complaint reports,
-            surfacing recurring themes and high-frequency pain points at scale.</div>
-        </div>
-        <div class="research-card reveal reveal-delay-1">
-          <div class="research-card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <rect x="3" y="3" width="18" height="18" rx="2" />
-              <path d="M3 9h18M9 21V9" />
-            </svg>
+          <div class="research-card reveal reveal-delay-1">
+            <div class="research-card-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <path d="M3 9h18M9 21V9" />
+              </svg>
+            </div>
+            <div class="research-card-title">Cross-Functional Alignment</div>
+            <div class="research-card-desc">Collaborated with PMs, engineers, and senior visual designers to align on
+              technical constraints and MATLAB's evolving design language.</div>
           </div>
-          <div class="research-card-title">Cross-Functional Alignment</div>
-          <div class="research-card-desc">Collaborated with PMs, engineers, and senior visual designers to align on
-            technical constraints and MATLAB's evolving design language.</div>
-        </div>
-        <div class="research-card reveal reveal-delay-2">
-          <div class="research-card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-            </svg>
+          <div class="research-card reveal reveal-delay-2">
+            <div class="research-card-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+              </svg>
+            </div>
+            <div class="research-card-title">Design System Alignment</div>
+            <div class="research-card-desc">Consulted senior visual designers to understand MATLAB's evolving design
+              language — informing color, iconography, and layout decisions.</div>
           </div>
-          <div class="research-card-title">Design System Alignment</div>
-          <div class="research-card-desc">Consulted senior visual designers to understand MATLAB's evolving design
-            language — informing color, iconography, and layout decisions.</div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ═══════════════════════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════════════════════
        CONSTRAINTS
   ═══════════════════════════════════════════════════════════ -->
-  <section class="section">
-    <div class="container-narrow">
-      <p class="section-label reveal">Constraints</p>
-      <h2 class="section-title reveal">Balancing legacy infrastructure<br>with strategic innovation</h2>
-      <div class="constraint-pair">
-        <div class="constraint-card reveal">
-          <div class="constraint-card-num">Constraint 01</div>
-          <div class="constraint-card-title">Working within a legacy system</div>
-          <div class="constraint-card-body">Developers requested minimal changes to the underlying information
-            architecture. My mandate was to focus on visual and interaction-level improvements — not structural
-            overhauls — which required creative problem-solving within tight boundaries.</div>
-        </div>
-        <div class="constraint-card reveal reveal-delay-1">
-          <div class="constraint-card-num">Constraint 02</div>
-          <div class="constraint-card-title">Alignment with MATLAB's visual future</div>
-          <div class="constraint-card-body">I consulted senior visual designers from the MATLAB team to understand their
-            evolving design language. This informed all choices for color, iconography, and layout — ensuring the
-            redesign felt part of a coherent system, not a one-off refresh.</div>
+    <section class="section">
+      <div class="container-narrow">
+        <p class="section-label reveal">Constraints</p>
+        <h2 class="section-title reveal">Balancing legacy infrastructure<br>with strategic innovation</h2>
+        <div class="constraint-pair">
+          <div class="constraint-card reveal">
+            <div class="constraint-card-num">Constraint 01</div>
+            <div class="constraint-card-title">Working within a legacy system</div>
+            <div class="constraint-card-body">Developers requested minimal changes to the underlying information
+              architecture. My mandate was to focus on visual and interaction-level improvements — not structural
+              overhauls — which required creative problem-solving within tight boundaries.</div>
+          </div>
+          <div class="constraint-card reveal reveal-delay-1">
+            <div class="constraint-card-num">Constraint 02</div>
+            <div class="constraint-card-title">Alignment with MATLAB's visual future</div>
+            <div class="constraint-card-body">I consulted senior visual designers from the MATLAB team to understand
+              their
+              evolving design language. This informed all choices for color, iconography, and layout — ensuring the
+              redesign felt part of a coherent system, not a one-off refresh.</div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ═══════════════════════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════════════════════
        FEATURE PRIORITIZATION
   ═══════════════════════════════════════════════════════════ -->
-  <section class="section section-alt">
-    <div class="container">
-      <p class="section-label reveal">Prioritizing Research Insights</p>
-      <h2 class="section-title reveal">Grounding design direction in real user pain points</h2>
-      <p class="section-body reveal">I led a workshop with two UX Researchers to map all research findings onto a
-        <strong>Functionality vs. Visual Design impact matrix</strong>. This exercise made the prioritization process
-        explicit and defensible — moving us from a long list of possible improvements to a focused set of high-ROI
-        updates.
-      </p>
-      <p class="section-body reveal" style="margin-top:16px;">The matrix helped me identify which problems were blocking
-        core workflows versus which were aesthetic frustrations — and sequence the work accordingly.</p>
-      <div class="reveal"
-        style="margin-top: 40px; border-radius: 16px; overflow: hidden; border: 1px solid var(--p200); aspect-ratio: 16/9; position: relative; background: var(--p50);">
-        <iframe src="https://player.vimeo.com/video/1078524728?background=1&autoplay=1&loop=1&muted=1" frameborder="0"
-          allow="autoplay; fullscreen" style="position:absolute;top:0;left:0;width:100%;height:100%;"
-          title="Prioritizing Research Insights"></iframe>
+    <section class="section section-alt">
+      <div class="container">
+        <p class="section-label reveal">Prioritizing Research Insights</p>
+        <h2 class="section-title reveal">Grounding design direction in real user pain points</h2>
+        <p class="section-body reveal">I led a workshop with two UX Researchers to map all research findings onto a
+          <strong>Functionality vs. Visual Design impact matrix</strong>. This exercise made the prioritization process
+          explicit and defensible — moving us from a long list of possible improvements to a focused set of high-ROI
+          updates.
+        </p>
+        <p class="section-body reveal" style="margin-top:16px;">The matrix helped me identify which problems were
+          blocking
+          core workflows versus which were aesthetic frustrations — and sequence the work accordingly.</p>
+        <div class="reveal"
+          style="margin-top: 40px; border-radius: 16px; overflow: hidden; border: 1px solid var(--p200); aspect-ratio: 16/9; position: relative; background: var(--p50);">
+          <iframe src="https://player.vimeo.com/video/1078524728?background=1&autoplay=1&loop=1&muted=1" frameborder="0"
+            allow="autoplay; fullscreen" style="position:absolute;top:0;left:0;width:100%;height:100%;"
+            title="Prioritizing Research Insights"></iframe>
+        </div>
+        <p class="img-caption reveal" style="margin-top:12px;">Workshop output: prioritization matrix mapping research
+          findings to impact quadrants.</p>
       </div>
-      <p class="img-caption reveal" style="margin-top:12px;">Workshop output: prioritization matrix mapping research
-        findings to impact quadrants.</p>
-    </div>
-  </section>
+    </section>
 
-  <!-- ═══════════════════════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════════════════════
        IDEATION
   ═══════════════════════════════════════════════════════════ -->
-  <section class="section">
-    <div class="container">
-      <p class="section-label reveal">Ideation &amp; Wireframes</p>
-      <h2 class="section-title reveal">Exploring the possibilities</h2>
-      <p class="section-body reveal" style="max-width:680px;">The wireframing phase went through significant iteration.
-        Early concepts were quickly pressure-tested in design reviews, leading to meaningful pivots — including a shift
-        to lighter iconography, tighter modular spacing, and ultimately a reimagined layout that treats App Designer as
-        a modern, scalable platform.</p>
+    <section class="section">
+      <div class="container">
+        <p class="section-label reveal">Ideation &amp; Wireframes</p>
+        <h2 class="section-title reveal">Exploring the possibilities</h2>
+        <p class="section-body reveal" style="max-width:680px;">The wireframing phase went through significant
+          iteration.
+          Early concepts were quickly pressure-tested in design reviews, leading to meaningful pivots — including a
+          shift
+          to lighter iconography, tighter modular spacing, and ultimately a reimagined layout that treats App Designer
+          as
+          a modern, scalable platform.</p>
 
-      <div class="reveal" style="margin-top: 48px;">
-        <div class="img-block">
-          <img src="Assets/Hero/MathWorks/initial-design.png" alt="Initial wireframe design"
-            style="width:100%;height:auto;display:block;" />
+        <div class="reveal" style="margin-top: 48px;">
+          <div class="img-block">
+            <img src="Assets/Hero/MathWorks/initial-design.png" alt="Initial wireframe design"
+              style="width:100%;height:auto;display:block;" />
+          </div>
+          <p class="img-caption" style="margin-top:10px;">Initial design exploration — early layout and structure
+            concepts.</p>
         </div>
-        <p class="img-caption" style="margin-top:10px;">Initial design exploration — early layout and structure
-          concepts.</p>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ═══════════════════════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════════════════════
        SOLUTIONS
   ═══════════════════════════════════════════════════════════ -->
-  <section class="section section-alt">
-    <div class="container">
-      <p class="section-label reveal">Final Recommendations</p>
-      <h2 class="section-title reveal">Three high-impact solutions</h2>
-      <p class="section-body reveal" style="margin-bottom: 0;">Each recommendation was grounded in research, validated
-        through design reviews, and scoped to be feasible within the existing technical architecture.</p>
+    <section class="section section-alt" id="solution">
+      <div class="container">
+        <p class="section-label reveal">Final Recommendations</p>
+        <h2 class="section-title reveal">Three high-impact solutions</h2>
+        <p class="section-body reveal" style="margin-bottom: 0;">Each recommendation was grounded in research, validated
+          through design reviews, and scoped to be feasible within the existing technical architecture.</p>
 
-      <div class="solution-stack" style="margin-top: 48px;">
+        <div class="solution-stack" style="margin-top: 48px;">
 
-        <!-- Solution 1 -->
-        <div class="solution-card reveal">
-          <div class="solution-card-text">
-            <div class="solution-num">Recommendation 01</div>
-            <h3 class="solution-title">Skeleton Screen + Progress Bar</h3>
-            <p class="solution-body">Collaborated with PM and developers to build a two-layer loading feedback system
-              that dramatically reduces perceived wait time and user anxiety.</p>
-            <ul class="solution-bullets">
-              <li>Skeleton screen mimics the app layout while content loads, maintaining spatial context</li>
-              <li>Progress bar under the toolbar gives real-time load status — users know something is happening</li>
-              <li>Together, these reduce uncertainty and improve perceived performance without changing load speed</li>
-            </ul>
+          <!-- Solution 1 -->
+          <div class="solution-card reveal">
+            <div class="solution-card-text">
+              <div class="solution-num">Recommendation 01</div>
+              <h3 class="solution-title">Skeleton Screen + Progress Bar</h3>
+              <p class="solution-body">Collaborated with PM and developers to build a two-layer loading feedback system
+                that dramatically reduces perceived wait time and user anxiety.</p>
+              <ul class="solution-bullets">
+                <li>Skeleton screen mimics the app layout while content loads, maintaining spatial context</li>
+                <li>Progress bar under the toolbar gives real-time load status — users know something is happening</li>
+                <li>Together, these reduce uncertainty and improve perceived performance without changing load speed
+                </li>
+              </ul>
+            </div>
+            <div class="solution-card-img" style="position:relative; overflow:hidden;">
+              <iframe src="https://player.vimeo.com/video/1077397039?background=1&autoplay=1&loop=1&muted=1"
+                frameborder="0" allow="autoplay; fullscreen"
+                style="position:absolute;top:0;left:0;width:100%;height:100%;"
+                title="Skeleton Screen & Progress Bar"></iframe>
+            </div>
           </div>
-          <div class="solution-card-img" style="position:relative; overflow:hidden;">
-            <iframe src="https://player.vimeo.com/video/1077397039?background=1&autoplay=1&loop=1&muted=1"
-              frameborder="0" allow="autoplay; fullscreen"
-              style="position:absolute;top:0;left:0;width:100%;height:100%;"
-              title="Skeleton Screen & Progress Bar"></iframe>
+
+          <!-- Solution 2 -->
+          <div class="solution-card flip reveal">
+            <div class="solution-card-img" style="position:relative; overflow:hidden;">
+              <iframe src="https://player.vimeo.com/video/1078526787?background=1&autoplay=1&loop=1&muted=1"
+                frameborder="0" allow="autoplay; fullscreen"
+                style="position:absolute;top:0;left:0;width:100%;height:100%;"
+                title="AI Copilot + Agent Model"></iframe>
+            </div>
+            <div class="solution-card-text">
+              <div class="solution-num">Recommendation 02</div>
+              <h3 class="solution-title">AI Copilot + Agent Model</h3>
+              <p class="solution-body">Proposed a dual-mode AI assistant to lower the barrier to entry for new users
+                while
+                augmenting power users' workflows.</p>
+              <ul class="solution-bullets">
+                <li>Copilot mode: suggests layout adjustments and callback logic inline as the user works</li>
+                <li>Agent mode: autonomously generates logic-based app templates from a prompt</li>
+                <li>Designed to feel like a knowledgeable collaborator, not an intrusive overlay</li>
+              </ul>
+            </div>
           </div>
+
+          <!-- Solution 3 -->
+          <div class="solution-card reveal">
+            <div class="solution-card-text">
+              <div class="solution-num">Recommendation 03</div>
+              <h3 class="solution-title">Dark Mode Toggle</h3>
+              <p class="solution-body">Added a smooth dark mode toggle based on consistently high user demand surfaced
+                across bug reports and interviews.</p>
+              <ul class="solution-bullets">
+                <li>73% of developers prefer dark mode (Stack Overflow Annual Survey)</li>
+                <li>Reduces eye strain in low-light coding environments</li>
+                <li>Aligns with ongoing dark mode efforts across MATLAB's broader design system</li>
+              </ul>
+            </div>
+            <div class="solution-card-img" style="position:relative; overflow:hidden;">
+              <iframe src="https://player.vimeo.com/video/1078527528?background=1&autoplay=1&loop=1&muted=1"
+                frameborder="0" allow="autoplay; fullscreen"
+                style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Dark Mode Toggle"></iframe>
+            </div>
+          </div>
+
         </div>
-
-        <!-- Solution 2 -->
-        <div class="solution-card flip reveal">
-          <div class="solution-card-img" style="position:relative; overflow:hidden;">
-            <iframe src="https://player.vimeo.com/video/1078526787?background=1&autoplay=1&loop=1&muted=1"
-              frameborder="0" allow="autoplay; fullscreen"
-              style="position:absolute;top:0;left:0;width:100%;height:100%;" title="AI Copilot + Agent Model"></iframe>
-          </div>
-          <div class="solution-card-text">
-            <div class="solution-num">Recommendation 02</div>
-            <h3 class="solution-title">AI Copilot + Agent Model</h3>
-            <p class="solution-body">Proposed a dual-mode AI assistant to lower the barrier to entry for new users while
-              augmenting power users' workflows.</p>
-            <ul class="solution-bullets">
-              <li>Copilot mode: suggests layout adjustments and callback logic inline as the user works</li>
-              <li>Agent mode: autonomously generates logic-based app templates from a prompt</li>
-              <li>Designed to feel like a knowledgeable collaborator, not an intrusive overlay</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Solution 3 -->
-        <div class="solution-card reveal">
-          <div class="solution-card-text">
-            <div class="solution-num">Recommendation 03</div>
-            <h3 class="solution-title">Dark Mode Toggle</h3>
-            <p class="solution-body">Added a smooth dark mode toggle based on consistently high user demand surfaced
-              across bug reports and interviews.</p>
-            <ul class="solution-bullets">
-              <li>73% of developers prefer dark mode (Stack Overflow Annual Survey)</li>
-              <li>Reduces eye strain in low-light coding environments</li>
-              <li>Aligns with ongoing dark mode efforts across MATLAB's broader design system</li>
-            </ul>
-          </div>
-          <div class="solution-card-img" style="position:relative; overflow:hidden;">
-            <iframe src="https://player.vimeo.com/video/1078527528?background=1&autoplay=1&loop=1&muted=1"
-              frameborder="0" allow="autoplay; fullscreen"
-              style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Dark Mode Toggle"></iframe>
-          </div>
-        </div>
-
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ═══════════════════════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════════════════════
        BEFORE / AFTER
   ═══════════════════════════════════════════════════════════ -->
-  <section class="section">
-    <div class="container">
-      <p class="section-label reveal">Before &amp; After</p>
-      <h2 class="section-title reveal">The transformation</h2>
-      <p class="section-body reveal">Side-by-side comparison of the original App Designer interface and the proposed
-        redesign — same core structure, dramatically improved clarity, hierarchy, and visual language.</p>
-      <div class="before-after reveal" style="margin-top: 40px;">
-        <div class="ba-card ba-before">
-          <div class="ba-label">Before</div>
-          <div class="ba-img">
-            <div class="img-placeholder">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-                <rect x="3" y="3" width="18" height="18" rx="2" />
-              </svg>
-              Original App Designer interface
+    <section class="section">
+      <div class="container">
+        <p class="section-label reveal">Before &amp; After</p>
+        <h2 class="section-title reveal">The transformation</h2>
+        <p class="section-body reveal">Side-by-side comparison of the original App Designer interface and the proposed
+          redesign — same core structure, dramatically improved clarity, hierarchy, and visual language.</p>
+        <div class="before-after reveal" style="margin-top: 40px;">
+          <div class="ba-card ba-before">
+            <div class="ba-label">Before</div>
+            <div class="ba-img">
+              <div class="img-placeholder">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <rect x="3" y="3" width="18" height="18" rx="2" />
+                </svg>
+                Original App Designer interface
+              </div>
             </div>
           </div>
-        </div>
-        <div class="ba-card ba-after">
-          <div class="ba-label">After</div>
-          <div class="ba-img">
-            <div class="img-placeholder" style="color: var(--p600);">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-                <rect x="3" y="3" width="18" height="18" rx="2" />
-                <path d="M9 11l3 3 5-5" />
-              </svg>
-              Redesigned App Designer interface
+          <div class="ba-card ba-after">
+            <div class="ba-label">After</div>
+            <div class="ba-img">
+              <div class="img-placeholder" style="color: var(--p600);">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <rect x="3" y="3" width="18" height="18" rx="2" />
+                  <path d="M9 11l3 3 5-5" />
+                </svg>
+                Redesigned App Designer interface
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ═══════════════════════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════════════════════
        TESTING
   ═══════════════════════════════════════════════════════════ -->
-  <section class="section section-alt">
-    <div class="container">
-      <p class="section-label reveal">Testing &amp; Feedback</p>
-      <h2 class="section-title reveal">Design reviews with<br>senior UX designers</h2>
-      <p class="section-body reveal">I participated in 8 rounds of design review sessions with six senior UX designers,
-        iteratively refining my work based on their feedback and keeping designs aligned with team goals and technical
-        feasibility.</p>
+    <section class="section section-alt">
+      <div class="container">
+        <p class="section-label reveal">Testing &amp; Feedback</p>
+        <h2 class="section-title reveal">Design reviews with<br>senior UX designers</h2>
+        <p class="section-body reveal">I participated in 8 rounds of design review sessions with six senior UX
+          designers,
+          iteratively refining my work based on their feedback and keeping designs aligned with team goals and technical
+          feasibility.</p>
 
-      <div class="quotes-grid">
-        <div class="quote-card reveal">
-          <p class="quote-text">"I've noticed how the system consistently provides feedback on my status. This makes the
-            app feel more intuitive, almost as if it's communicating directly with me."</p>
-          <p class="quote-attr">— Senior UX Designer, MathWorks</p>
-        </div>
-        <div class="quote-card reveal reveal-delay-1">
-          <p class="quote-text">"The elements appear less cluttered and cleaner. The new UI represents a significant
-            improvement and aligns well with the direction we aim to move in."</p>
-          <p class="quote-attr">— Senior UX Designer, MathWorks</p>
-        </div>
-        <div class="quote-card reveal reveal-delay-2">
-          <p class="quote-text">"These improvements will enhance the user experience by maximizing screen real estate,
-            offering more space for interaction and reducing cognitive load."</p>
-          <p class="quote-attr">— Senior UX Designer, MathWorks</p>
+        <div class="quotes-grid">
+          <div class="quote-card reveal">
+            <p class="quote-text">"I've noticed how the system consistently provides feedback on my status. This makes
+              the
+              app feel more intuitive, almost as if it's communicating directly with me."</p>
+            <p class="quote-attr">— Senior UX Designer, MathWorks</p>
+          </div>
+          <div class="quote-card reveal reveal-delay-1">
+            <p class="quote-text">"The elements appear less cluttered and cleaner. The new UI represents a significant
+              improvement and aligns well with the direction we aim to move in."</p>
+            <p class="quote-attr">— Senior UX Designer, MathWorks</p>
+          </div>
+          <div class="quote-card reveal reveal-delay-2">
+            <p class="quote-text">"These improvements will enhance the user experience by maximizing screen real estate,
+              offering more space for interaction and reducing cognitive load."</p>
+            <p class="quote-attr">— Senior UX Designer, MathWorks</p>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ═══════════════════════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════════════════════
        OUTCOME
   ═══════════════════════════════════════════════════════════ -->
-  <section class="section">
-    <div class="container-narrow">
-      <p class="section-label reveal">Outcome</p>
-      <h2 class="section-title reveal">4 of 7 features added<br>to the roadmap</h2>
-      <div class="outcome-list">
-        <div class="outcome-item reveal">
-          <div class="outcome-icon">01</div>
-          <div class="outcome-text">
-            <div class="outcome-title">4 of 7 proposed features added to the App Designer roadmap</div>
-            <div class="outcome-desc">More than half of my final recommendations were formally adopted and scheduled for
-              engineering implementation in the product roadmap.</div>
+    <section class="section" id="impact">
+      <div class="container-narrow">
+        <p class="section-label reveal">Outcome</p>
+        <h2 class="section-title reveal">4 of 7 features added<br>to the roadmap</h2>
+        <div class="outcome-list">
+          <div class="outcome-item reveal">
+            <div class="outcome-icon">01</div>
+            <div class="outcome-text">
+              <div class="outcome-title">4 of 7 proposed features added to the App Designer roadmap</div>
+              <div class="outcome-desc">More than half of my final recommendations were formally adopted and scheduled
+                for
+                engineering implementation in the product roadmap.</div>
+            </div>
           </div>
-        </div>
-        <div class="outcome-item reveal">
-          <div class="outcome-icon">02</div>
-          <div class="outcome-text">
-            <div class="outcome-title">Influenced direction of MATLAB's future UI plans</div>
-            <div class="outcome-desc">The redesign work directly informed ongoing discussions around MATLAB's broader
-              visual design evolution — particularly the dark mode and loading state systems.</div>
+          <div class="outcome-item reveal">
+            <div class="outcome-icon">02</div>
+            <div class="outcome-text">
+              <div class="outcome-title">Influenced direction of MATLAB's future UI plans</div>
+              <div class="outcome-desc">The redesign work directly informed ongoing discussions around MATLAB's broader
+                visual design evolution — particularly the dark mode and loading state systems.</div>
+            </div>
           </div>
-        </div>
-        <div class="outcome-item reveal">
-          <div class="outcome-icon">03</div>
-          <div class="outcome-text">
-            <div class="outcome-title">Positioned App Designer to unlock 3M+ potential users</div>
-            <div class="outcome-desc">By lowering the learning curve and modernizing the interface, the redesign creates
-              a path for the broader MATLAB community to adopt App Designer as their primary app-building tool.</div>
+          <div class="outcome-item reveal">
+            <div class="outcome-icon">03</div>
+            <div class="outcome-text">
+              <div class="outcome-title">Positioned App Designer to unlock 3M+ potential users</div>
+              <div class="outcome-desc">By lowering the learning curve and modernizing the interface, the redesign
+                creates
+                a path for the broader MATLAB community to adopt App Designer as their primary app-building tool.</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ═══════════════════════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════════════════════
        LEARNINGS
   ═══════════════════════════════════════════════════════════ -->
-  <section class="section section-alt">
-    <div class="container">
-      <p class="section-label reveal">Reflections</p>
-      <h2 class="section-title reveal">What I took away</h2>
-      <div class="learnings-grid">
-        <div class="learning-card reveal">
-          <div class="learning-num">01</div>
-          <div class="learning-title">Deep dive into industry insight and visual development</div>
-          <div class="learning-body">Initially grappling with the technology, I took a user-centric approach — actually
-            exploring the coding environment to understand potential user hurdles. Conversations with App Designer users
-            provided invaluable insights into real workflow challenges and the intersection of code and visual tools.
+    <section class="section section-alt">
+      <div class="container">
+        <p class="section-label reveal">Reflections</p>
+        <h2 class="section-title reveal">What I took away</h2>
+        <div class="learnings-grid">
+          <div class="learning-card reveal">
+            <div class="learning-num">01</div>
+            <div class="learning-title">Deep dive into industry insight and visual development</div>
+            <div class="learning-body">Initially grappling with the technology, I took a user-centric approach —
+              actually
+              exploring the coding environment to understand potential user hurdles. Conversations with App Designer
+              users
+              provided invaluable insights into real workflow challenges and the intersection of code and visual tools.
+            </div>
+          </div>
+          <div class="learning-card reveal reveal-delay-1">
+            <div class="learning-num">02</div>
+            <div class="learning-title">Collaboration over isolation</div>
+            <div class="learning-body">This project highlighted the paramount importance of communication and
+              cross-functional collaboration. Each stakeholder — from engineers to researchers to visual designers —
+              brought invaluable expertise. The best outcomes came from synthesis, not solo thinking.</div>
+          </div>
+          <div class="learning-card reveal reveal-delay-2">
+            <div class="learning-num">03</div>
+            <div class="learning-title">Balancing functionality and aesthetics</div>
+            <div class="learning-body">While visual design is crucial, it's equally vital to recognize when something is
+              'good enough' and shift focus to broader functionality. Design impact isn't just measured in aesthetics —
+              it's measured in whether the right problems got solved.</div>
           </div>
         </div>
-        <div class="learning-card reveal reveal-delay-1">
-          <div class="learning-num">02</div>
-          <div class="learning-title">Collaboration over isolation</div>
-          <div class="learning-body">This project highlighted the paramount importance of communication and
-            cross-functional collaboration. Each stakeholder — from engineers to researchers to visual designers —
-            brought invaluable expertise. The best outcomes came from synthesis, not solo thinking.</div>
-        </div>
-        <div class="learning-card reveal reveal-delay-2">
-          <div class="learning-num">03</div>
-          <div class="learning-title">Balancing functionality and aesthetics</div>
-          <div class="learning-body">While visual design is crucial, it's equally vital to recognize when something is
-            'good enough' and shift focus to broader functionality. Design impact isn't just measured in aesthetics —
-            it's measured in whether the right problems got solved.</div>
-        </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+  </div> <!-- End sections-wrapper -->
 
   <!-- ═══════════════════════════════════════════════════════════
        NEXT CASE STUDY
@@ -2115,6 +2255,26 @@
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
     reveals.forEach(el => observer.observe(el));
+
+    // TOC active state handling
+    const trackedSections = document.querySelectorAll('.sections-wrapper section[id]');
+    const tocLinks = document.querySelectorAll('.toc-link');
+
+    if (trackedSections.length > 0 && tocLinks.length > 0) {
+      const tocObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            tocLinks.forEach(link => link.classList.remove('active'));
+            const activeLink = document.querySelector(`.toc-link[href="#${entry.target.id}"]`);
+            if (activeLink) {
+              activeLink.classList.add('active');
+            }
+          }
+        });
+      }, { rootMargin: '-20% 0px -40% 0px', threshold: 0 });
+
+      trackedSections.forEach(section => tocObserver.observe(section));
+    }
   </script>
 
 </body>

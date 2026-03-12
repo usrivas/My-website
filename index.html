@@ -293,10 +293,13 @@
 
     .hero-bg {
       position: absolute;
-      inset: 0;
+      inset: -10% -5%;
+      /* Added overflow for parallax scroll */
       background-image: url('./Assets/Hero/hero-new.jpeg');
       background-size: cover;
       background-position: center center;
+      will-change: transform;
+      transform: translateY(0);
     }
 
     .hero-bg::after {
@@ -999,14 +1002,16 @@
       overflow: hidden;
     }
 
-    .philosophy-section::before {
-      content: '';
+    .philosophy-bg {
       position: absolute;
-      inset: 0;
+      inset: -15% -5%;
+      /* Added overflow for parallax scroll */
       background-image: url('./Assets/Hero/hero-new.jpeg');
       background-size: cover;
       background-position: center center;
       z-index: 0;
+      will-change: transform;
+      transform: translateY(0);
     }
 
     .philosophy-section::after {
@@ -1474,7 +1479,7 @@
 
   <!-- ── ANNOUNCEMENT BAR ─────────────────────────────────────── -->
   <div class="announcement-bar" role="banner">
-    Available for new opportunities · <a href="#contact">Let's talk</a>
+    Available for new opportunities · <a href="https://www.linkedin.com/in/unnati-srivastava/">Let's talk</a>
   </div>
 
   <!-- ── NAV ─────────────────────────────────────────────────── -->
@@ -1495,7 +1500,7 @@
       </ul>
 
       <div class="nav-actions">
-        <a href="#contact" class="btn btn-ghost">Say hello</a>
+        <a href="https://www.linkedin.com/in/unnati-srivastava/" class="btn btn-ghost">Say hello</a>
         <a href="#work-grid" class="btn btn-primary">View work</a>
       </div>
     </div>
@@ -1744,6 +1749,7 @@
 
     <!-- ── PHILOSOPHY / ABOUT ────────────────────────────────── -->
     <section id="about" class="philosophy-section" aria-label="Design philosophy">
+      <div class="philosophy-bg" aria-hidden="true"></div>
       <div class="philosophy-inner">
         <div class="philosophy-glass">
           <div class="philosophy-eyebrow">The Design Philosophy</div>
@@ -1924,7 +1930,7 @@
         </h2>
         <p class="footer-cta-sub">Let's build something meaningful together.</p>
         <div class="footer-cta-actions">
-          <a href="mailto:hello@unnati.design" class="btn btn-purple">Get in touch</a>
+          <a href="https://www.linkedin.com/in/unnati-srivastava/" class="btn btn-purple">Get in touch</a>
           <a href="#work-grid" class="btn btn-white-outline"
             style="background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.2) !important;">View
             work</a>
@@ -1954,7 +1960,7 @@
         <div>
           <p class="footer-col-title">Connect</p>
           <ul class="footer-nav">
-            <li><a href="#contact">Say hello</a></li>
+            <li><a href="https://www.linkedin.com/in/unnati-srivastava/">Say hello</a></li>
             <li><a href="#experience">Resume</a></li>
           </ul>
         </div>
@@ -2064,6 +2070,46 @@
 
       setTimeout(type, startDelay);
     })();
+
+    // ── PARALLAX ──────────────────────────────────────────────
+    const heroBg = document.querySelector('.hero-bg');
+    const philoBg = document.querySelector('.philosophy-bg');
+    const philoSection = document.getElementById('about');
+
+    function handleParallax() {
+      const scrollY = window.pageYOffset;
+
+      // Hero Parallax
+      if (heroBg) {
+        heroBg.style.transform = `translate3d(0, ${scrollY * 0.35}px, 0)`;
+      }
+
+      // Philosophy Parallax
+      if (philoBg && philoSection) {
+        const rect = philoSection.getBoundingClientRect();
+        const winHeight = window.innerHeight;
+
+        if (rect.top < winHeight && rect.bottom > 0) {
+          const sectionOffset = philoSection.offsetTop;
+          const relativeScroll = scrollY - sectionOffset + (winHeight / 2);
+          philoBg.style.transform = `translate3d(0, ${relativeScroll * 0.18}px, 0)`;
+        }
+      }
+    }
+
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          handleParallax();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+
+    // Initial call
+    handleParallax();
   </script>
 
 </body>

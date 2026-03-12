@@ -140,6 +140,107 @@
       text-decoration-color: var(--p300);
     }
 
+    /* ─── SIDEBAR & SECTIONS ─────────────────────────────── */
+    .sections-wrapper {
+      position: relative;
+    }
+
+    .sidebar-track {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    .case-sidebar {
+      position: sticky;
+      top: 120px;
+      width: 220px;
+      margin-top: 96px;
+      /* Align with section padding */
+      pointer-events: auto;
+    }
+
+    .toc-title {
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--n500);
+      margin-bottom: 32px;
+    }
+
+    .toc-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .toc-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 15px;
+      font-weight: 400;
+      color: var(--n500);
+      text-decoration: none;
+      transition: all 0.2s var(--ease-out);
+    }
+
+    .toc-link .line {
+      display: block;
+      width: 18px;
+      height: 1px;
+      background: var(--n300);
+      transition: all 0.2s var(--ease-out);
+    }
+
+    .toc-link:hover {
+      color: var(--n700);
+    }
+
+    .toc-link:hover .line {
+      background: var(--n500);
+      width: 22px;
+    }
+
+    .toc-link.active {
+      color: var(--black);
+      font-weight: 500;
+    }
+
+    .toc-link.active .line {
+      background: var(--black);
+      width: 32px;
+      height: 1.5px;
+    }
+
+    @media (min-width: 1140px) {
+      .sections-wrapper .container {
+        max-width: 1380px;
+        padding-left: 280px;
+      }
+
+      .sections-wrapper .container-narrow {
+        max-width: 1020px;
+        padding-left: 280px;
+      }
+
+      .sidebar-track .container {
+        padding-left: 40px !important;
+      }
+    }
+
+    @media (max-width: 1139px) {
+      .sidebar-track {
+        display: none;
+      }
+    }
+
     /* ─── NAV ────────────────────────────────────────────── */
     nav#navbar {
       position: sticky;
@@ -1577,7 +1678,7 @@
 
   <!-- ANNOUNCEMENT BAR -->
   <div class="announcement-bar" role="banner">
-    Available for new opportunities · <a href="index.html#contact">Let's talk</a>
+    Available for new opportunities · <a href="https://www.linkedin.com/in/unnati-srivastava/">Let's talk</a>
   </div>
 
   <!-- NAV -->
@@ -1599,7 +1700,7 @@
       </ul>
 
       <div class="nav-actions">
-        <a href="index.html#contact" class="btn btn-ghost">Say hello</a>
+        <a href="https://www.linkedin.com/in/unnati-srivastava/" class="btn btn-ghost">Say hello</a>
         <a href="index.html#work" class="btn btn-primary-nav">View work</a>
       </div>
     </div>
@@ -1692,268 +1793,297 @@
   <!-- ═══════════════════════════════════════════════════════════
        OVERVIEW
   ═══════════════════════════════════════════════════════════ -->
-  <section class="section">
-    <div class="container">
-      <div class="two-col-wide">
-        <div>
-          <p class="section-label reveal">Project Overview</p>
-          <h2 class="section-title reveal">A couples app that helps partners <em>reconnect</em></h2>
-          <p class="section-body reveal">Spark is a mobile app for iOS and Android that helps couples stay connected
-            through playful, personalized coupons — small, thoughtful gestures that feel meaningful rather than
-            obligatory.</p>
-          <p class="section-body reveal">I've always been fascinated by how design can shift emotional dynamics in
-            overlooked spaces. As the Founding Product Designer, I owned the entire experience end-to-end: from the
-            mobile app to sales and marketing dashboards, the marketing website, and a scalable design system that tied
-            it all together.</p>
-        </div>
-        <div class="reveal reveal-delay-2">
-          <div class="img-block">
-            <img src="Assets/Spark/hero-image.png" alt="Spark App — Hero Overview"
-              style="width:100%;height:auto;display:block;" />
-          </div>
-          <p class="img-caption">The Spark homepage — a curated set of coupon cards, ready to send with a tap.</p>
-        </div>
+  <div class="sections-wrapper">
+    <div class="sidebar-track" aria-hidden="true">
+      <div class="container" style="height: 100%; position: relative;">
+        <aside class="case-sidebar">
+          <h3 class="toc-title">Contents</h3>
+          <ul class="toc-list">
+            <li><a href="#overview" class="toc-link active"><span class="line"></span>Overview</a></li>
+            <li><a href="#problem" class="toc-link"><span class="line"></span>Problem</a></li>
+            <li><a href="#research" class="toc-link"><span class="line"></span>Research</a></li>
+            <li><a href="#solution" class="toc-link"><span class="line"></span>Solution</a></li>
+            <li><a href="#impact" class="toc-link"><span class="line"></span>Impact</a></li>
+          </ul>
+        </aside>
       </div>
     </div>
-  </section>
 
-  <!-- ═══════════════════════════════════════════════════════════
+    <section class="section" id="overview">
+      <div class="container">
+        <div class="two-col-wide">
+          <div>
+            <p class="section-label reveal">Project Overview</p>
+            <h2 class="section-title reveal">A couples app that helps partners <em>reconnect</em></h2>
+            <p class="section-body reveal">Spark is a mobile app for iOS and Android that helps couples stay connected
+              through playful, personalized coupons — small, thoughtful gestures that feel meaningful rather than
+              obligatory.</p>
+            <p class="section-body reveal">I've always been fascinated by how design can shift emotional dynamics in
+              overlooked spaces. As the Founding Product Designer, I owned the entire experience end-to-end: from the
+              mobile app to sales and marketing dashboards, the marketing website, and a scalable design system that
+              tied
+              it all together.</p>
+          </div>
+          <div class="reveal reveal-delay-2">
+            <div class="img-block">
+              <img src="Assets/Spark/hero-image.png" alt="Spark App — Hero Overview"
+                style="width:100%;height:auto;display:block;" />
+            </div>
+            <p class="img-caption">The Spark homepage — a curated set of coupon cards, ready to send with a tap.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
        SCOPE BAND
   ═══════════════════════════════════════════════════════════ -->
-  <div class="scope-band">
-    <div class="container">
-      <div class="scope-inner">
-        <div class="scope-item reveal">
-          <div class="scope-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <rect x="5" y="2" width="14" height="20" rx="2" />
-              <path d="M12 18h.01" />
-            </svg>
+    <div class="scope-band">
+      <div class="container">
+        <div class="scope-inner">
+          <div class="scope-item reveal">
+            <div class="scope-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <rect x="5" y="2" width="14" height="20" rx="2" />
+                <path d="M12 18h.01" />
+              </svg>
+            </div>
+            <div class="scope-title">Mobile App</div>
+            <div class="scope-desc">iOS &amp; Android — full coupon flow, onboarding, redemption</div>
           </div>
-          <div class="scope-title">Mobile App</div>
-          <div class="scope-desc">iOS &amp; Android — full coupon flow, onboarding, redemption</div>
-        </div>
-        <div class="scope-item reveal reveal-delay-1">
-          <div class="scope-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
-              <polyline points="9 22 9 12 15 12 15 22" />
-            </svg>
+          <div class="scope-item reveal reveal-delay-1">
+            <div class="scope-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                <polyline points="9 22 9 12 15 12 15 22" />
+              </svg>
+            </div>
+            <div class="scope-title">Marketing Website</div>
+            <div class="scope-desc">Landing pages &amp; conversion-focused flows</div>
           </div>
-          <div class="scope-title">Marketing Website</div>
-          <div class="scope-desc">Landing pages &amp; conversion-focused flows</div>
-        </div>
-        <div class="scope-item reveal reveal-delay-2">
-          <div class="scope-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <rect x="2" y="3" width="20" height="14" rx="2" />
-              <path d="M8 21h8M12 17v4" />
-            </svg>
+          <div class="scope-item reveal reveal-delay-2">
+            <div class="scope-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <rect x="2" y="3" width="20" height="14" rx="2" />
+                <path d="M8 21h8M12 17v4" />
+              </svg>
+            </div>
+            <div class="scope-title">Dashboards</div>
+            <div class="scope-desc">Sales &amp; analytics tools for the internal team</div>
           </div>
-          <div class="scope-title">Dashboards</div>
-          <div class="scope-desc">Sales &amp; analytics tools for the internal team</div>
-        </div>
-        <div class="scope-item reveal reveal-delay-3">
-          <div class="scope-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <circle cx="12" cy="12" r="3" />
-              <path d="M19.07 4.93A10 10 0 115 19.07" />
-              <path d="M22 12A10 10 0 0012 2" />
-            </svg>
+          <div class="scope-item reveal reveal-delay-3">
+            <div class="scope-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <circle cx="12" cy="12" r="3" />
+                <path d="M19.07 4.93A10 10 0 115 19.07" />
+                <path d="M22 12A10 10 0 0012 2" />
+              </svg>
+            </div>
+            <div class="scope-title">Design System</div>
+            <div class="scope-desc">Scalable tokens, components, and patterns</div>
           </div>
-          <div class="scope-title">Design System</div>
-          <div class="scope-desc">Scalable tokens, components, and patterns</div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- ═══════════════════════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════════════════════
        CONTEXT
   ═══════════════════════════════════════════════════════════ -->
-  <section class="section section-alt">
-    <div class="container-narrow">
-      <p class="section-label reveal">Context</p>
-      <h2 class="section-title reveal">Busy schedules make<br>intimacy feel like <em>a task</em></h2>
-      <p class="section-body reveal">Couples want to keep their connection alive, but busy schedules, routines, and
-        misaligned expectations can make intimacy feel like a chore instead of a joy. The moments that once came
-        naturally get buried under notifications, work stress, and the monotony of daily routine.</p>
-      <p class="section-body reveal">Spark was born from the question: what if staying connected felt as easy and
-        delightful as sending a meme?</p>
-    </div>
-    <div class="container" style="margin-top: 48px;">
-      <div class="img-full reveal">
-        <img src="Assets/Spark/research-context.png" alt="User Research Context — Couples & Connection Patterns"
-          style="width:100%;max-width:900px;height:auto;display:block;border-radius:var(--radius-md);" />
+    <section class="section section-alt" id="problem">
+      <div class="container-narrow">
+        <p class="section-label reveal">Context</p>
+        <h2 class="section-title reveal">Busy schedules make<br>intimacy feel like <em>a task</em></h2>
+        <p class="section-body reveal">Couples want to keep their connection alive, but busy schedules, routines, and
+          misaligned expectations can make intimacy feel like a chore instead of a joy. The moments that once came
+          naturally get buried under notifications, work stress, and the monotony of daily routine.</p>
+        <p class="section-body reveal">Spark was born from the question: what if staying connected felt as easy and
+          delightful as sending a meme?</p>
       </div>
-    </div>
-  </section>
+      <div class="container" style="margin-top: 48px;">
+        <div class="img-full reveal">
+          <img src="Assets/Spark/research-context.png" alt="User Research Context — Couples & Connection Patterns"
+            style="width:100%;max-width:900px;height:auto;display:block;border-radius:var(--radius-md);" />
+        </div>
+      </div>
+    </section>
 
-  <!-- ═══════════════════════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════════════════════
        THE PROBLEM
   ═══════════════════════════════════════════════════════════ -->
-  <div class="container-narrow">
-    <div class="hmw-block reveal">
-      <div class="hmw-label">The Problem</div>
-      <p class="hmw-text">Most relationship-focused apps center around <strong>dating</strong> — not <strong>sustaining
-          love</strong>. There's no app that makes it delightfully easy for committed couples to nurture their bond in
-        the everyday.</p>
+    <div class="container-narrow">
+      <div class="hmw-block reveal">
+        <div class="hmw-label">The Problem</div>
+        <p class="hmw-text">Most relationship-focused apps center around <strong>dating</strong> — not
+          <strong>sustaining
+            love</strong>. There's no app that makes it delightfully easy for committed couples to nurture their bond in
+          the everyday.
+        </p>
+      </div>
     </div>
-  </div>
 
-  <!-- ═══════════════════════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════════════════════
        RESEARCH & DISCOVERY
   ═══════════════════════════════════════════════════════════ -->
-  <section class="section section-alt">
-    <div class="container">
-      <p class="section-label reveal">Research &amp; Discovery</p>
-      <h2 class="section-title reveal">Understanding how couples<br>stay connected today</h2>
-      <p class="section-body reveal">I conducted qualitative research with couples across different relationship stages
-        to understand their routines, friction points, and the role of small gestures in sustaining connection. The goal
-        was to build empathy before building anything else.</p>
+    <section class="section section-alt" id="research">
+      <div class="container">
+        <p class="section-label reveal">Research &amp; Discovery</p>
+        <h2 class="section-title reveal">Understanding how couples<br>stay connected today</h2>
+        <p class="section-body reveal">I conducted qualitative research with couples across different relationship
+          stages
+          to understand their routines, friction points, and the role of small gestures in sustaining connection. The
+          goal
+          was to build empathy before building anything else.</p>
 
-      <div class="research-grid">
-        <div class="research-card reveal">
-          <div class="research-card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-              <circle cx="9" cy="7" r="4" />
-              <path d="M23 21v-2a4 4 0 00-3-3.87" />
-              <path d="M16 3.13a4 4 0 010 7.75" />
-            </svg>
+        <div class="research-grid">
+          <div class="research-card reveal">
+            <div class="research-card-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M23 21v-2a4 4 0 00-3-3.87" />
+                <path d="M16 3.13a4 4 0 010 7.75" />
+              </svg>
+            </div>
+            <div class="research-card-title">Couples Interviews</div>
+            <div class="research-card-desc">In-depth conversations with couples at different relationship stages —
+              dating,
+              long-term, long-distance — to surface real patterns and pain points.</div>
           </div>
-          <div class="research-card-title">Couples Interviews</div>
-          <div class="research-card-desc">In-depth conversations with couples at different relationship stages — dating,
-            long-term, long-distance — to surface real patterns and pain points.</div>
-        </div>
-        <div class="research-card reveal reveal-delay-1">
-          <div class="research-card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <circle cx="11" cy="11" r="8" />
-              <path d="M21 21l-4.35-4.35" />
-            </svg>
+          <div class="research-card reveal reveal-delay-1">
+            <div class="research-card-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <circle cx="11" cy="11" r="8" />
+                <path d="M21 21l-4.35-4.35" />
+              </svg>
+            </div>
+            <div class="research-card-title">Competitive Analysis</div>
+            <div class="research-card-desc">Mapped the existing relationship app landscape — from LoveByte to Couple —
+              to
+              understand where intimacy apps succeed and where they fall short.</div>
           </div>
-          <div class="research-card-title">Competitive Analysis</div>
-          <div class="research-card-desc">Mapped the existing relationship app landscape — from LoveByte to Couple — to
-            understand where intimacy apps succeed and where they fall short.</div>
-        </div>
-        <div class="research-card reveal reveal-delay-2">
-          <div class="research-card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <path d="M12 2a10 10 0 100 20 10 10 0 000-20z" />
-              <path d="M8 14s1.5 2 4 2 4-2 4-2" />
-              <line x1="9" y1="9" x2="9.01" y2="9" />
-              <line x1="15" y1="9" x2="15.01" y2="9" />
-            </svg>
+          <div class="research-card reveal reveal-delay-2">
+            <div class="research-card-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M12 2a10 10 0 100 20 10 10 0 000-20z" />
+                <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+                <line x1="9" y1="9" x2="9.01" y2="9" />
+                <line x1="15" y1="9" x2="15.01" y2="9" />
+              </svg>
+            </div>
+            <div class="research-card-title">Love Languages Research</div>
+            <div class="research-card-desc">Studied how different love languages shape expectations around gestures —
+              informing how Spark surfaces and personalizes coupon recommendations.</div>
           </div>
-          <div class="research-card-title">Love Languages Research</div>
-          <div class="research-card-desc">Studied how different love languages shape expectations around gestures —
-            informing how Spark surfaces and personalizes coupon recommendations.</div>
-        </div>
-        <div class="research-card reveal">
-          <div class="research-card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
-              <polyline points="14 2 14 8 20 8" />
-              <line x1="16" y1="13" x2="8" y2="13" />
-              <line x1="16" y1="17" x2="8" y2="17" />
-            </svg>
+          <div class="research-card reveal">
+            <div class="research-card-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+                <line x1="16" y1="13" x2="8" y2="13" />
+                <line x1="16" y1="17" x2="8" y2="17" />
+              </svg>
+            </div>
+            <div class="research-card-title">Surveys &amp; Behavioral Data</div>
+            <div class="research-card-desc">Collected quantitative signal on frequency of gestures, willingness to plan
+              dates, and what makes couples feel "seen" in their relationship.</div>
           </div>
-          <div class="research-card-title">Surveys &amp; Behavioral Data</div>
-          <div class="research-card-desc">Collected quantitative signal on frequency of gestures, willingness to plan
-            dates, and what makes couples feel "seen" in their relationship.</div>
-        </div>
-        <div class="research-card reveal reveal-delay-1">
-          <div class="research-card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
-            </svg>
+          <div class="research-card reveal reveal-delay-1">
+            <div class="research-card-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+              </svg>
+            </div>
+            <div class="research-card-title">User Testing (Beta)</div>
+            <div class="research-card-desc">Early prototypes tested with real couples — uncovering surprising insights
+              about trust, vulnerability, and the emotional weight of sending vs. receiving a coupon.</div>
           </div>
-          <div class="research-card-title">User Testing (Beta)</div>
-          <div class="research-card-desc">Early prototypes tested with real couples — uncovering surprising insights
-            about trust, vulnerability, and the emotional weight of sending vs. receiving a coupon.</div>
-        </div>
-        <div class="research-card reveal reveal-delay-2">
-          <div class="research-card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <path
-                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
-            </svg>
+          <div class="research-card reveal reveal-delay-2">
+            <div class="research-card-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path
+                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
+              </svg>
+            </div>
+            <div class="research-card-title">Founder &amp; Stakeholder Alignment</div>
+            <div class="research-card-desc">Weekly syncs with the founding team to align research findings with product
+              vision, roadmap priorities, and technical constraints.</div>
           </div>
-          <div class="research-card-title">Founder &amp; Stakeholder Alignment</div>
-          <div class="research-card-desc">Weekly syncs with the founding team to align research findings with product
-            vision, roadmap priorities, and technical constraints.</div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Research Insights -->
-  <section class="section">
-    <div class="container-narrow">
-      <p class="section-label reveal">Key Insights</p>
-      <h2 class="section-title reveal">What couples actually need</h2>
-      <p class="section-body reveal">Three themes emerged consistently across every research method — shaping every
-        design decision that followed.</p>
+    <!-- Research Insights -->
+    <section class="section">
+      <div class="container-narrow">
+        <p class="section-label reveal">Key Insights</p>
+        <h2 class="section-title reveal">What couples actually need</h2>
+        <p class="section-body reveal">Three themes emerged consistently across every research method — shaping every
+          design decision that followed.</p>
 
-      <div class="insight-row" style="margin-top: 36px;">
-        <div class="insight-pill reveal">
-          <div class="insight-icon">✦</div>
-          <div class="insight-text"><strong>Small gestures carry big emotional weight.</strong> A handwritten note or a
-            spontaneous plan matters more than grand gestures. The frequency of small, intentional acts is the real
-            predictor of relationship satisfaction.</div>
-        </div>
-        <div class="insight-pill reveal reveal-delay-1">
-          <div class="insight-icon">✦</div>
-          <div class="insight-text"><strong>Planning feels unromantic, but structure enables spontaneity.</strong>
-            Couples want things to feel effortless — yet they need light scaffolding to make gestures happen. The design
-            challenge: make structure invisible.</div>
-        </div>
-        <div class="insight-pill reveal reveal-delay-2">
-          <div class="insight-icon">✦</div>
-          <div class="insight-text"><strong>Vulnerability is the barrier, not effort.</strong> Many users said they knew
-            what their partner wanted — they just felt awkward initiating. Spark had to lower the emotional activation
-            energy, not just the logistical one.</div>
+        <div class="insight-row" style="margin-top: 36px;">
+          <div class="insight-pill reveal">
+            <div class="insight-icon">✦</div>
+            <div class="insight-text"><strong>Small gestures carry big emotional weight.</strong> A handwritten note or
+              a
+              spontaneous plan matters more than grand gestures. The frequency of small, intentional acts is the real
+              predictor of relationship satisfaction.</div>
+          </div>
+          <div class="insight-pill reveal reveal-delay-1">
+            <div class="insight-icon">✦</div>
+            <div class="insight-text"><strong>Planning feels unromantic, but structure enables spontaneity.</strong>
+              Couples want things to feel effortless — yet they need light scaffolding to make gestures happen. The
+              design
+              challenge: make structure invisible.</div>
+          </div>
+          <div class="insight-pill reveal reveal-delay-2">
+            <div class="insight-icon">✦</div>
+            <div class="insight-text"><strong>Vulnerability is the barrier, not effort.</strong> Many users said they
+              knew
+              what their partner wanted — they just felt awkward initiating. Spark had to lower the emotional activation
+              energy, not just the logistical one.</div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ═══════════════════════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════════════════════
        HMW
   ═══════════════════════════════════════════════════════════ -->
-  <div class="container-narrow">
-    <div class="hmw-block reveal">
-      <div class="hmw-label">How Might We</div>
-      <p class="hmw-text">How might we make <strong>staying connected</strong> feel as <strong>natural and
-          delightful</strong> as any other daily ritual — for couples who are already in love, but need a little nudge?
-      </p>
+    <div class="container-narrow">
+      <div class="hmw-block reveal">
+        <div class="hmw-label">How Might We</div>
+        <p class="hmw-text">How might we make <strong>staying connected</strong> feel as <strong>natural and
+            delightful</strong> as any other daily ritual — for couples who are already in love, but need a little
+          nudge?
+        </p>
+      </div>
     </div>
-  </div>
 
-  <!-- ═══════════════════════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════════════════════
        IDEATION
   ═══════════════════════════════════════════════════════════ -->
-  <section class="section section-alt">
-    <div class="container">
-      <p class="section-label reveal">Ideation</p>
-      <h2 class="section-title reveal">Mapping every path<br>through the <em>experience</em></h2>
-      <p class="section-body reveal">
-        Before any pixels, I mapped the full information architecture and user flows for all core interactions — coupon
-        creation, redemption, settings, and the ambassador program. This ensured every edge case was accounted for and
-        the development team had a single source of truth.</p>
-      <p class="section-body reveal" style="margin-top: 16px;">The core interaction had to be simple enough to use in 30
-        seconds, but rich enough to feel personal. Early wireframes went through 12+ rounds before we landed on the
-        final architecture.</p>
+    <section class="section section-alt">
+      <div class="container">
+        <p class="section-label reveal">Ideation</p>
+        <h2 class="section-title reveal">Mapping every path<br>through the <em>experience</em></h2>
+        <p class="section-body reveal">
+          Before any pixels, I mapped the full information architecture and user flows for all core interactions —
+          coupon
+          creation, redemption, settings, and the ambassador program. This ensured every edge case was accounted for and
+          the development team had a single source of truth.</p>
+        <p class="section-body reveal" style="margin-top: 16px;">The core interaction had to be simple enough to use in
+          30
+          seconds, but rich enough to feel personal. Early wireframes went through 12+ rounds before we landed on the
+          final architecture.</p>
 
 
 
-      <!-- User Flow Toggle -->
-      <div style="margin-top: 64px;" class="reveal">
+        <!-- User Flow Toggle -->
+        <div style="margin-top: 64px;" class="reveal">
 
-        <!-- Segmented Toggle -->
-        <div style="display: flex; justify-content: center; margin-bottom: 36px;">
-          <div id="flow-toggle" style="
+          <!-- Segmented Toggle -->
+          <div style="display: flex; justify-content: center; margin-bottom: 36px;">
+            <div id="flow-toggle" style="
             display: inline-flex;
             background: var(--p100);
             border: 1px solid var(--p200);
@@ -1961,7 +2091,7 @@
             padding: 4px;
             gap: 2px;
           ">
-            <button onclick="switchFlow(0)" data-flow-btn="0" style="
+              <button onclick="switchFlow(0)" data-flow-btn="0" style="
               padding: 8px 22px;
               border-radius: var(--radius-pill);
               border: none;
@@ -1975,7 +2105,7 @@
               color: #fff;
               box-shadow: 0 2px 8px rgba(97, 68, 196, 0.22);
             ">My Coupons</button>
-            <button onclick="switchFlow(1)" data-flow-btn="1" style="
+              <button onclick="switchFlow(1)" data-flow-btn="1" style="
               padding: 8px 22px;
               border-radius: var(--radius-pill);
               border: none;
@@ -1989,7 +2119,7 @@
               color: var(--p700);
               box-shadow: none;
             ">Onboarding</button>
-            <button onclick="switchFlow(2)" data-flow-btn="2" style="
+              <button onclick="switchFlow(2)" data-flow-btn="2" style="
               padding: 8px 22px;
               border-radius: var(--radius-pill);
               border: none;
@@ -2003,529 +2133,543 @@
               color: var(--p700);
               box-shadow: none;
             ">User Settings</button>
+            </div>
+          </div>
+
+          <!-- Flow Panels -->
+          <div id="flow-panel-0" class="img-block flow-panel-clickable" style="display:block; cursor:zoom-in;"
+            onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+            <img src="Assets/Spark/user-flow1.png" alt="User Flow — My Coupons"
+              style="width:100%;height:auto;display:block; transition: opacity 0.18s ease;" />
+            <div class="flow-zoom-hint">Click to zoom</div>
+          </div>
+          <div id="flow-panel-1" class="img-block flow-panel-clickable" style="display:none; cursor:zoom-in;"
+            onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+            <img src="Assets/Spark/user-flow2.png" alt="User Flow — Onboarding"
+              style="width:100%;height:auto;display:block; transition: opacity 0.18s ease;" />
+            <div class="flow-zoom-hint">Click to zoom</div>
+          </div>
+          <div id="flow-panel-2" class="img-block flow-panel-clickable" style="display:none; cursor:zoom-in;"
+            onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+            <img src="Assets/Spark/user-flow3.png" alt="User Flow — User Settings"
+              style="width:100%;height:auto;display:block; transition: opacity 0.18s ease;" />
+            <div class="flow-zoom-hint">Click to zoom</div>
           </div>
         </div>
 
-        <!-- Flow Panels -->
-        <div id="flow-panel-0" class="img-block flow-panel-clickable" style="display:block; cursor:zoom-in;"
-          onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
-          <img src="Assets/Spark/user-flow1.png" alt="User Flow — My Coupons"
-            style="width:100%;height:auto;display:block; transition: opacity 0.18s ease;" />
-          <div class="flow-zoom-hint">Click to zoom</div>
+        <style>
+          .flow-panel-clickable {
+            position: relative;
+          }
+
+          .flow-panel-clickable:hover img {
+            opacity: 0.92;
+          }
+
+          .flow-zoom-hint {
+            position: absolute;
+            bottom: 14px;
+            right: 14px;
+            background: rgba(16, 15, 18, 0.55);
+            color: #fff;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.04em;
+            padding: 5px 12px;
+            border-radius: 100px;
+            backdrop-filter: blur(6px);
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(4px);
+            transition: opacity 0.18s ease, transform 0.18s ease;
+          }
+
+          .flow-panel-clickable:hover .flow-zoom-hint {
+            opacity: 1;
+            transform: translateY(0);
+          }
+
+          /* Lightbox */
+          #flow-lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(16, 15, 18, 0);
+            backdrop-filter: blur(0px);
+            transition: background 0.28s var(--ease-out), backdrop-filter 0.28s var(--ease-out), opacity 0.28s var(--ease-out);
+            pointer-events: none;
+            opacity: 0;
+          }
+
+          #flow-lightbox.open {
+            background: rgba(16, 15, 18, 0.82);
+            backdrop-filter: blur(10px);
+            pointer-events: all;
+            opacity: 1;
+          }
+
+          #flow-lightbox-inner {
+            position: relative;
+            max-width: 92vw;
+            max-height: 88vh;
+            transform: scale(0.93) translateY(12px);
+            transition: transform 0.3s var(--ease-spring), opacity 0.28s var(--ease-out);
+            opacity: 0;
+            overflow: auto;
+            border-radius: 12px;
+            box-shadow: 0 32px 80px rgba(16, 15, 18, 0.5), 0 8px 24px rgba(16, 15, 18, 0.3);
+          }
+
+          #flow-lightbox.open #flow-lightbox-inner {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+          }
+
+          #flow-lightbox-img {
+            display: block;
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 88vh;
+            border-radius: 12px;
+            cursor: zoom-in;
+            transform-origin: top left;
+            transition: transform 0.3s var(--ease-out);
+            user-select: none;
+          }
+
+          #flow-lightbox-img.zoomed {
+            cursor: zoom-out;
+            max-width: none;
+            max-height: none;
+          }
+
+          #flow-lightbox-close {
+            position: fixed;
+            top: 24px;
+            right: 28px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            font-size: 1.1rem;
+            line-height: 1;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(6px);
+            transition: background 0.16s ease, transform 0.16s ease;
+            z-index: 10000;
+          }
+
+          #flow-lightbox-close:hover {
+            background: rgba(255, 255, 255, 0.22);
+            transform: scale(1.08);
+          }
+        </style>
+
+        <!-- Lightbox DOM -->
+        <div id="flow-lightbox" onclick="handleLightboxClick(event)">
+          <div id="flow-lightbox-inner">
+            <img id="flow-lightbox-img" src="" alt="" onclick="toggleZoom(event)" />
+          </div>
+          <button id="flow-lightbox-close" onclick="closeLightbox()" aria-label="Close">✕</button>
         </div>
-        <div id="flow-panel-1" class="img-block flow-panel-clickable" style="display:none; cursor:zoom-in;"
-          onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
-          <img src="Assets/Spark/user-flow2.png" alt="User Flow — Onboarding"
-            style="width:100%;height:auto;display:block; transition: opacity 0.18s ease;" />
-          <div class="flow-zoom-hint">Click to zoom</div>
-        </div>
-        <div id="flow-panel-2" class="img-block flow-panel-clickable" style="display:none; cursor:zoom-in;"
-          onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
-          <img src="Assets/Spark/user-flow3.png" alt="User Flow — User Settings"
-            style="width:100%;height:auto;display:block; transition: opacity 0.18s ease;" />
-          <div class="flow-zoom-hint">Click to zoom</div>
-        </div>
-      </div>
 
-      <style>
-        .flow-panel-clickable {
-          position: relative;
-        }
-
-        .flow-panel-clickable:hover img {
-          opacity: 0.92;
-        }
-
-        .flow-zoom-hint {
-          position: absolute;
-          bottom: 14px;
-          right: 14px;
-          background: rgba(16, 15, 18, 0.55);
-          color: #fff;
-          font-family: 'DM Sans', sans-serif;
-          font-size: 0.75rem;
-          font-weight: 500;
-          letter-spacing: 0.04em;
-          padding: 5px 12px;
-          border-radius: 100px;
-          backdrop-filter: blur(6px);
-          pointer-events: none;
-          opacity: 0;
-          transform: translateY(4px);
-          transition: opacity 0.18s ease, transform 0.18s ease;
-        }
-
-        .flow-panel-clickable:hover .flow-zoom-hint {
-          opacity: 1;
-          transform: translateY(0);
-        }
-
-        /* Lightbox */
-        #flow-lightbox {
-          position: fixed;
-          inset: 0;
-          z-index: 9999;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background: rgba(16, 15, 18, 0);
-          backdrop-filter: blur(0px);
-          transition: background 0.28s var(--ease-out), backdrop-filter 0.28s var(--ease-out), opacity 0.28s var(--ease-out);
-          pointer-events: none;
-          opacity: 0;
-        }
-
-        #flow-lightbox.open {
-          background: rgba(16, 15, 18, 0.82);
-          backdrop-filter: blur(10px);
-          pointer-events: all;
-          opacity: 1;
-        }
-
-        #flow-lightbox-inner {
-          position: relative;
-          max-width: 92vw;
-          max-height: 88vh;
-          transform: scale(0.93) translateY(12px);
-          transition: transform 0.3s var(--ease-spring), opacity 0.28s var(--ease-out);
-          opacity: 0;
-          overflow: auto;
-          border-radius: 12px;
-          box-shadow: 0 32px 80px rgba(16, 15, 18, 0.5), 0 8px 24px rgba(16, 15, 18, 0.3);
-        }
-
-        #flow-lightbox.open #flow-lightbox-inner {
-          transform: scale(1) translateY(0);
-          opacity: 1;
-        }
-
-        #flow-lightbox-img {
-          display: block;
-          width: auto;
-          height: auto;
-          max-width: 100%;
-          max-height: 88vh;
-          border-radius: 12px;
-          cursor: zoom-in;
-          transform-origin: top left;
-          transition: transform 0.3s var(--ease-out);
-          user-select: none;
-        }
-
-        #flow-lightbox-img.zoomed {
-          cursor: zoom-out;
-          max-width: none;
-          max-height: none;
-        }
-
-        #flow-lightbox-close {
-          position: fixed;
-          top: 24px;
-          right: 28px;
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          border: none;
-          background: rgba(255, 255, 255, 0.12);
-          color: #fff;
-          font-size: 1.1rem;
-          line-height: 1;
-          cursor: pointer;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          backdrop-filter: blur(6px);
-          transition: background 0.16s ease, transform 0.16s ease;
-          z-index: 10000;
-        }
-
-        #flow-lightbox-close:hover {
-          background: rgba(255, 255, 255, 0.22);
-          transform: scale(1.08);
-        }
-      </style>
-
-      <!-- Lightbox DOM -->
-      <div id="flow-lightbox" onclick="handleLightboxClick(event)">
-        <div id="flow-lightbox-inner">
-          <img id="flow-lightbox-img" src="" alt="" onclick="toggleZoom(event)" />
-        </div>
-        <button id="flow-lightbox-close" onclick="closeLightbox()" aria-label="Close">✕</button>
-      </div>
-
-      <script>
-        function switchFlow(index) {
-          for (var i = 0; i < 3; i++) {
-            var panel = document.getElementById('flow-panel-' + i);
-            var btn = document.querySelector('[data-flow-btn="' + i + '"]');
-            if (i === index) {
-              panel.style.display = 'block';
-              btn.style.background = 'var(--p700)';
-              btn.style.color = '#fff';
-              btn.style.boxShadow = '0 2px 8px rgba(97, 68, 196, 0.22)';
-            } else {
-              panel.style.display = 'none';
-              btn.style.background = 'transparent';
-              btn.style.color = 'var(--p700)';
-              btn.style.boxShadow = 'none';
+        <script>
+          function switchFlow(index) {
+            for (var i = 0; i < 3; i++) {
+              var panel = document.getElementById('flow-panel-' + i);
+              var btn = document.querySelector('[data-flow-btn="' + i + '"]');
+              if (i === index) {
+                panel.style.display = 'block';
+                btn.style.background = 'var(--p700)';
+                btn.style.color = '#fff';
+                btn.style.boxShadow = '0 2px 8px rgba(97, 68, 196, 0.22)';
+              } else {
+                panel.style.display = 'none';
+                btn.style.background = 'transparent';
+                btn.style.color = 'var(--p700)';
+                btn.style.boxShadow = 'none';
+              }
             }
           }
-        }
 
-        var _lbZoomed = false;
-        var _lbZoomScale = 2.2;
+          var _lbZoomed = false;
+          var _lbZoomScale = 2.2;
 
-        function openLightbox(src, alt) {
-          var lb = document.getElementById('flow-lightbox');
-          var img = document.getElementById('flow-lightbox-img');
-          img.src = src;
-          img.alt = alt;
-          img.style.transform = 'scale(1)';
-          img.classList.remove('zoomed');
-          _lbZoomed = false;
-          document.body.style.overflow = 'hidden';
-          lb.classList.add('open');
-        }
-
-        function closeLightbox() {
-          var lb = document.getElementById('flow-lightbox');
-          lb.classList.remove('open');
-          document.body.style.overflow = '';
-          _lbZoomed = false;
-        }
-
-        function handleLightboxClick(e) {
-          if (e.target === document.getElementById('flow-lightbox')) {
-            closeLightbox();
-          }
-        }
-
-        function toggleZoom(e) {
-          e.stopPropagation();
-          var img = document.getElementById('flow-lightbox-img');
-          var inner = document.getElementById('flow-lightbox-inner');
-          if (!_lbZoomed) {
-            var rect = img.getBoundingClientRect();
-            var offsetX = (e.clientX - rect.left) / rect.width;
-            var offsetY = (e.clientY - rect.top) / rect.height;
-            img.style.transformOrigin = (offsetX * 100) + '% ' + (offsetY * 100) + '%';
-            img.style.transform = 'scale(' + _lbZoomScale + ')';
-            img.classList.add('zoomed');
-            _lbZoomed = true;
-          } else {
+          function openLightbox(src, alt) {
+            var lb = document.getElementById('flow-lightbox');
+            var img = document.getElementById('flow-lightbox-img');
+            img.src = src;
+            img.alt = alt;
             img.style.transform = 'scale(1)';
-            img.style.transformOrigin = 'top left';
             img.classList.remove('zoomed');
             _lbZoomed = false;
+            document.body.style.overflow = 'hidden';
+            lb.classList.add('open');
           }
-        }
 
-        document.addEventListener('keydown', function (e) {
-          if (e.key === 'Escape') closeLightbox();
-        });
-      </script>
-    </div>
-  </section>
+          function closeLightbox() {
+            var lb = document.getElementById('flow-lightbox');
+            lb.classList.remove('open');
+            document.body.style.overflow = '';
+            _lbZoomed = false;
+          }
 
-  <!-- ═══════════════════════════════════════════════════════════
+          function handleLightboxClick(e) {
+            if (e.target === document.getElementById('flow-lightbox')) {
+              closeLightbox();
+            }
+          }
+
+          function toggleZoom(e) {
+            e.stopPropagation();
+            var img = document.getElementById('flow-lightbox-img');
+            var inner = document.getElementById('flow-lightbox-inner');
+            if (!_lbZoomed) {
+              var rect = img.getBoundingClientRect();
+              var offsetX = (e.clientX - rect.left) / rect.width;
+              var offsetY = (e.clientY - rect.top) / rect.height;
+              img.style.transformOrigin = (offsetX * 100) + '% ' + (offsetY * 100) + '%';
+              img.style.transform = 'scale(' + _lbZoomScale + ')';
+              img.classList.add('zoomed');
+              _lbZoomed = true;
+            } else {
+              img.style.transform = 'scale(1)';
+              img.style.transformOrigin = 'top left';
+              img.classList.remove('zoomed');
+              _lbZoomed = false;
+            }
+          }
+
+          document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeLightbox();
+          });
+        </script>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════
        BRANDING & STYLE GUIDE
   ═══════════════════════════════════════════════════════════ -->
-  <section class="section">
-    <div class="container">
-      <div class="two-col-wide">
-        <div>
-          <p class="section-label reveal">Branding &amp; Style Guide</p>
-          <h2 class="section-title reveal">A design language built<br>on warmth and <em>play</em></h2>
+    <section class="section">
+      <div class="container">
+        <div class="two-col-wide">
+          <div>
+            <p class="section-label reveal">Branding &amp; Style Guide</p>
+            <h2 class="section-title reveal">A design language built<br>on warmth and <em>play</em></h2>
 
 
-        </div>
-        <div class="reveal reveal-delay-2">
-          <div class="img-block">
-            <img src="Assets/Spark/design-system.png" alt="Spark Design System — Color & Typography"
-              style="width:100%;height:auto;display:block;" />
           </div>
-          <p class="img-caption">Color tokens, typography scale, and component library — built for consistency across
-            all surfaces.</p>
+          <div class="reveal reveal-delay-2">
+            <div class="img-block">
+              <img src="Assets/Spark/design-system.png" alt="Spark Design System — Color & Typography"
+                style="width:100%;height:auto;display:block;" />
+            </div>
+            <p class="img-caption">Color tokens, typography scale, and component library — built for consistency across
+              all surfaces.</p>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ═══════════════════════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════════════════════
        INTRODUCING SPARK
   ═══════════════════════════════════════════════════════════ -->
-  <section class="section section-alt">
-    <div class="container">
-      <p class="section-label reveal">Introduction</p>
-      <h2 class="section-title reveal"><em>Introducing</em> Spark</h2>
-      <div class="reveal" style="margin-top: 32px;">
-        <img src="Assets/Spark/introduction.png" alt="Introducing Spark — Coupon Creation Experience"
-          style="width:100%;max-width:900px;height:auto;display:block;border-radius:16px;margin:0 auto;" />
+    <section class="section section-alt">
+      <div class="container">
+        <p class="section-label reveal">Introduction</p>
+        <h2 class="section-title reveal"><em>Introducing</em> Spark</h2>
+        <div class="reveal" style="margin-top: 32px;">
+          <img src="Assets/Spark/introduction.png" alt="Introducing Spark — Coupon Creation Experience"
+            style="width:100%;max-width:900px;height:auto;display:block;border-radius:16px;margin:0 auto;" />
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ═══════════════════════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════════════════════
        CORE EXPERIENCE
   ═══════════════════════════════════════════════════════════ -->
-  <section class="section">
-    <div class="container">
-      <p class="section-label reveal">Core Experience</p>
-      <h2 class="section-title reveal">Four flows that make<br>the <em>experience</em></h2>
-      <div class="flow-grid" style="margin-top:48px;">
+    <section class="section" id="solution">
+      <div class="container">
+        <p class="section-label reveal">Core Experience</p>
+        <h2 class="section-title reveal">Four flows that make<br>the <em>experience</em></h2>
+        <div class="flow-grid" style="margin-top:48px;">
 
-        <!-- Flow 01 -->
-        <div class="flow-card reveal">
-          <div class="flow-card-header">
-            <span class="flow-num">01</span>
-            <div>
-              <div class="flow-label">Core Flow</div>
-              <h3 class="flow-title">Browse & Send</h3>
-            </div>
-          </div>
-          <div class="flow-card-body">
-            <div class="flow-steps">
-              <div class="flow-step">
-                <span class="flow-step-num">1</span>
-                <div>
-                  <div class="flow-step-title">Landing on Homepage</div>
-                  <div class="flow-step-body">See a set of default coupons ready to pick. Favorite the ones you love or
-                    scroll through for inspiration.</div>
-                </div>
-              </div>
-              <div class="flow-step">
-                <span class="flow-step-num">2</span>
-                <div>
-                  <div class="flow-step-title">Filter & Search</div>
-                  <div class="flow-step-body">Use categories or the search bar to find the perfect coupon.</div>
-                </div>
-              </div>
-              <div class="flow-step">
-                <span class="flow-step-num">3</span>
-                <div>
-                  <div class="flow-step-title">Pick a Coupon</div>
-                  <div class="flow-step-body">Choose a template or write your own — add visuals, a voice note, or set a
-                    timing.</div>
-                </div>
-              </div>
-              <div class="flow-step">
-                <span class="flow-step-num"
-                  style="color:var(--spark-rose);border-color:var(--spark-rose-border);background:var(--spark-rose-bg);">4</span>
-                <div>
-                  <div class="flow-step-title">Send the Love ♡</div>
-                  <div class="flow-step-body">Your partner receives the coupon blurred — ready to tap, shake, and
-                    reveal.</div>
-                </div>
+          <!-- Flow 01 -->
+          <div class="flow-card reveal">
+            <div class="flow-card-header">
+              <span class="flow-num">01</span>
+              <div>
+                <div class="flow-label">Core Flow</div>
+                <h3 class="flow-title">Browse & Send</h3>
               </div>
             </div>
-            <div class="flow-media flow-media-video">
-              <iframe src="https://player.vimeo.com/video/1118466365?autoplay=1&loop=1&muted=1&background=1&controls=0"
-                allow="autoplay; fullscreen"
-                style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"></iframe>
-            </div>
-          </div>
-        </div>
-
-        <!-- Flow 02 -->
-        <div class="flow-card reveal reveal-delay-1">
-          <div class="flow-card-header">
-            <span class="flow-num">02</span>
-            <div>
-              <div class="flow-label">Core Flow</div>
-              <h3 class="flow-title">Onboarding & Setup</h3>
-            </div>
-          </div>
-          <div class="flow-card-body" style="display:flex;flex-direction:column;">
-            <div class="flow-steps">
-              <div class="flow-step">
-                <span class="flow-step-num">1</span>
-                <div>
-                  <div class="flow-step-title">Getting each partner set up</div>
-                  <div class="flow-step-body">The initial flow establishes individual identity — name, partner's name,
-                    anniversary date — and sets the emotional tone of the app. Every screen was written to feel warm,
-                    not clinical. We A/B tested copy extensively to find the voice that felt right for an intimacy
-                    product.</div>
+            <div class="flow-card-body">
+              <div class="flow-steps">
+                <div class="flow-step">
+                  <span class="flow-step-num">1</span>
+                  <div>
+                    <div class="flow-step-title">Landing on Homepage</div>
+                    <div class="flow-step-body">See a set of default coupons ready to pick. Favorite the ones you love
+                      or
+                      scroll through for inspiration.</div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div class="flow-media flow-media-img">
-              <img src="Assets/Spark/phone-onboarding-welcome.png" alt="Onboarding — Welcome & Setup"
-                style="width:100%;height:auto;display:block;" />
-            </div>
-          </div>
-        </div>
-
-        <!-- Flow 03 -->
-        <div class="flow-card reveal reveal-delay-2">
-          <div class="flow-card-header">
-            <span class="flow-num">03</span>
-            <div>
-              <div class="flow-label">Onboarding 02 — Subscription Conversion</div>
-              <h3 class="flow-title">Paywall</h3>
-            </div>
-          </div>
-          <div class="flow-card-body" style="display:flex;flex-direction:column;">
-            <div class="flow-steps">
-              <div class="flow-step">
-                <span class="flow-step-num">1</span>
-                <div>
-                  <div class="flow-step-title">Converting users to subscribers</div>
-                  <div class="flow-step-body">The second onboarding stage handles the paywall — a particularly sensitive
-                    moment in a couples app, where one partner may be more bought-in than the other. I designed a flow
-                    that communicated value without creating pressure, using social proof and a clear free trial path to
-                    reduce friction.</div>
+                <div class="flow-step">
+                  <span class="flow-step-num">2</span>
+                  <div>
+                    <div class="flow-step-title">Filter & Search</div>
+                    <div class="flow-step-body">Use categories or the search bar to find the perfect coupon.</div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div class="flow-media flow-media-img">
-              <img src="Assets/Spark/phone-onboarding-paywall.png" alt="Subscription — Paywall"
-                style="width:100%;height:auto;display:block;" />
-            </div>
-          </div>
-        </div>
-
-        <!-- Flow 04 -->
-        <div class="flow-card reveal reveal-delay-3">
-          <div class="flow-card-header">
-            <span class="flow-num">04</span>
-            <div>
-              <div class="flow-label">Core Flow</div>
-              <h3 class="flow-title">The Blurry Reveal</h3>
-            </div>
-          </div>
-          <div class="flow-card-body">
-            <div class="flow-steps">
-              <div class="flow-step">
-                <span class="flow-step-num">1</span>
-                <div>
-                  <div class="flow-step-title">The Surprise</div>
-                  <div class="flow-step-body">Each coupon starts blurry, adding a little surprise to receiving one.
+                <div class="flow-step">
+                  <span class="flow-step-num">3</span>
+                  <div>
+                    <div class="flow-step-title">Pick a Coupon</div>
+                    <div class="flow-step-body">Choose a template or write your own — add visuals, a voice note, or set
+                      a
+                      timing.</div>
+                  </div>
+                </div>
+                <div class="flow-step">
+                  <span class="flow-step-num"
+                    style="color:var(--spark-rose);border-color:var(--spark-rose-border);background:var(--spark-rose-bg);">4</span>
+                  <div>
+                    <div class="flow-step-title">Send the Love ♡</div>
+                    <div class="flow-step-body">Your partner receives the coupon blurred — ready to tap, shake, and
+                      reveal.</div>
                   </div>
                 </div>
               </div>
-              <div class="flow-step">
-                <span class="flow-step-num"
-                  style="color:var(--spark-rose);border-color:var(--spark-rose-border);background:var(--spark-rose-bg);">2</span>
-                <div>
-                  <div class="flow-step-title">Tap or Shake to Reveal</div>
-                  <div class="flow-step-body">Tap or shake your phone to reveal it, then decide whether to accept or
-                    reject.</div>
-                </div>
+              <div class="flow-media flow-media-video">
+                <iframe
+                  src="https://player.vimeo.com/video/1118466365?autoplay=1&loop=1&muted=1&background=1&controls=0"
+                  allow="autoplay; fullscreen"
+                  style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"></iframe>
               </div>
             </div>
-            <div class="flow-media flow-media-video">
-              <iframe src="https://player.vimeo.com/video/1118470221?autoplay=1&loop=1&muted=1&background=1&controls=0"
-                allow="autoplay; fullscreen"
-                style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"></iframe>
-            </div>
           </div>
-        </div>
 
-        <!-- Flow 05 -->
-        <div class="flow-card reveal reveal-delay-3">
-          <div class="flow-card-header">
-            <span class="flow-num">05</span>
-            <div>
-              <div class="flow-label">Ambassador Program</div>
-              <h3 class="flow-title">Turning users into advocates</h3>
-            </div>
-          </div>
-          <div class="flow-card-body" style="display:flex;flex-direction:column;">
-            <div class="flow-steps">
-              <div class="flow-step">
-                <span class="flow-step-num">1</span>
-                <div>
-                  <div class="flow-step-title">Gamified level progression</div>
-                  <div class="flow-step-body">Spark's Ambassador Program gamifies word-of-mouth growth. Users who share
-                    Spark with their friends earn real money — and progress through ambassador levels with escalating
-                    rewards. Level 1 &amp; 2 ambassadors claim earnings via gift card email; Level 3+ unlock a special
-                    card revealing a physical gift.</div>
-                </div>
-              </div>
-              <div class="flow-step">
-                <span class="flow-step-num">2</span>
-                <div>
-                  <div class="flow-step-title">Dashboard built to feel like a reward</div>
-                  <div class="flow-step-body">I designed the full ambassador dashboard: referral code generation,
-                    earnings tracker, level progression with clear targets, and social sharing shortcuts. Every element
-                    was designed to feel like a reward in itself — not a chore.</div>
-                </div>
+          <!-- Flow 02 -->
+          <div class="flow-card reveal reveal-delay-1">
+            <div class="flow-card-header">
+              <span class="flow-num">02</span>
+              <div>
+                <div class="flow-label">Core Flow</div>
+                <h3 class="flow-title">Onboarding & Setup</h3>
               </div>
             </div>
-            <div class="flow-media flow-media-img">
-              <img src="Assets/Spark/ambassador.png" alt="Spark Ambassador Program Dashboard"
-                style="width:100%;height:auto;display:block;" />
+            <div class="flow-card-body" style="display:flex;flex-direction:column;">
+              <div class="flow-steps">
+                <div class="flow-step">
+                  <span class="flow-step-num">1</span>
+                  <div>
+                    <div class="flow-step-title">Getting each partner set up</div>
+                    <div class="flow-step-body">The initial flow establishes individual identity — name, partner's name,
+                      anniversary date — and sets the emotional tone of the app. Every screen was written to feel warm,
+                      not clinical. We A/B tested copy extensively to find the voice that felt right for an intimacy
+                      product.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="flow-media flow-media-img">
+                <img src="Assets/Spark/phone-onboarding-welcome.png" alt="Onboarding — Welcome & Setup"
+                  style="width:100%;height:auto;display:block;" />
+              </div>
             </div>
           </div>
-        </div>
 
+          <!-- Flow 03 -->
+          <div class="flow-card reveal reveal-delay-2">
+            <div class="flow-card-header">
+              <span class="flow-num">03</span>
+              <div>
+                <div class="flow-label">Onboarding 02 — Subscription Conversion</div>
+                <h3 class="flow-title">Paywall</h3>
+              </div>
+            </div>
+            <div class="flow-card-body" style="display:flex;flex-direction:column;">
+              <div class="flow-steps">
+                <div class="flow-step">
+                  <span class="flow-step-num">1</span>
+                  <div>
+                    <div class="flow-step-title">Converting users to subscribers</div>
+                    <div class="flow-step-body">The second onboarding stage handles the paywall — a particularly
+                      sensitive
+                      moment in a couples app, where one partner may be more bought-in than the other. I designed a flow
+                      that communicated value without creating pressure, using social proof and a clear free trial path
+                      to
+                      reduce friction.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="flow-media flow-media-img">
+                <img src="Assets/Spark/phone-onboarding-paywall.png" alt="Subscription — Paywall"
+                  style="width:100%;height:auto;display:block;" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Flow 04 -->
+          <div class="flow-card reveal reveal-delay-3">
+            <div class="flow-card-header">
+              <span class="flow-num">04</span>
+              <div>
+                <div class="flow-label">Core Flow</div>
+                <h3 class="flow-title">The Blurry Reveal</h3>
+              </div>
+            </div>
+            <div class="flow-card-body">
+              <div class="flow-steps">
+                <div class="flow-step">
+                  <span class="flow-step-num">1</span>
+                  <div>
+                    <div class="flow-step-title">The Surprise</div>
+                    <div class="flow-step-body">Each coupon starts blurry, adding a little surprise to receiving one.
+                    </div>
+                  </div>
+                </div>
+                <div class="flow-step">
+                  <span class="flow-step-num"
+                    style="color:var(--spark-rose);border-color:var(--spark-rose-border);background:var(--spark-rose-bg);">2</span>
+                  <div>
+                    <div class="flow-step-title">Tap or Shake to Reveal</div>
+                    <div class="flow-step-body">Tap or shake your phone to reveal it, then decide whether to accept or
+                      reject.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="flow-media flow-media-video">
+                <iframe
+                  src="https://player.vimeo.com/video/1118470221?autoplay=1&loop=1&muted=1&background=1&controls=0"
+                  allow="autoplay; fullscreen"
+                  style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"></iframe>
+              </div>
+            </div>
+          </div>
+
+          <!-- Flow 05 -->
+          <div class="flow-card reveal reveal-delay-3">
+            <div class="flow-card-header">
+              <span class="flow-num">05</span>
+              <div>
+                <div class="flow-label">Ambassador Program</div>
+                <h3 class="flow-title">Turning users into advocates</h3>
+              </div>
+            </div>
+            <div class="flow-card-body" style="display:flex;flex-direction:column;">
+              <div class="flow-steps">
+                <div class="flow-step">
+                  <span class="flow-step-num">1</span>
+                  <div>
+                    <div class="flow-step-title">Gamified level progression</div>
+                    <div class="flow-step-body">Spark's Ambassador Program gamifies word-of-mouth growth. Users who
+                      share
+                      Spark with their friends earn real money — and progress through ambassador levels with escalating
+                      rewards. Level 1 &amp; 2 ambassadors claim earnings via gift card email; Level 3+ unlock a special
+                      card revealing a physical gift.</div>
+                  </div>
+                </div>
+                <div class="flow-step">
+                  <span class="flow-step-num">2</span>
+                  <div>
+                    <div class="flow-step-title">Dashboard built to feel like a reward</div>
+                    <div class="flow-step-body">I designed the full ambassador dashboard: referral code generation,
+                      earnings tracker, level progression with clear targets, and social sharing shortcuts. Every
+                      element
+                      was designed to feel like a reward in itself — not a chore.</div>
+                  </div>
+                </div>
+              </div>
+              <div class="flow-media flow-media-img">
+                <img src="Assets/Spark/ambassador.png" alt="Spark Ambassador Program Dashboard"
+                  style="width:100%;height:auto;display:block;" />
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ═══════════════════════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════════════════════
        TESTING & QUOTES
   ═══════════════════════════════════════════════════════════ -->
-  <section class="section">
-    <div class="container">
-      <p class="section-label reveal">Testing &amp; Feedback</p>
-      <h2 class="section-title reveal">What couples said<br>after using Spark</h2>
-      <p class="section-body reveal">Beta testing with real couples revealed how deeply love languages and relationship
-        dynamics shape interaction expectations — and gave us clear signal on what was working and what needed to
-        change.</p>
+    <section class="section" id="impact">
+      <div class="container">
+        <p class="section-label reveal">Testing &amp; Feedback</p>
+        <h2 class="section-title reveal">What couples said<br>after using Spark</h2>
+        <p class="section-body reveal">Beta testing with real couples revealed how deeply love languages and
+          relationship
+          dynamics shape interaction expectations — and gave us clear signal on what was working and what needed to
+          change.</p>
 
-      <div class="quotes-grid">
-        <div class="quote-card reveal">
-          <p class="quote-text">"I didn't expect to feel this nervous sending my first coupon. But when she accepted it,
-            I genuinely felt closer to her. It's such a small thing, but it wasn't."</p>
-          <p class="quote-attr">— Beta user, in a 3-year relationship</p>
-        </div>
-        <div class="quote-card reveal reveal-delay-1">
-          <p class="quote-text">"The blurry reveal is my favorite part. It makes receiving a coupon feel like a surprise
-            every time, even when I know one is coming."</p>
-          <p class="quote-attr">— Beta user, long-distance couple</p>
-        </div>
-        <div class="quote-card reveal reveal-delay-2">
-          <p class="quote-text">"I loved that I could pause when things got hard. It felt like the app understood that
-            relationships aren't always sunshine — and that's okay."</p>
-          <p class="quote-attr">— Beta user, married 5 years</p>
+        <div class="quotes-grid">
+          <div class="quote-card reveal">
+            <p class="quote-text">"I didn't expect to feel this nervous sending my first coupon. But when she accepted
+              it,
+              I genuinely felt closer to her. It's such a small thing, but it wasn't."</p>
+            <p class="quote-attr">— Beta user, in a 3-year relationship</p>
+          </div>
+          <div class="quote-card reveal reveal-delay-1">
+            <p class="quote-text">"The blurry reveal is my favorite part. It makes receiving a coupon feel like a
+              surprise
+              every time, even when I know one is coming."</p>
+            <p class="quote-attr">— Beta user, long-distance couple</p>
+          </div>
+          <div class="quote-card reveal reveal-delay-2">
+            <p class="quote-text">"I loved that I could pause when things got hard. It felt like the app understood that
+              relationships aren't always sunshine — and that's okay."</p>
+            <p class="quote-attr">— Beta user, married 5 years</p>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ═══════════════════════════════════════════════════════════
+    <!-- ═══════════════════════════════════════════════════════════
        LEARNINGS
   ═══════════════════════════════════════════════════════════ -->
-  <section class="section section-alt">
-    <div class="container">
-      <p class="section-label reveal">Reflections</p>
-      <h2 class="section-title reveal">What I took away</h2>
-      <div class="learnings-grid">
-        <div class="learning-card reveal">
-          <div class="learning-num">01</div>
-          <div class="learning-title">Designing for intimacy requires balancing excitement with safety</div>
-          <div class="learning-body">Vulnerability is a core part of connection — and it means users are more cautious
-            than in other product contexts. Every interaction had to earn emotional trust before it could ask for
-            emotional investment. Delight is not enough; safety has to come first.</div>
-        </div>
-        <div class="learning-card reveal reveal-delay-1">
-          <div class="learning-num">02</div>
-          <div class="learning-title">Simple, playful interactions create more delight than complexity</div>
-          <div class="learning-body">Early versions had more features — custom reminders, relationship quizzes, shared
-            calendars. Testing showed that none of them mattered as much as making the core coupon flow feel magical.
-            Restraint was the most powerful design decision I made on this project.</div>
-        </div>
-        <div class="learning-card reveal reveal-delay-2">
-          <div class="learning-num">03</div>
-          <div class="learning-title">Love languages shape UX expectations in surprising ways</div>
-          <div class="learning-body">Users who give love through acts of service wanted structured redemption flows.
-            Users who prefer words of affirmation wanted more copy customization. Understanding love languages as a
-            design input — not just a marketing insight — fundamentally changed how we built the coupon composer.</div>
+    <section class="section section-alt">
+      <div class="container">
+        <p class="section-label reveal">Reflections</p>
+        <h2 class="section-title reveal">What I took away</h2>
+        <div class="learnings-grid">
+          <div class="learning-card reveal">
+            <div class="learning-num">01</div>
+            <div class="learning-title">Designing for intimacy requires balancing excitement with safety</div>
+            <div class="learning-body">Vulnerability is a core part of connection — and it means users are more cautious
+              than in other product contexts. Every interaction had to earn emotional trust before it could ask for
+              emotional investment. Delight is not enough; safety has to come first.</div>
+          </div>
+          <div class="learning-card reveal reveal-delay-1">
+            <div class="learning-num">02</div>
+            <div class="learning-title">Simple, playful interactions create more delight than complexity</div>
+            <div class="learning-body">Early versions had more features — custom reminders, relationship quizzes, shared
+              calendars. Testing showed that none of them mattered as much as making the core coupon flow feel magical.
+              Restraint was the most powerful design decision I made on this project.</div>
+          </div>
+          <div class="learning-card reveal reveal-delay-2">
+            <div class="learning-num">03</div>
+            <div class="learning-title">Love languages shape UX expectations in surprising ways</div>
+            <div class="learning-body">Users who give love through acts of service wanted structured redemption flows.
+              Users who prefer words of affirmation wanted more copy customization. Understanding love languages as a
+              design input — not just a marketing insight — fundamentally changed how we built the coupon composer.
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+  </div> <!-- End sections-wrapper -->
 
   <!-- ═══════════════════════════════════════════════════════════
        NEXT CASE STUDY
@@ -2586,6 +2730,26 @@
       });
     }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
     reveals.forEach(el => observer.observe(el));
+
+    // TOC active state handling
+    const trackedSections = document.querySelectorAll('.sections-wrapper section[id]');
+    const tocLinks = document.querySelectorAll('.toc-link');
+
+    if (trackedSections.length > 0 && tocLinks.length > 0) {
+      const tocObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            tocLinks.forEach(link => link.classList.remove('active'));
+            const activeLink = document.querySelector(`.toc-link[href="#${entry.target.id}"]`);
+            if (activeLink) {
+              activeLink.classList.add('active');
+            }
+          }
+        });
+      }, { rootMargin: '-20% 0px -40% 0px', threshold: 0 });
+
+      trackedSections.forEach(section => tocObserver.observe(section));
+    }
   </script>
 
 </body>
