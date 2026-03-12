@@ -1,0 +1,1916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crossfill Actions — Unnati Srivastava</title>
+  <meta name="description" content="Case study: Crossfill Actions — Designing the optimization workflow that turned a reporting dashboard into an actionable product." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── CSS Variables ─────────────────────────────────── */
+    :root {
+      --bg-dark: #0d0c10;
+      --bg-dark-2: #100f12;
+      --bg-dark-3: #161420;
+      --bg-light: #fafafa;
+      --bg-card: #ffffff;
+      --p900: #3b2a7a;
+      --p800: #5a42b0;
+      --p700: #8d6fde;
+      --p500: #a28ae5;
+      --p300: #c4b4f0;
+      --p200: #ebe5ff;
+      --p100: #f7f5ff;
+      --text-white: #ffffff;
+      --text-muted: rgba(255,255,255,0.55);
+      --text-subtle: rgba(255,255,255,0.35);
+      --text-dark: #1e1a33;
+      --text-dark-2: #3d3660;
+      --text-dark-muted: #6b6589;
+      --border-dark: rgba(255,255,255,0.07);
+      --border-purple: rgba(141,111,222,0.2);
+      --border-purple-strong: rgba(141,111,222,0.45);
+      --radius-card: 20px;
+      --radius-pill: 100px;
+      --shadow-float: 0 32px 80px rgba(0,0,0,0.55), 0 8px 24px rgba(0,0,0,0.35);
+      --shadow-glow: 0 0 80px rgba(141,111,222,0.25), 0 0 160px rgba(141,111,222,0.1);
+      --shadow-card: 0 2px 12px rgba(141,111,222,0.08), 0 1px 3px rgba(0,0,0,0.06);
+      --transition: 0.35s cubic-bezier(0.22,1,0.36,1);
+    }
+
+    /* ─── Reset & Base ──────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    ::selection { background: #e9e2ff; color: #1e1a33; }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg-dark); }
+    ::-webkit-scrollbar-thumb { background: #e9e2ff; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--p300); }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-white);
+      line-height: 1.65;
+      font-size: 16px;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── Typography ────────────────────────────────────── */
+    h1, h2, h3, h4 { font-family: 'DM Sans', sans-serif; font-weight: 500; line-height: 1.1; }
+
+    .serif-italic { font-family: 'DM Serif Display', serif; font-style: italic; font-weight: 400; }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.6875rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--p500);
+      margin-bottom: 1rem;
+    }
+
+    .section-label.dark { color: var(--p700); }
+
+    /* ─── Layout ────────────────────────────────────────── */
+    .container {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .container-narrow {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ─── Navigation ────────────────────────────────────── */
+    .nav-wrapper {
+      position: fixed;
+      top: 1.25rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 100;
+      width: calc(100% - 3rem);
+      max-width: 860px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.75rem 1.5rem;
+      background: rgba(16,15,18,0.8);
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-dark);
+      transition: var(--transition);
+    }
+
+    nav.scrolled {
+      background: rgba(16,15,18,0.95);
+      border-color: var(--border-purple);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(141,111,222,0.08);
+    }
+
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--text-white);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-logo:hover { color: var(--p300); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 400;
+      padding: 0.375rem 0.875rem;
+      border-radius: var(--radius-pill);
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text-white); background: rgba(255,255,255,0.06); }
+
+    .nav-cta {
+      background: rgba(141,111,222,0.15) !important;
+      color: var(--p300) !important;
+      border: 1px solid var(--border-purple) !important;
+    }
+
+    .nav-cta:hover {
+      background: rgba(141,111,222,0.28) !important;
+      color: var(--p200) !important;
+      border-color: var(--border-purple-strong) !important;
+    }
+
+    /* ─── Hero Section ──────────────────────────────────── */
+    .hero {
+      background: var(--bg-dark-2);
+      padding: 10rem 2rem 5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Grain texture overlay */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Radial glow */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: -10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70%;
+      height: 60%;
+      background: radial-gradient(ellipse at center, rgba(141,111,222,0.12) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-inner { position: relative; z-index: 1; }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(141,111,222,0.12);
+      border: 1px solid var(--border-purple);
+      border-radius: var(--radius-pill);
+      padding: 0.35rem 1rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--p300);
+      margin-bottom: 1.75rem;
+    }
+
+    .hero-tag-dot {
+      width: 5px; height: 5px;
+      background: var(--p500);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--p500);
+    }
+
+    .hero-tags-row {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+
+    .tag-chip {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-pill);
+      padding: 0.3rem 0.85rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.75rem, 6vw, 5rem);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.03;
+      color: var(--text-white);
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--text-muted);
+      font-weight: 300;
+      line-height: 1.6;
+      max-width: 560px;
+      margin: 0 auto 2.5rem;
+    }
+
+    /* Meta grid */
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      max-width: 760px;
+      margin: 0 auto 4rem;
+      border: 1px solid var(--border-dark);
+      border-radius: 14px;
+      overflow: hidden;
+      background: rgba(255,255,255,0.025);
+    }
+
+    .hero-meta-item {
+      padding: 1.25rem 1.5rem;
+      text-align: left;
+      position: relative;
+    }
+
+    .hero-meta-item:not(:last-child) {
+      border-right: 1px solid var(--border-dark);
+    }
+
+    .hero-meta-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--p500);
+      margin-bottom: 0.35rem;
+    }
+
+    .hero-meta-value {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.8);
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    /* ─── Browser Mockup ────────────────────────────────── */
+    .browser-wrap {
+      position: relative;
+      max-width: 960px;
+      margin: 0 auto;
+      z-index: 1;
+    }
+
+    .browser-glow {
+      position: absolute;
+      bottom: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      height: 160px;
+      background: radial-gradient(ellipse at center, rgba(141,111,222,0.35) 0%, transparent 70%);
+      filter: blur(40px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .browser-frame {
+      position: relative;
+      z-index: 1;
+      background: #1a1826;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: var(--shadow-float), var(--shadow-glow);
+      overflow: hidden;
+    }
+
+    .browser-chrome {
+      background: #0f0e14;
+      padding: 0.7rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .browser-dots { display: flex; gap: 6px; }
+
+    .browser-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+    }
+
+    .browser-dot:nth-child(1) { background: #ff5f57; }
+    .browser-dot:nth-child(2) { background: #febc2e; }
+    .browser-dot:nth-child(3) { background: #28c840; }
+
+    .browser-bar {
+      flex: 1;
+      background: rgba(255,255,255,0.05);
+      border-radius: 6px;
+      padding: 0.3rem 0.875rem;
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.3);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .browser-content {
+      display: flex;
+      min-height: 360px;
+      background: #13111e;
+    }
+
+    /* Sidebar */
+    .app-sidebar {
+      width: 200px;
+      background: #0f0e1a;
+      border-right: 1px solid rgba(255,255,255,0.06);
+      padding: 1.25rem 0;
+      flex-shrink: 0;
+    }
+
+    .sidebar-logo {
+      padding: 0 1rem 1rem;
+      font-family: 'DM Serif Display', serif;
+      font-size: 1rem;
+      color: var(--p300);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      margin-bottom: 0.75rem;
+    }
+
+    .sidebar-section {
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+      padding: 0.75rem 1rem 0.35rem;
+    }
+
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.45rem 1rem;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.5);
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .sidebar-item:hover { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.8); }
+
+    .sidebar-item.active {
+      background: rgba(141,111,222,0.15);
+      color: var(--p300);
+      border-left: 2px solid var(--p500);
+    }
+
+    .sidebar-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.6;
+    }
+
+    /* Main area */
+    .app-main { flex: 1; padding: 1.25rem 1.5rem; overflow: hidden; }
+
+    .app-tabs {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      margin-bottom: 1.25rem;
+    }
+
+    .app-tab {
+      padding: 0.5rem 1rem;
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.4);
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      cursor: pointer;
+    }
+
+    .app-tab.active {
+      color: var(--p300);
+      border-bottom-color: var(--p500);
+    }
+
+    .app-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .app-title { font-size: 0.9rem; font-weight: 600; color: rgba(255,255,255,0.9); }
+
+    .app-btn {
+      background: var(--p700);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 0.35rem 0.875rem;
+      font-size: 0.7rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .action-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 80px;
+      gap: 0.5rem;
+      align-items: center;
+      padding: 0.625rem 0.875rem;
+      border-radius: 8px;
+      margin-bottom: 0.375rem;
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .action-row:hover { background: rgba(255,255,255,0.03); }
+
+    .action-row.header {
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+      border-color: transparent;
+    }
+
+    .action-name {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.8);
+    }
+
+    .action-icon {
+      width: 22px; height: 22px;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      flex-shrink: 0;
+    }
+
+    .action-cell { font-size: 0.72rem; color: rgba(255,255,255,0.45); }
+
+    .status-pill {
+      display: inline-block;
+      font-size: 0.6rem;
+      font-weight: 500;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+    }
+
+    .status-active { background: rgba(34,197,94,0.15); color: #4ade80; }
+    .status-draft { background: rgba(234,179,8,0.15); color: #facc15; }
+    .status-paused { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.4); }
+
+    /* ─── Stats Bar ─────────────────────────────────────── */
+    .stats-bar {
+      background: var(--bg-dark);
+      padding: 5rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stats-bar::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(141,111,222,0.03) 50%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .stats-inner {
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr 1px 1fr;
+      max-width: 900px;
+      margin: 0 auto;
+      align-items: center;
+    }
+
+    .stat-divider {
+      width: 1px;
+      height: 80px;
+      background: linear-gradient(180deg, transparent, rgba(141,111,222,0.3), transparent);
+    }
+
+    .stat-item { text-align: center; padding: 0 2.5rem; }
+
+    .stat-number {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.75rem, 5vw, 4.5rem);
+      font-weight: 400;
+      color: var(--p300);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    /* ─── Section Base ──────────────────────────────────── */
+    .section-dark {
+      background: var(--bg-dark-2);
+      padding: 6rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section-light {
+      background: var(--bg-light);
+      padding: 6rem 2rem;
+    }
+
+    /* ─── Two-Col Layout ────────────────────────────────── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .two-col.reverse { direction: rtl; }
+    .two-col.reverse > * { direction: ltr; }
+
+    /* ─── Problem Section ───────────────────────────────── */
+    .problem-heading {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--text-dark);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+
+    .problem-body {
+      font-size: 0.95rem;
+      color: #5a5375;
+      line-height: 1.75;
+    }
+
+    .tool-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .tool-card {
+      background: var(--bg-card);
+      border-radius: 14px;
+      border: 1px solid rgba(0,0,0,0.06);
+      border-left: 3px solid var(--p700);
+      padding: 1.25rem;
+      box-shadow: var(--shadow-card);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .tool-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(141,111,222,0.12), 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .tool-card-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.75rem;
+      font-size: 1rem;
+    }
+
+    .tool-card-name {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.25rem;
+    }
+
+    .tool-card-desc {
+      font-size: 0.75rem;
+      color: var(--text-dark-muted);
+      line-height: 1.5;
+    }
+
+    /* ─── Role Section ──────────────────────────────────── */
+    .role-section {
+      background: var(--bg-dark-2);
+      padding: 6rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .role-section::before {
+      content: '';
+      position: absolute;
+      top: -20%;
+      right: -10%;
+      width: 50%;
+      height: 100%;
+      background: radial-gradient(ellipse, rgba(141,111,222,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .role-content { position: relative; z-index: 1; }
+
+    .role-heading {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--text-white);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+
+    .role-body {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 2.5rem;
+    }
+
+    .flow-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border-dark);
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border-dark);
+    }
+
+    .flow-step {
+      background: rgba(255,255,255,0.025);
+      padding: 1.25rem;
+      position: relative;
+      transition: background var(--transition);
+    }
+
+    .flow-step:hover { background: rgba(141,111,222,0.08); }
+
+    .flow-step-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.75rem;
+      color: var(--p700);
+      opacity: 0.4;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .flow-step-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.8);
+      margin-bottom: 0.25rem;
+    }
+
+    .flow-step-desc {
+      font-size: 0.7rem;
+      color: var(--text-subtle);
+      line-height: 1.5;
+    }
+
+    /* ─── Understanding / Tension Split ────────────────── */
+    .tension-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .tension-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-card);
+      padding: 2rem;
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tension-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--p700);
+    }
+
+    .tension-card-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--p700);
+      margin-bottom: 0.75rem;
+    }
+
+    .tension-card h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.75rem;
+    }
+
+    .tension-list {
+      list-style: none;
+    }
+
+    .tension-list li {
+      font-size: 0.82rem;
+      color: var(--text-dark-muted);
+      padding: 0.3rem 0;
+      display: flex;
+      gap: 0.5rem;
+      align-items: flex-start;
+    }
+
+    .tension-list li::before {
+      content: '·';
+      color: var(--p500);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 0.05em;
+    }
+
+    /* Principle Block */
+    .principle-block {
+      background: linear-gradient(135deg, #1e1433 0%, #2d1f5e 40%, #1a1030 100%);
+      border-radius: var(--radius-card);
+      padding: 3rem 3.5rem;
+      border: 1px solid var(--border-purple);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 60px rgba(141,111,222,0.1);
+    }
+
+    .principle-block::before {
+      content: '';
+      position: absolute;
+      top: -40%;
+      right: -10%;
+      width: 50%;
+      height: 150%;
+      background: radial-gradient(ellipse, rgba(141,111,222,0.15) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    /* Purple dots */
+    .principle-block::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+      background-image: radial-gradient(circle, rgba(141,111,222,0.25) 1px, transparent 1px);
+      background-size: 24px 24px;
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .principle-inner { position: relative; z-index: 1; }
+
+    .principle-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--p300);
+      margin-bottom: 1rem;
+    }
+
+    .principle-text {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+      color: var(--text-white);
+      line-height: 1.35;
+      letter-spacing: -0.01em;
+    }
+
+    /* ─── Exploration Section ───────────────────────────── */
+    .option-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .option-card {
+      background: rgba(255,255,255,0.04);
+      border-radius: var(--radius-card);
+      padding: 2rem;
+      border: 1px solid var(--border-dark);
+      transition: var(--transition);
+    }
+
+    .option-card:hover {
+      border-color: var(--border-purple);
+      background: rgba(141,111,222,0.06);
+    }
+
+    .option-card.chosen {
+      border-color: var(--p700);
+      background: rgba(141,111,222,0.08);
+      box-shadow: 0 0 0 1px rgba(141,111,222,0.3), 0 0 40px rgba(141,111,222,0.12);
+    }
+
+    .option-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.7rem;
+      border-radius: var(--radius-pill);
+      margin-bottom: 1rem;
+    }
+
+    .option-badge.direction { background: var(--p700); color: white; }
+    .option-badge.discarded { background: rgba(255,255,255,0.07); color: var(--text-muted); }
+
+    .option-card h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-white);
+      margin-bottom: 0.5rem;
+    }
+
+    .option-card p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .option-card-reason {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-dark);
+      font-size: 0.75rem;
+      color: var(--text-subtle);
+      line-height: 1.5;
+    }
+
+    /* ─── Design Structure ──────────────────────────────── */
+    .tab-flow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: rgba(0,0,0,0.06);
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+
+    .tab-step {
+      background: var(--bg-card);
+      padding: 1.75rem 1.5rem;
+      position: relative;
+      transition: background var(--transition);
+    }
+
+    .tab-step:hover { background: var(--p100); }
+
+    .tab-step-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2rem;
+      color: var(--p700);
+      opacity: 0.3;
+      line-height: 1;
+      margin-bottom: 0.75rem;
+    }
+
+    .tab-step-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.4rem;
+    }
+
+    .tab-step-desc {
+      font-size: 0.73rem;
+      color: var(--text-dark-muted);
+      line-height: 1.5;
+    }
+
+    /* ─── Iteration Cards ───────────────────────────────── */
+    .iteration-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .iteration-card {
+      background: rgba(255,255,255,0.04);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-dark);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .iteration-card:hover {
+      border-color: var(--border-purple);
+      transform: translateY(-4px);
+    }
+
+    .iteration-card-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border-dark);
+    }
+
+    .iteration-card-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--p500);
+      margin-bottom: 0.5rem;
+    }
+
+    .iteration-card-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-white);
+      margin-bottom: 0.5rem;
+    }
+
+    .iteration-card-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .iteration-card-body { padding: 1.5rem; }
+
+    .iteration-points { list-style: none; }
+
+    .iteration-points li {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      padding: 0.3rem 0;
+      display: flex;
+      gap: 0.5rem;
+      align-items: flex-start;
+    }
+
+    .iteration-points li::before {
+      content: '→';
+      color: var(--p500);
+      flex-shrink: 0;
+      font-size: 0.7rem;
+      margin-top: 0.1em;
+    }
+
+    /* ─── Inline Editor Card ────────────────────────────── */
+    .inline-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-card);
+      border: 1px solid rgba(0,0,0,0.07);
+      padding: 2rem;
+      box-shadow: var(--shadow-card);
+    }
+
+    .inline-card-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--p700);
+      margin-bottom: 0.75rem;
+    }
+
+    .inline-card h4 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.75rem;
+    }
+
+    .inline-card p {
+      font-size: 0.85rem;
+      color: var(--text-dark-muted);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .inline-feature-list { list-style: none; }
+
+    .inline-feature-list li {
+      font-size: 0.82rem;
+      color: #5a5375;
+      padding: 0.4rem 0;
+      display: flex;
+      gap: 0.6rem;
+      border-bottom: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .inline-feature-list li:last-child { border-bottom: none; }
+
+    .inline-feature-list li::before {
+      content: '✦';
+      color: var(--p500);
+      font-size: 0.6rem;
+      flex-shrink: 0;
+      margin-top: 0.25em;
+    }
+
+    /* ─── Impact Grid ───────────────────────────────────── */
+    .impact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .impact-item {
+      background: rgba(255,255,255,0.04);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-dark);
+      padding: 2rem;
+      transition: var(--transition);
+    }
+
+    .impact-item:hover {
+      background: rgba(141,111,222,0.07);
+      border-color: var(--border-purple);
+      transform: translateY(-3px);
+    }
+
+    .impact-icon {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .impact-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-white);
+      margin-bottom: 0.5rem;
+    }
+
+    .impact-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ─── Learning Cards ────────────────────────────────── */
+    .learning-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .learning-card {
+      background: var(--bg-card);
+      border-radius: var(--radius-card);
+      border: 1px solid rgba(0,0,0,0.07);
+      padding: 2rem;
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .learning-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(141,111,222,0.12), 0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .learning-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 4rem;
+      color: var(--p700);
+      opacity: 0.12;
+      line-height: 1;
+      position: absolute;
+      top: 0.75rem;
+      right: 1.25rem;
+    }
+
+    .learning-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--p700);
+      margin-bottom: 0.75rem;
+    }
+
+    .learning-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.75rem;
+      line-height: 1.3;
+    }
+
+    .learning-desc {
+      font-size: 0.82rem;
+      color: var(--text-dark-muted);
+      line-height: 1.65;
+    }
+
+    /* ─── Next Case ─────────────────────────────────────── */
+    .next-case {
+      background: var(--bg-dark);
+      padding: 6rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .next-case::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 50%;
+      background: radial-gradient(ellipse at center bottom, rgba(141,111,222,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .next-case-inner { position: relative; z-index: 1; }
+
+    .next-label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--p500);
+      margin-bottom: 1.5rem;
+    }
+
+    .next-title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--text-white);
+      margin-bottom: 0.5rem;
+    }
+
+    .next-subtitle {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+    }
+
+    .btn-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.875rem 2rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: var(--transition);
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--p700);
+      color: white;
+      box-shadow: 0 4px 24px rgba(141,111,222,0.3);
+    }
+
+    .btn-primary:hover {
+      background: var(--p500);
+      box-shadow: 0 8px 40px rgba(141,111,222,0.45);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border-dark);
+    }
+
+    .btn-outline:hover {
+      background: rgba(141,111,222,0.08);
+      border-color: var(--border-purple);
+      color: var(--p300);
+      transform: translateY(-2px);
+    }
+
+    /* ─── Footer ────────────────────────────────────────── */
+    footer {
+      background: var(--bg-dark-2);
+      padding: 2rem;
+      border-top: 1px solid var(--border-dark);
+    }
+
+    .footer-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1rem;
+      color: var(--text-white);
+      text-decoration: none;
+    }
+
+    .footer-copy {
+      font-size: 0.75rem;
+      color: var(--text-subtle);
+    }
+
+    /* ─── Scroll Reveal ─────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s cubic-bezier(0.22,1,0.36,1), transform 0.65s cubic-bezier(0.22,1,0.36,1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    /* ─── Section Headings ──────────────────────────────── */
+    .section-h2-dark {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--text-white);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+
+    .section-h2-light {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      color: var(--text-dark);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+
+    .section-body-dark {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-body-light {
+      font-size: 0.95rem;
+      color: #5a5375;
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Separator line between dark sections */
+    .section-dark::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-purple), transparent);
+    }
+
+    /* ─── Responsive ────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .two-col { grid-template-columns: 1fr; gap: 3rem; }
+      .two-col.reverse { direction: ltr; }
+      .hero-meta { grid-template-columns: 1fr 1fr; }
+      .hero-meta-item:nth-child(2) { border-right: none; }
+      .hero-meta-item:nth-child(1),
+      .hero-meta-item:nth-child(2) { border-bottom: 1px solid var(--border-dark); }
+      .stats-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .stat-divider { display: none; }
+      .flow-bar { grid-template-columns: 1fr 1fr; }
+      .tension-grid { grid-template-columns: 1fr; }
+      .option-cards { grid-template-columns: 1fr; }
+      .tab-flow { grid-template-columns: 1fr 1fr; }
+      .iteration-grid { grid-template-columns: 1fr; }
+      .impact-grid { grid-template-columns: 1fr; }
+      .learning-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .hero-meta { grid-template-columns: 1fr; }
+      .hero-meta-item { border-right: none !important; border-bottom: 1px solid var(--border-dark) !important; }
+      .flow-bar { grid-template-columns: 1fr; }
+      .tab-flow { grid-template-columns: 1fr; }
+      .nav-wrapper { width: calc(100% - 2rem); }
+      .browser-content { flex-direction: column; }
+      .app-sidebar { width: 100%; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── Navigation ──────────────────────────────────────── -->
+  <div class="nav-wrapper">
+    <nav id="main-nav">
+      <a href="index.html" class="nav-logo">Unnati</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Work</a></li>
+        <li><a href="mailto:hello@unnati.design" class="nav-cta">Say hello →</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <!-- ─── Hero ────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-tag">
+        <span class="hero-tag-dot"></span>
+        Case Study
+      </div>
+
+      <div class="hero-tags-row">
+        <span class="tag-chip">Product Design</span>
+        <span class="tag-chip">Workflow</span>
+        <span class="tag-chip">B2B SaaS</span>
+        <span class="tag-chip">0 → 1</span>
+      </div>
+
+      <h1>Crossfill <em class="serif-italic">Actions</em></h1>
+
+      <p class="hero-subtitle">
+        Designing the optimization workflow that turned a reporting dashboard into an actionable product.
+      </p>
+
+      <div class="hero-meta">
+        <div class="hero-meta-item">
+          <div class="hero-meta-label">My Role</div>
+          <div class="hero-meta-value">Product Designer<br>Actions page lead</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="hero-meta-label">Area</div>
+          <div class="hero-meta-value">Actions page +<br>optimization workflow</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="hero-meta-label">Platform</div>
+          <div class="hero-meta-value">B2B SaaS<br>Web dashboard</div>
+        </div>
+        <div class="hero-meta-item">
+          <div class="hero-meta-label">Outcome</div>
+          <div class="hero-meta-value">Reporting tool →<br>actionable product</div>
+        </div>
+      </div>
+
+      <!-- Browser Mockup -->
+      <div class="browser-wrap reveal">
+        <div class="browser-glow"></div>
+        <div class="browser-frame">
+          <div class="browser-chrome">
+            <div class="browser-dots">
+              <div class="browser-dot"></div>
+              <div class="browser-dot"></div>
+              <div class="browser-dot"></div>
+            </div>
+            <div class="browser-bar">app.crossfill.io/dashboard/actions</div>
+          </div>
+          <div class="browser-content">
+            <div class="app-sidebar">
+              <div class="sidebar-logo">Crossfill</div>
+              <div class="sidebar-section">Analytics</div>
+              <div class="sidebar-item"><span class="sidebar-dot"></span>Overview</div>
+              <div class="sidebar-item"><span class="sidebar-dot"></span>Reports</div>
+              <div class="sidebar-item active"><span class="sidebar-dot"></span>Actions</div>
+              <div class="sidebar-section">Workflow</div>
+              <div class="sidebar-item"><span class="sidebar-dot"></span>Templates</div>
+              <div class="sidebar-item"><span class="sidebar-dot"></span>Integrations</div>
+              <div class="sidebar-section">Settings</div>
+              <div class="sidebar-item"><span class="sidebar-dot"></span>Team</div>
+              <div class="sidebar-item"><span class="sidebar-dot"></span>Preferences</div>
+            </div>
+            <div class="app-main">
+              <div class="app-tabs">
+                <div class="app-tab active">All Actions</div>
+                <div class="app-tab">Active</div>
+                <div class="app-tab">Drafts</div>
+                <div class="app-tab">Completed</div>
+              </div>
+              <div class="app-header-row">
+                <div class="app-title">Optimization Actions</div>
+                <button class="app-btn">+ New Action</button>
+              </div>
+              <div class="action-row header">
+                <span>Action</span>
+                <span>Category</span>
+                <span>Owner</span>
+                <span>Due</span>
+                <span>Status</span>
+              </div>
+              <div class="action-row">
+                <div class="action-name">
+                  <div class="action-icon" style="background:rgba(141,111,222,0.2);">✦</div>
+                  Reduce cart abandonment rate
+                </div>
+                <div class="action-cell">Conversion</div>
+                <div class="action-cell">Priya M.</div>
+                <div class="action-cell">Mar 18</div>
+                <div class="action-cell"><span class="status-pill status-active">Active</span></div>
+              </div>
+              <div class="action-row">
+                <div class="action-name">
+                  <div class="action-icon" style="background:rgba(250,204,21,0.15);">⚡</div>
+                  Optimize checkout flow steps
+                </div>
+                <div class="action-cell">UX</div>
+                <div class="action-cell">Dev team</div>
+                <div class="action-cell">Mar 25</div>
+                <div class="action-cell"><span class="status-pill status-draft">Draft</span></div>
+              </div>
+              <div class="action-row">
+                <div class="action-name">
+                  <div class="action-icon" style="background:rgba(34,197,94,0.15);">↑</div>
+                  A/B test pricing page layout
+                </div>
+                <div class="action-cell">Growth</div>
+                <div class="action-cell">Karan S.</div>
+                <div class="action-cell">Apr 1</div>
+                <div class="action-cell"><span class="status-pill status-active">Active</span></div>
+              </div>
+              <div class="action-row">
+                <div class="action-name">
+                  <div class="action-icon" style="background:rgba(255,255,255,0.06);">→</div>
+                  Improve email re-engagement flow
+                </div>
+                <div class="action-cell">Retention</div>
+                <div class="action-cell">Ananya R.</div>
+                <div class="action-cell">Apr 8</div>
+                <div class="action-cell"><span class="status-pill status-paused">Paused</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Stats Bar ────────────────────────────────────────── -->
+  <section class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat-item reveal">
+        <div class="stat-number">4</div>
+        <div class="stat-label">tools replaced by a single workflow</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item reveal reveal-delay-2">
+        <div class="stat-number serif-italic">0→1</div>
+        <div class="stat-label">designed and shipped from scratch</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item reveal reveal-delay-4">
+        <div class="stat-number">↓</div>
+        <div class="stat-label">friction across every step</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── The Problem ──────────────────────────────────────── -->
+  <section class="section-light">
+    <div class="container">
+      <div class="two-col">
+        <div class="reveal">
+          <span class="section-label dark">The Problem</span>
+          <h2 class="section-h2-light">Crossfill had data. It didn't have direction.</h2>
+          <p class="section-body-light">
+            The platform surfaced analytics beautifully — but when teams wanted to act on insights, they had to leave the product entirely. There was no structured way to create, assign, or track optimization actions. Teams were stitching together spreadsheets, Notion docs, Jira tickets, and Slack threads just to move from "we see the problem" to "we did something about it."
+          </p>
+          <p class="section-body-light">
+            The result: brilliant insights that went nowhere. A product that felt complete but wasn't. My job was to design the missing layer — the Actions workflow.
+          </p>
+        </div>
+        <div class="tool-grid reveal reveal-delay-2">
+          <div class="tool-card">
+            <div class="tool-card-icon" style="background:#f0f0ff;">📊</div>
+            <div class="tool-card-name">Spreadsheets</div>
+            <div class="tool-card-desc">Manual tracking, version chaos, no visibility across teams</div>
+          </div>
+          <div class="tool-card">
+            <div class="tool-card-icon" style="background:#fff0f8;">📝</div>
+            <div class="tool-card-name">Notion Docs</div>
+            <div class="tool-card-desc">Notes without accountability or status tracking</div>
+          </div>
+          <div class="tool-card">
+            <div class="tool-card-icon" style="background:#f0f8ff;">🎯</div>
+            <div class="tool-card-name">Jira Tickets</div>
+            <div class="tool-card-desc">Built for dev workflows, not optimization cycles</div>
+          </div>
+          <div class="tool-card">
+            <div class="tool-card-icon" style="background:#fffaf0;">💬</div>
+            <div class="tool-card-name">Slack Threads</div>
+            <div class="tool-card-desc">Ephemeral conversations, zero structured follow-through</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── My Role ──────────────────────────────────────────── -->
+  <section class="role-section">
+    <div class="container-narrow">
+      <div class="role-content">
+        <div class="reveal">
+          <span class="section-label">My Role</span>
+          <h2 class="role-heading">From research to shipped product — I led every step.</h2>
+          <p class="role-body">
+            As the Actions page lead, I owned the full design process: user research, workflow mapping, concept exploration, prototyping, and handoff. I worked closely with the PM and two engineers to move from zero to a shipped feature in one quarter.
+          </p>
+        </div>
+        <div class="flow-bar reveal reveal-delay-2">
+          <div class="flow-step">
+            <div class="flow-step-num">01</div>
+            <div class="flow-step-label">Research</div>
+            <div class="flow-step-desc">User interviews, workflow shadowing, pain mapping</div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-num">02</div>
+            <div class="flow-step-label">Define</div>
+            <div class="flow-step-desc">Jobs-to-be-done, user flows, system structure</div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-num">03</div>
+            <div class="flow-step-label">Explore</div>
+            <div class="flow-step-desc">Direction exploration, option stress-testing</div>
+          </div>
+          <div class="flow-step">
+            <div class="flow-step-num">04</div>
+            <div class="flow-step-label">Ship</div>
+            <div class="flow-step-desc">Prototype → feedback → refine → handoff</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Understanding the Workflow ──────────────────────── -->
+  <section class="section-light">
+    <div class="container">
+      <div class="reveal" style="margin-bottom:3rem;">
+        <span class="section-label dark">Understanding the Workflow</span>
+        <h2 class="section-h2-light">Two teams. One product. Completely different mental models.</h2>
+        <p class="section-body-light" style="max-width:600px;">
+          Research interviews revealed a deep tension between how engineering and customer success teams thought about "taking action" on data.
+        </p>
+      </div>
+
+      <div class="tension-grid">
+        <div class="tension-card reveal">
+          <div class="tension-card-label">Engineering Mindset</div>
+          <h4>Structured. Ticket-driven. Async.</h4>
+          <ul class="tension-list">
+            <li>Wants tasks with clear scope and acceptance criteria</li>
+            <li>Lives in sprint cycles — prefers batched work</li>
+            <li>Thinks in systems: dependencies, blockers, priorities</li>
+            <li>Needs integration with existing dev tooling</li>
+          </ul>
+        </div>
+        <div class="tension-card reveal reveal-delay-2">
+          <div class="tension-card-label">Customer Success Mindset</div>
+          <h4>Relational. Outcome-driven. Reactive.</h4>
+          <ul class="tension-list">
+            <li>Wants to act on a customer insight immediately</li>
+            <li>Thinks in goals, not tasks — "fix the churn problem"</li>
+            <li>Needs visibility across clients, not code repos</li>
+            <li>Wants a single place to see "what's being done"</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="principle-block reveal">
+        <div class="principle-inner">
+          <div class="principle-label">Design Principle</div>
+          <p class="principle-text">
+            "The Actions workflow had to feel native to how each team worked — not force either group to adopt the other's mental model. Flexibility without chaos."
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Early Exploration ────────────────────────────────── -->
+  <section class="section-dark">
+    <div class="container">
+      <div class="reveal" style="margin-bottom:3rem;">
+        <span class="section-label">Early Exploration</span>
+        <h2 class="section-h2-dark">Two directions. One clear winner.</h2>
+        <p class="section-body-dark" style="max-width:580px;">
+          I explored two fundamentally different approaches before narrowing down. Each had a distinct philosophy about where actions should live.
+        </p>
+      </div>
+
+      <div class="option-cards">
+        <div class="option-card chosen reveal">
+          <span class="option-badge direction">↑ Chosen Direction</span>
+          <h4>Dedicated Actions Page</h4>
+          <p>A purpose-built home for all optimization actions — separate from the analytics views, with its own navigation, filtering, and workflow tools. Actions become a first-class feature, not a sidebar panel.</p>
+          <div class="option-card-reason">
+            <strong style="color:var(--p300);">Why this won:</strong> Gave the feature the visual weight it deserved. Created a mental separation between "looking at data" and "acting on data." Scalable as the feature grew.
+          </div>
+        </div>
+        <div class="option-card reveal reveal-delay-2">
+          <span class="option-badge discarded">↓ Discarded</span>
+          <h4>Contextual Inline Actions</h4>
+          <p>Actions embedded directly within report and metric views — clicking an insight immediately spawns a task creation flow without leaving the current context.</p>
+          <div class="option-card-reason">
+            <strong style="color:rgba(255,255,255,0.3);">Why this lost:</strong> Created fragmentation. There was no single place to see "all the work being done." Power users managing multiple actions across multiple reports got lost quickly.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Design Structure ─────────────────────────────────── -->
+  <section class="section-light">
+    <div class="container">
+      <div class="reveal" style="margin-bottom:3rem;">
+        <span class="section-label dark">Design Structure</span>
+        <h2 class="section-h2-light">A four-state flow for every action.</h2>
+        <p class="section-body-light" style="max-width:580px;">
+          Every optimization action moves through the same four lifecycle states, giving teams a shared vocabulary for progress.
+        </p>
+      </div>
+
+      <div class="tab-flow reveal">
+        <div class="tab-step">
+          <div class="tab-step-num">01</div>
+          <div class="tab-step-label">Identify</div>
+          <div class="tab-step-desc">Spot the insight, create the action with context attached</div>
+        </div>
+        <div class="tab-step">
+          <div class="tab-step-num">02</div>
+          <div class="tab-step-label">Assign</div>
+          <div class="tab-step-desc">Set owner, due date, category, and priority</div>
+        </div>
+        <div class="tab-step">
+          <div class="tab-step-num">03</div>
+          <div class="tab-step-label">Execute</div>
+          <div class="tab-step-desc">Work happens; status updates keep stakeholders aligned</div>
+        </div>
+        <div class="tab-step">
+          <div class="tab-step-num">04</div>
+          <div class="tab-step-label">Measure</div>
+          <div class="tab-step-desc">Close the loop — did the action move the metric?</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Iteration 1 ──────────────────────────────────────── -->
+  <section class="section-dark">
+    <div class="container">
+      <div class="reveal" style="margin-bottom:3rem;">
+        <span class="section-label">Iteration 1</span>
+        <h2 class="section-h2-dark">Getting the structure right.</h2>
+        <p class="section-body-dark" style="max-width:580px;">
+          The first round of testing surfaced two clear problems with the initial layout — both fixable with focused redesigns.
+        </p>
+      </div>
+
+      <div class="iteration-grid">
+        <div class="iteration-card reveal">
+          <div class="iteration-card-header">
+            <div class="iteration-card-label">Problem Found</div>
+            <div class="iteration-card-title">Table view overwhelmed users</div>
+            <div class="iteration-card-desc">Dense rows with too many columns made it hard to scan. Users said it "felt like a spreadsheet" — not in a good way.</div>
+          </div>
+          <div class="iteration-card-body">
+            <ul class="iteration-points">
+              <li>Reduced visible columns to 5 (from 9)</li>
+              <li>Added color-coded status pills for instant scanning</li>
+              <li>Introduced a card-list toggle for different work styles</li>
+              <li>Progressive disclosure: full detail on click/expand</li>
+            </ul>
+          </div>
+        </div>
+        <div class="iteration-card reveal reveal-delay-2">
+          <div class="iteration-card-header">
+            <div class="iteration-card-label">Problem Found</div>
+            <div class="iteration-card-title">Action creation felt disconnected</div>
+            <div class="iteration-card-desc">The modal for creating a new action had no context about which insight triggered it. Users lost the "why" behind the action.</div>
+          </div>
+          <div class="iteration-card-body">
+            <ul class="iteration-points">
+              <li>Added "linked insight" field — attaches the source metric</li>
+              <li>Auto-populated action title from insight description</li>
+              <li>Kept modal slim — 3 required fields only, rest optional</li>
+              <li>Inline preview of linked chart in creation flow</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Iteration 2 ──────────────────────────────────────── -->
+  <section class="section-light">
+    <div class="container">
+      <div class="two-col">
+        <div class="reveal">
+          <span class="section-label dark">Iteration 2</span>
+          <h2 class="section-h2-light">The inline editor that changed everything.</h2>
+          <p class="section-body-light">
+            After the first round of revisions, a new pattern emerged from power users: they wanted to edit action details without leaving the list. Navigating to a detail page for a quick status change felt like too much friction.
+          </p>
+          <p class="section-body-light">
+            The solution was an expandable inline editor — click any row to reveal an edit panel within the table itself. No navigation, no lost context, no modal interruptions.
+          </p>
+        </div>
+        <div class="inline-card reveal reveal-delay-2">
+          <div class="inline-card-label">Inline Editor</div>
+          <h4>Edit-in-place, stay in flow</h4>
+          <p>An expandable row panel that surfaces the most-edited fields without a full page change.</p>
+          <ul class="inline-feature-list">
+            <li>Status update with one click — no modal</li>
+            <li>Owner reassignment via inline people picker</li>
+            <li>Notes/comments thread within the row</li>
+            <li>Linked insight remains visible for reference</li>
+            <li>Keyboard shortcut (E) to toggle editor on focused row</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Impact ───────────────────────────────────────────── -->
+  <section class="section-dark">
+    <div class="container">
+      <div class="reveal" style="margin-bottom:3rem;">
+        <span class="section-label">Impact</span>
+        <h2 class="section-h2-dark">A reporting tool became an actionable product.</h2>
+        <p class="section-body-dark" style="max-width:560px;">
+          Shipping the Actions page changed how Crossfill users engaged with the platform — and how the team talked about the product itself.
+        </p>
+      </div>
+
+      <div class="impact-grid">
+        <div class="impact-item reveal">
+          <div class="impact-icon">🔗</div>
+          <div class="impact-title">4 tools replaced by one workflow</div>
+          <div class="impact-desc">Teams stopped switching between spreadsheets, Notion, Jira, and Slack. The entire optimization loop now lives in Crossfill.</div>
+        </div>
+        <div class="impact-item reveal reveal-delay-1">
+          <div class="impact-icon">🚀</div>
+          <div class="impact-title">0 → 1 designed and shipped</div>
+          <div class="impact-desc">A net-new feature, built from scratch in one quarter. Zero prior design system components covered this use case — every pattern was new.</div>
+        </div>
+        <div class="impact-item reveal reveal-delay-2">
+          <div class="impact-icon">↓</div>
+          <div class="impact-title">Friction reduced across every step</div>
+          <div class="impact-desc">From creation to close, every step in the action lifecycle was made faster and less error-prone through focused iteration.</div>
+        </div>
+        <div class="impact-item reveal reveal-delay-3">
+          <div class="impact-icon">🎯</div>
+          <div class="impact-title">Actions reframed the product narrative</div>
+          <div class="impact-desc">Internally and in sales conversations, Crossfill shifted from "analytics tool" to "optimization platform." The Actions page made that story real.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Reflection ───────────────────────────────────────── -->
+  <section class="section-light">
+    <div class="container">
+      <div class="reveal" style="margin-bottom:3rem;">
+        <span class="section-label dark">Reflection</span>
+        <h2 class="section-h2-light">Three things I carry forward.</h2>
+      </div>
+
+      <div class="learning-grid">
+        <div class="learning-card reveal">
+          <div class="learning-num">1</div>
+          <div class="learning-label">Learning</div>
+          <div class="learning-title">0→1 work demands a stronger opinion upfront</div>
+          <div class="learning-desc">When there's no existing pattern to improve, the designer has to make bold structural decisions early. Staying neutral for too long creates drift. I learned to commit to a direction, articulate why, and invite critique of that specific choice — not an open-ended "what do you think?"</div>
+        </div>
+        <div class="learning-card reveal reveal-delay-2">
+          <div class="learning-num">2</div>
+          <div class="learning-label">Learning</div>
+          <div class="learning-title">Friction often hides in transitions, not features</div>
+          <div class="learning-desc">The biggest UX wins came not from adding features, but from smoothing the moments between them. The inline editor wasn't a new feature — it was a better transition between "viewing" and "editing." I now map every workflow as a series of transitions first.</div>
+        </div>
+        <div class="learning-card reveal reveal-delay-4">
+          <div class="learning-num">3</div>
+          <div class="learning-label">Learning</div>
+          <div class="learning-title">Ship something learnable, not just something finished</div>
+          <div class="learning-desc">We could have waited for a "complete" Actions feature. Instead, we shipped a focused MVP that taught us what users actually did — which turned out to be quite different from what we assumed. The best design decisions in this project came after shipping, not before.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Next Case ────────────────────────────────────────── -->
+  <section class="next-case">
+    <div class="next-case-inner">
+      <div class="next-label reveal">Next Case Study</div>
+      <h2 class="next-title reveal reveal-delay-1">Spark</h2>
+      <p class="next-subtitle reveal reveal-delay-2">Designing the onboarding flow that made early users stick.</p>
+      <div class="reveal reveal-delay-3">
+        <a href="spark.html" class="btn-pill btn-primary">View Case Study →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── Footer ───────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-inner">
+      <a href="index.html" class="footer-logo">Unnati</a>
+      <div class="footer-copy">© 2026 · Product Designer</div>
+    </div>
+  </footer>
+
+  <!-- ─── Scripts ──────────────────────────────────────────── -->
+  <script>
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.05, rootMargin: '200px 0px 200px 0px' });
+    revealEls.forEach(el => observer.observe(el));
+
+    // Nav scroll effect
+    const nav = document.getElementById('main-nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 60) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+    }, { passive: true });
+  </script>
+
+</body>
+</html>

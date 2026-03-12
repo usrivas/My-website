@@ -1,0 +1,2585 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spark — Unnati Srivastava</title>
+  <meta name="description"
+    content="Case study: Spark — a couples app that helps partners reconnect through playful, personalized coupons. Founding Product Designer, 0→1." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"
+    rel="stylesheet" />
+
+  <style>
+    /* ─── CSS Variables ─────────────────────────────────── */
+    :root {
+      --white: #ffffff;
+      --near-white: #fafafa;
+      --black: #100f12;
+      --p900: #2e1f6b;
+      --p700: #6144c4;
+      --p600: #7c5cbf;
+      --p500: #9b7fe8;
+      --p300: #c9b8f5;
+      --p200: #e4dbff;
+      --p100: #f3efff;
+      --p50: #faf8ff;
+      --n700: #5a5869;
+      --n500: #9a98a6;
+      --n300: #cccad6;
+      --n100: #fafafa;
+      --spark-rose: #e8718a;
+      --spark-rose-lt: #f0a0b2;
+      --spark-rose-bg: rgba(232, 113, 138, 0.08);
+      --spark-rose-border: rgba(232, 113, 138, 0.18);
+      --divider: rgba(16, 15, 18, 0.08);
+      --divider-light: rgba(16, 15, 18, 0.06);
+      --radius-sm: 0.75rem;
+      --radius-md: 1.25rem;
+      --radius-lg: 2rem;
+      --radius-pill: 100px;
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+      --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      --shadow-card: 0 2px 12px rgba(97, 68, 196, 0.07), 0 1px 3px rgba(0, 0, 0, 0.05);
+      --shadow-float: 0 8px 40px rgba(97, 68, 196, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    /* ─── Reset & Base ──────────────────────────────────── */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    ::selection {
+      background: #e4dbff;
+      color: #2e1f6b;
+    }
+
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--white);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--p200);
+      border-radius: 100px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--p300);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: 'DM Sans', Arial, sans-serif;
+      background: var(--white);
+      color: var(--black);
+      line-height: 1.65;
+      font-weight: 300;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      pointer-events: none;
+      opacity: 0.022;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    }
+
+    /* ─── Layout ────────────────────────────────────────── */
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    .container-narrow {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* ─── ANNOUNCEMENT BAR ───────────────────────────────── */
+    .announcement-bar {
+      background: var(--black);
+      color: rgba(255, 255, 255, 0.75);
+      text-align: center;
+      font-size: 13px;
+      font-weight: 300;
+      letter-spacing: 0.01em;
+      padding: 10px 20px;
+      line-height: 1.4;
+    }
+
+    .announcement-bar a {
+      color: var(--p300);
+      text-decoration: underline;
+      text-decoration-color: transparent;
+      transition: text-decoration-color 0.2s ease;
+    }
+
+    .announcement-bar a:hover {
+      text-decoration-color: var(--p300);
+    }
+
+    /* ─── NAV ────────────────────────────────────────────── */
+    nav#navbar {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      border-bottom: 1px solid rgba(16, 15, 18, 0.07);
+      transition: box-shadow 0.3s ease;
+    }
+
+    nav#navbar.scrolled {
+      box-shadow: 0 2px 20px rgba(16, 15, 18, 0.08);
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--black);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      flex-shrink: 0;
+    }
+
+    .nav-logo-mark {
+      width: 28px;
+      height: 28px;
+      background: var(--p700);
+      border-radius: 7px;
+      display: grid;
+      place-items: center;
+      transition: background 0.2s ease;
+    }
+
+    .nav-logo-mark svg {
+      display: block;
+    }
+
+    .nav-logo:hover .nav-logo-mark {
+      background: var(--p900);
+    }
+
+    .nav-logo:focus-visible {
+      outline: 2px solid var(--p500);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      list-style: none;
+      flex: 1;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--n700);
+      text-decoration: none;
+      padding: 6px 14px;
+      border-radius: 100px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: color 0.2s ease, background 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--black);
+      background: rgba(16, 15, 18, 0.05);
+    }
+
+    .nav-links a:focus-visible {
+      outline: 2px solid var(--p500);
+      outline-offset: 2px;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: 'DM Sans', Arial, sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 100px;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.2s var(--ease-spring), box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    .btn:active {
+      transform: scale(0.97) !important;
+    }
+
+    .btn:focus-visible {
+      outline: 2px solid var(--p500);
+      outline-offset: 3px;
+    }
+
+    .btn-ghost {
+      padding: 8px 18px;
+      color: var(--n700);
+      background: transparent;
+    }
+
+    .btn-ghost:hover {
+      color: var(--black);
+      background: rgba(16, 15, 18, 0.05);
+    }
+
+    .btn-primary-nav {
+      padding: 9px 20px;
+      color: #fff;
+      background: var(--black);
+      box-shadow: 0 1px 4px rgba(16, 15, 18, 0.2);
+    }
+
+    .btn-primary-nav:hover {
+      background: var(--p900);
+      box-shadow: 0 4px 16px rgba(46, 31, 107, 0.3);
+      transform: translateY(-1px);
+    }
+
+    /* ─── CASE HERO ──────────────────────────────────────── */
+    .case-hero {
+      padding: 100px 0 80px;
+      background: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .case-hero::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--divider);
+    }
+
+    /* Ambient glow — rose-tinted for Spark */
+    .case-hero::before {
+      content: '';
+      position: absolute;
+      top: -60px;
+      right: -100px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(ellipse at center, rgba(232, 113, 138, 0.07) 0%, rgba(97, 68, 196, 0.04) 50%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Decorative large number */
+    .case-hero-num {
+      position: absolute;
+      top: 60px;
+      right: 4vw;
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(140px, 18vw, 260px);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1;
+      color: rgba(232, 113, 138, 0.05);
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -0.04em;
+    }
+
+    .case-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--n500);
+      margin-bottom: 32px;
+      opacity: 0;
+      animation: fadeUp 0.6s var(--ease-out) 0.1s both;
+    }
+
+    .case-breadcrumb a {
+      color: var(--n500);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .case-breadcrumb a:hover {
+      color: var(--black);
+    }
+
+    .case-breadcrumb span {
+      opacity: 0.5;
+    }
+
+    .case-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeUp 0.6s var(--ease-out) 0.2s both;
+    }
+
+    .tag {
+      font-size: 11.5px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--spark-rose);
+      background: var(--spark-rose-bg);
+      padding: 5px 12px;
+      border-radius: 100px;
+      border: 1px solid var(--spark-rose-border);
+    }
+
+    .case-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(56px, 7.5vw, 96px);
+      font-weight: 400;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeUp 0.7s var(--ease-out) 0.3s both;
+    }
+
+    .case-title em {
+      font-style: italic;
+      color: var(--spark-rose);
+    }
+
+    /* Meta grid */
+    .case-meta {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid var(--divider);
+      border-radius: 16px;
+      overflow: hidden;
+      opacity: 0;
+      animation: fadeUp 0.7s var(--ease-out) 0.45s both;
+    }
+
+    .meta-item {
+      padding: 22px 26px;
+      border-right: 1px solid var(--divider);
+    }
+
+    .meta-item:last-child {
+      border-right: none;
+    }
+
+    .meta-label {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--p600);
+      margin-bottom: 8px;
+    }
+
+    .meta-value {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--black);
+      line-height: 1.5;
+    }
+
+    .meta-value strong {
+      font-weight: 600;
+    }
+
+    .meta-sub {
+      font-size: 12.5px;
+      color: var(--n500);
+      margin-top: 2px;
+      display: block;
+    }
+
+    /* ─── STATS BAR ──────────────────────────────────────── */
+    .stats-bar {
+      background: var(--black);
+      padding: 60px 0;
+    }
+
+    .stats-inner {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+
+    .stat-item {
+      padding: 0 48px;
+      border-right: 1px solid rgba(255, 255, 255, 0.07);
+      text-align: center;
+    }
+
+    .stat-item:last-child {
+      border-right: none;
+    }
+
+    .stat-big {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(48px, 6vw, 72px);
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: var(--near-white);
+      margin-bottom: 10px;
+    }
+
+    .stat-big em {
+      font-style: italic;
+      color: var(--spark-rose-lt);
+    }
+
+    .stat-desc {
+      font-size: 13.5px;
+      font-weight: 300;
+      color: rgba(250, 250, 250, 0.45);
+      line-height: 1.55;
+      max-width: 200px;
+      margin: 0 auto;
+    }
+
+    /* ─── SECTIONS ───────────────────────────────────────── */
+    .section {
+      padding: 96px 0;
+      border-bottom: 1px solid var(--divider);
+    }
+
+    .section:last-of-type {
+      border-bottom: none;
+    }
+
+    .section-alt {
+      background: var(--p50);
+    }
+
+    .section-label {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--p600);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-label::before {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 1.5px;
+      background: var(--p500);
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(28px, 3.8vw, 44px);
+      font-weight: 400;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      margin-bottom: 20px;
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--spark-rose);
+    }
+
+    .section-body {
+      font-size: 16.5px;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--n700);
+      max-width: 640px;
+    }
+
+    .section-body+.section-body {
+      margin-top: 16px;
+    }
+
+    /* Two-col layout */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .two-col-wide {
+      display: grid;
+      grid-template-columns: 5fr 4fr;
+      gap: 72px;
+      align-items: center;
+    }
+
+    /* ─── IMAGE BLOCKS ───────────────────────────────────── */
+    .img-block {
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--p100);
+      border: 1px solid var(--p200);
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .img-block img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+
+    .img-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: var(--n500);
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      padding: 40px;
+      text-align: center;
+      position: absolute;
+      inset: 0;
+    }
+
+    .img-placeholder svg {
+      opacity: 0.3;
+    }
+
+    .vimeo-embed {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: inherit;
+    }
+
+    .vimeo-embed iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      pointer-events: none;
+    }
+
+    .img-caption {
+      font-size: 12.5px;
+      color: var(--n500);
+      line-height: 1.5;
+      margin-top: 12px;
+      letter-spacing: 0.01em;
+    }
+
+    /* Full-width image */
+    .img-full {
+      max-width: 900px;
+      width: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--p200);
+      margin: 48px auto;
+      background: var(--p100);
+    }
+
+    .img-full img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Phone mockup trio */
+    .phone-trio {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 48px;
+    }
+
+    .phone-frame {
+      background: var(--p100);
+      border: 1px solid var(--p200);
+      border-radius: 24px;
+      overflow: hidden;
+      aspect-ratio: 9/16;
+      position: relative;
+      position: relative;
+    }
+
+    .phone-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--n500);
+      text-align: center;
+      margin-top: 12px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── HMW BLOCK ──────────────────────────────────────── */
+    .hmw-block {
+      background: var(--black);
+      border-radius: 20px;
+      padding: 56px 64px;
+      position: relative;
+      overflow: hidden;
+      margin: 48px 0;
+    }
+
+    .hmw-block::before {
+      content: '"';
+      position: absolute;
+      top: -20px;
+      left: 40px;
+      font-family: 'DM Serif Display', serif;
+      font-size: 200px;
+      line-height: 1;
+      color: rgba(255, 255, 255, 0.03);
+      pointer-events: none;
+    }
+
+    .hmw-block::after {
+      content: '';
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(ellipse, rgba(232, 113, 138, 0.14) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hmw-label {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--spark-rose-lt);
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hmw-text {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(20px, 2.8vw, 30px);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 1.45;
+      color: var(--near-white);
+      max-width: 680px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hmw-text strong {
+      font-style: normal;
+      font-weight: 400;
+      color: var(--spark-rose-lt);
+    }
+
+    /* ─── RESEARCH GRID ──────────────────────────────────── */
+    .research-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    .research-card {
+      background: var(--white);
+      border: 1px solid var(--p200);
+      border-radius: 14px;
+      padding: 28px 24px;
+      transition: transform 0.22s var(--ease-spring), box-shadow 0.22s ease;
+    }
+
+    .research-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-float);
+    }
+
+    .research-card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: var(--spark-rose-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      color: var(--spark-rose);
+    }
+
+    .research-card-title {
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 6px;
+    }
+
+    .research-card-desc {
+      font-size: 13.5px;
+      font-weight: 300;
+      color: var(--n700);
+      line-height: 1.55;
+    }
+
+    /* ─── INSIGHT PILLS ──────────────────────────────────── */
+    .insight-row {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .insight-pill {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 24px;
+      border-radius: 12px;
+      border: 1px solid var(--p200);
+      background: var(--white);
+      transition: transform 0.2s var(--ease-spring), box-shadow 0.2s ease;
+    }
+
+    .insight-pill:hover {
+      transform: translateX(6px);
+      box-shadow: var(--shadow-card);
+    }
+
+    .insight-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--spark-rose-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--spark-rose);
+      font-size: 15px;
+    }
+
+    .insight-text {
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--n700);
+    }
+
+    .insight-text strong {
+      font-weight: 600;
+      color: var(--black);
+    }
+
+    /* ─── CONSTRAINT CARDS ───────────────────────────────── */
+    .constraint-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .constraint-card {
+      border: 1px solid var(--p200);
+      border-radius: 16px;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+      background: var(--white);
+    }
+
+    .constraint-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--spark-rose);
+    }
+
+    .constraint-card-num {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--p600);
+      margin-bottom: 12px;
+    }
+
+    .constraint-card-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .constraint-card-body {
+      font-size: 14.5px;
+      font-weight: 300;
+      color: var(--n700);
+      line-height: 1.65;
+    }
+
+    /* ─── SOLUTION CARDS ─────────────────────────────────── */
+    .solution-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      margin-top: 16px;
+    }
+
+    .solution-card {
+      border: 1px solid var(--p200);
+      border-radius: 20px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 360px;
+    }
+
+    .solution-card-text {
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .solution-num {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--spark-rose);
+      margin-bottom: 14px;
+    }
+
+    .solution-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(20px, 2.4vw, 28px);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--black);
+      margin-bottom: 16px;
+    }
+
+    .solution-body {
+      font-size: 14.5px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--n700);
+      margin-bottom: 20px;
+    }
+
+    .solution-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .solution-bullets li {
+      font-size: 13.5px;
+      color: var(--n700);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.5;
+    }
+
+    .solution-bullets li::before {
+      content: '→';
+      color: var(--spark-rose);
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .solution-card-img {
+      background: var(--p100);
+      border-left: 1px solid var(--p200);
+      position: relative;
+    }
+
+    .solution-card.flip .solution-card-img {
+      border-left: none;
+      border-right: 1px solid var(--p200);
+    }
+
+    /* ─── FLOW GRID (Core User Flows) ───────────────────── */
+    .flow-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      margin-top: 16px;
+    }
+
+    .flow-card {
+      border: 1px solid var(--p200);
+      border-radius: 20px;
+      overflow: hidden;
+      background: var(--white);
+    }
+
+    .flow-card-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 24px 28px;
+      border-bottom: 1px solid var(--p200);
+    }
+
+    .flow-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 40px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--p200);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .flow-label {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--spark-rose);
+      margin-bottom: 4px;
+    }
+
+    .flow-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(18px, 2vw, 22px);
+      font-weight: 400;
+      line-height: 1.2;
+      color: var(--black);
+      margin: 0;
+    }
+
+    .flow-media {
+      background: var(--p50);
+    }
+
+    .flow-media-video {
+      position: relative;
+      padding-bottom: 100%;
+      background: #000000;
+    }
+
+    .flow-media-video iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .flow-media-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Cards with video + text: text left, video right */
+    .flow-card-body {
+      display: grid;
+      grid-template-columns: 1fr 50%;
+      align-items: stretch;
+    }
+
+    .flow-steps {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .flow-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .flow-step-num {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 1px solid var(--p200);
+      background: var(--p50);
+      color: var(--p600);
+      font-size: 11px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .flow-step-title {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 3px;
+      line-height: 1.3;
+    }
+
+    .flow-step-body {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--n700);
+      line-height: 1.55;
+    }
+
+
+    /* ─── QUOTES GRID ────────────────────────────────────── */
+    .quotes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .quote-card {
+      background: var(--p50);
+      border: 1px solid var(--p200);
+      border-radius: 16px;
+      padding: 28px 28px 24px;
+      position: relative;
+    }
+
+    .quote-card::before {
+      content: '"';
+      position: absolute;
+      top: 12px;
+      left: 20px;
+      font-family: 'DM Serif Display', serif;
+      font-size: 60px;
+      line-height: 1;
+      color: var(--p300);
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    .quote-text {
+      font-size: 14.5px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--n700);
+      padding-top: 24px;
+      font-style: italic;
+    }
+
+    .quote-attr {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--n500);
+      margin-top: 16px;
+      letter-spacing: 0.02em;
+    }
+
+    /* ─── LEARNINGS GRID ─────────────────────────────────── */
+    .learnings-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .learning-card {
+      border: 1px solid var(--p200);
+      border-radius: 16px;
+      padding: 32px 28px;
+      background: var(--white);
+      transition: transform 0.22s var(--ease-spring), box-shadow 0.22s ease;
+    }
+
+    .learning-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-float);
+    }
+
+    .learning-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 40px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--p200);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .learning-title {
+      font-size: 15.5px;
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 10px;
+      line-height: 1.35;
+    }
+
+    .learning-body {
+      font-size: 13.5px;
+      font-weight: 300;
+      color: var(--n700);
+      line-height: 1.65;
+    }
+
+    /* ─── SCOPE BAND ─────────────────────────────────────── */
+    .scope-band {
+      background: var(--p900);
+      padding: 60px 0;
+    }
+
+    .scope-inner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .scope-item {
+      padding: 0 36px;
+      border-right: 1px solid rgba(255, 255, 255, 0.07);
+      text-align: center;
+    }
+
+    .scope-item:last-child {
+      border-right: none;
+    }
+
+    .scope-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(232, 113, 138, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+      color: var(--spark-rose-lt);
+    }
+
+    .scope-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--near-white);
+      margin-bottom: 6px;
+    }
+
+    .scope-desc {
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(250, 250, 250, 0.4);
+      line-height: 1.5;
+    }
+
+    /* ─── NEXT CASE STUDY ────────────────────────────────── */
+    .next-section {
+      padding: 80px 0;
+      background: var(--p50);
+      text-align: center;
+    }
+
+    .next-label {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--n500);
+      margin-bottom: 20px;
+    }
+
+    .next-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      margin-bottom: 16px;
+    }
+
+    .next-title em {
+      font-style: italic;
+      color: var(--p700);
+    }
+
+    .next-desc {
+      font-size: 15.5px;
+      font-weight: 300;
+      color: var(--n700);
+      max-width: 400px;
+      margin: 0 auto 36px;
+      line-height: 1.65;
+    }
+
+    .btn-next {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--black);
+      color: var(--near-white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 13px 28px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: transform 0.22s var(--ease-spring), background 0.2s ease, box-shadow 0.22s ease;
+      box-shadow: 0 2px 8px rgba(16, 15, 18, 0.15), 0 8px 24px rgba(16, 15, 18, 0.1);
+    }
+
+    .btn-next:hover {
+      transform: translateY(-3px);
+      background: var(--p900);
+      box-shadow: 0 4px 12px rgba(46, 31, 107, 0.25), 0 14px 40px rgba(46, 31, 107, 0.18);
+    }
+
+    .btn-next:active {
+      transform: translateY(-1px);
+    }
+
+    .btn-next svg {
+      transition: transform 0.2s var(--ease-spring);
+    }
+
+    .btn-next:hover svg {
+      transform: translateX(4px);
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    footer {
+      background: var(--black);
+      color: var(--near-white);
+      padding: 52px 40px 40px;
+    }
+
+    .footer-grid {
+      max-width: 1140px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+
+    .footer-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 28px;
+      font-weight: 400;
+      font-style: italic;
+      letter-spacing: -0.015em;
+      margin-bottom: 8px;
+    }
+
+    .footer-tagline {
+      font-size: 13.5px;
+      font-weight: 300;
+      color: rgba(250, 250, 250, 0.4);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: rgba(250, 250, 250, 0.45);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--near-white);
+    }
+
+    .footer-divider {
+      max-width: 1140px;
+      margin: 0 auto 20px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.07);
+    }
+
+    .footer-bottom {
+      max-width: 1140px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      font-size: 11.5px;
+      color: rgba(250, 250, 250, 0.25);
+      letter-spacing: 0.03em;
+    }
+
+    /* ─── GLOBAL IMAGE SIZING ───────────────────────────────── */
+    .flow-img {
+      max-width: 900px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .flow-img img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ─── SCROLL ANIMATIONS ──────────────────────────────── */
+    .js-ready .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+    }
+
+    .js-ready .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 {
+      transition-delay: 0.1s;
+    }
+
+    .reveal-delay-2 {
+      transition-delay: 0.2s;
+    }
+
+    .reveal-delay-3 {
+      transition-delay: 0.3s;
+    }
+
+    .reveal-delay-4 {
+      transition-delay: 0.4s;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 900px) {
+
+      .container,
+      .container-narrow {
+        padding: 0 24px;
+      }
+
+      .nav-inner {
+        padding: 0 24px;
+      }
+
+      .case-meta {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .meta-item:nth-child(2) {
+        border-right: none;
+      }
+
+      .meta-item:nth-child(3) {
+        border-top: 1px solid var(--divider);
+      }
+
+      .meta-item:nth-child(4) {
+        border-top: 1px solid var(--divider);
+      }
+
+      .stats-inner {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .stat-item {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        padding: 0 0 40px;
+      }
+
+      .stat-item:last-child {
+        border-bottom: none;
+      }
+
+      .scope-inner {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+      }
+
+      .scope-item {
+        border-right: none;
+      }
+
+      .two-col,
+      .two-col-wide {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .research-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .constraint-pair {
+        grid-template-columns: 1fr;
+      }
+
+      .phone-trio {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .solution-card {
+        grid-template-columns: 1fr;
+      }
+
+      .solution-card.flip .solution-card-text {
+        order: 0;
+      }
+
+      .solution-card.flip .solution-card-img {
+        order: 1;
+        border-right: none;
+        border-top: 1px solid var(--p200);
+      }
+
+      .solution-card-img {
+        border-left: none;
+        border-top: 1px solid var(--p200);
+        min-height: 260px;
+      }
+
+      .quotes-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .learnings-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 8px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .research-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .learnings-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hmw-block {
+        padding: 36px 28px;
+      }
+
+      .case-meta {
+        grid-template-columns: 1fr;
+      }
+
+      .meta-item {
+        border-right: none;
+        border-bottom: 1px solid var(--divider);
+      }
+
+      .meta-item:last-child {
+        border-bottom: none;
+      }
+
+      .phone-trio {
+        grid-template-columns: 1fr;
+      }
+
+      .scope-inner {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ANNOUNCEMENT BAR -->
+  <div class="announcement-bar" role="banner">
+    Available for new opportunities · <a href="index.html#contact">Let's talk</a>
+  </div>
+
+  <!-- NAV -->
+  <nav id="navbar" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="Home — Unnati">
+        <span class="nav-logo-mark" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+            <path d="M7 1.5C7 1.5 2 4.5 2 8a5 5 0 0010 0c0-3.5-5-6.5-5-6.5z" fill="white" opacity="0.9" />
+          </svg>
+        </span>
+        Unnati
+      </a>
+
+      <ul class="nav-links" role="list">
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#play">Play</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="index.html#contact" class="btn btn-ghost">Say hello</a>
+        <a href="index.html#work" class="btn btn-primary-nav">View work</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       CASE HERO
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="case-hero">
+    <div class="case-hero-num" aria-hidden="true">02</div>
+    <div class="container">
+
+      <nav class="case-breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span aria-hidden="true">→</span>
+        <a href="index.html#work">Work</a>
+        <span aria-hidden="true">→</span>
+        <span aria-current="page">Spark</span>
+      </nav>
+
+      <div class="case-tags">
+        <span class="tag">0 → 1 Product</span>
+        <span class="tag">App Design</span>
+        <span class="tag">iOS &amp; Android</span>
+        <span class="tag">Design System</span>
+        <span class="tag">Founding Designer</span>
+      </div>
+
+      <h1 class="case-title"><em>Spark</em></h1>
+
+      <div class="case-meta">
+        <div class="meta-item">
+          <div class="meta-label">Role</div>
+          <div class="meta-value">Founding Product Designer<span class="meta-sub">End-to-end research, design &amp;
+              stakeholder alignment</span></div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Team</div>
+          <div class="meta-value">1 PM · 4 Devs<span class="meta-sub">2 very passionate Founders</span></div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Timeline</div>
+          <div class="meta-value"><strong>January 2025</strong><span class="meta-sub">Present — ongoing</span></div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Platform</div>
+          <div class="meta-value">iOS &amp; Android<span class="meta-sub">+ Marketing website &amp; dashboards</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Hero Video -->
+    <div class="container" style="margin-top: 56px; padding-bottom: 0;">
+      <div
+        style="border-radius: 20px; overflow: hidden; border: 1px solid var(--p200); aspect-ratio: 16/9; position: relative; background: var(--black);">
+        <iframe src="https://player.vimeo.com/video/1117709445?autoplay=1&loop=1&muted=1&background=1&controls=0"
+          allow="autoplay; fullscreen" style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"
+          title="Spark — Product Overview"></iframe>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       STATS BAR
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="stats-bar" aria-label="Key scope">
+    <div class="container">
+      <div class="stats-inner">
+        <div class="stat-item reveal">
+          <div class="stat-big">0<em>→1</em></div>
+          <div class="stat-desc">Sole designer on a greenfield mobile product, built from scratch</div>
+        </div>
+        <div class="stat-item reveal reveal-delay-1">
+          <div class="stat-big">4<em>+</em></div>
+          <div class="stat-desc">Surface areas designed: mobile app, marketing site, sales &amp; analytics dashboards
+          </div>
+        </div>
+        <div class="stat-item reveal reveal-delay-2">
+          <div class="stat-big">1<em>ds</em></div>
+          <div class="stat-desc">Scalable design system created to tie all surfaces together into one cohesive language
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       OVERVIEW
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="two-col-wide">
+        <div>
+          <p class="section-label reveal">Project Overview</p>
+          <h2 class="section-title reveal">A couples app that helps partners <em>reconnect</em></h2>
+          <p class="section-body reveal">Spark is a mobile app for iOS and Android that helps couples stay connected
+            through playful, personalized coupons — small, thoughtful gestures that feel meaningful rather than
+            obligatory.</p>
+          <p class="section-body reveal">I've always been fascinated by how design can shift emotional dynamics in
+            overlooked spaces. As the Founding Product Designer, I owned the entire experience end-to-end: from the
+            mobile app to sales and marketing dashboards, the marketing website, and a scalable design system that tied
+            it all together.</p>
+        </div>
+        <div class="reveal reveal-delay-2">
+          <div class="img-block">
+            <img src="Assets/Spark/hero-image.png" alt="Spark App — Hero Overview"
+              style="width:100%;height:auto;display:block;" />
+          </div>
+          <p class="img-caption">The Spark homepage — a curated set of coupon cards, ready to send with a tap.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SCOPE BAND
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="scope-band">
+    <div class="container">
+      <div class="scope-inner">
+        <div class="scope-item reveal">
+          <div class="scope-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="5" y="2" width="14" height="20" rx="2" />
+              <path d="M12 18h.01" />
+            </svg>
+          </div>
+          <div class="scope-title">Mobile App</div>
+          <div class="scope-desc">iOS &amp; Android — full coupon flow, onboarding, redemption</div>
+        </div>
+        <div class="scope-item reveal reveal-delay-1">
+          <div class="scope-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+              <polyline points="9 22 9 12 15 12 15 22" />
+            </svg>
+          </div>
+          <div class="scope-title">Marketing Website</div>
+          <div class="scope-desc">Landing pages &amp; conversion-focused flows</div>
+        </div>
+        <div class="scope-item reveal reveal-delay-2">
+          <div class="scope-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="2" y="3" width="20" height="14" rx="2" />
+              <path d="M8 21h8M12 17v4" />
+            </svg>
+          </div>
+          <div class="scope-title">Dashboards</div>
+          <div class="scope-desc">Sales &amp; analytics tools for the internal team</div>
+        </div>
+        <div class="scope-item reveal reveal-delay-3">
+          <div class="scope-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <circle cx="12" cy="12" r="3" />
+              <path d="M19.07 4.93A10 10 0 115 19.07" />
+              <path d="M22 12A10 10 0 0012 2" />
+            </svg>
+          </div>
+          <div class="scope-title">Design System</div>
+          <div class="scope-desc">Scalable tokens, components, and patterns</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       CONTEXT
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="section section-alt">
+    <div class="container-narrow">
+      <p class="section-label reveal">Context</p>
+      <h2 class="section-title reveal">Busy schedules make<br>intimacy feel like <em>a task</em></h2>
+      <p class="section-body reveal">Couples want to keep their connection alive, but busy schedules, routines, and
+        misaligned expectations can make intimacy feel like a chore instead of a joy. The moments that once came
+        naturally get buried under notifications, work stress, and the monotony of daily routine.</p>
+      <p class="section-body reveal">Spark was born from the question: what if staying connected felt as easy and
+        delightful as sending a meme?</p>
+    </div>
+    <div class="container" style="margin-top: 48px;">
+      <div class="img-full reveal">
+        <img src="Assets/Spark/research-context.png" alt="User Research Context — Couples & Connection Patterns"
+          style="width:100%;max-width:900px;height:auto;display:block;border-radius:var(--radius-md);" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       THE PROBLEM
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="container-narrow">
+    <div class="hmw-block reveal">
+      <div class="hmw-label">The Problem</div>
+      <p class="hmw-text">Most relationship-focused apps center around <strong>dating</strong> — not <strong>sustaining
+          love</strong>. There's no app that makes it delightfully easy for committed couples to nurture their bond in
+        the everyday.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       RESEARCH & DISCOVERY
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="section section-alt">
+    <div class="container">
+      <p class="section-label reveal">Research &amp; Discovery</p>
+      <h2 class="section-title reveal">Understanding how couples<br>stay connected today</h2>
+      <p class="section-body reveal">I conducted qualitative research with couples across different relationship stages
+        to understand their routines, friction points, and the role of small gestures in sustaining connection. The goal
+        was to build empathy before building anything else.</p>
+
+      <div class="research-grid">
+        <div class="research-card reveal">
+          <div class="research-card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 00-3-3.87" />
+              <path d="M16 3.13a4 4 0 010 7.75" />
+            </svg>
+          </div>
+          <div class="research-card-title">Couples Interviews</div>
+          <div class="research-card-desc">In-depth conversations with couples at different relationship stages — dating,
+            long-term, long-distance — to surface real patterns and pain points.</div>
+        </div>
+        <div class="research-card reveal reveal-delay-1">
+          <div class="research-card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <circle cx="11" cy="11" r="8" />
+              <path d="M21 21l-4.35-4.35" />
+            </svg>
+          </div>
+          <div class="research-card-title">Competitive Analysis</div>
+          <div class="research-card-desc">Mapped the existing relationship app landscape — from LoveByte to Couple — to
+            understand where intimacy apps succeed and where they fall short.</div>
+        </div>
+        <div class="research-card reveal reveal-delay-2">
+          <div class="research-card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M12 2a10 10 0 100 20 10 10 0 000-20z" />
+              <path d="M8 14s1.5 2 4 2 4-2 4-2" />
+              <line x1="9" y1="9" x2="9.01" y2="9" />
+              <line x1="15" y1="9" x2="15.01" y2="9" />
+            </svg>
+          </div>
+          <div class="research-card-title">Love Languages Research</div>
+          <div class="research-card-desc">Studied how different love languages shape expectations around gestures —
+            informing how Spark surfaces and personalizes coupon recommendations.</div>
+        </div>
+        <div class="research-card reveal">
+          <div class="research-card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+              <polyline points="14 2 14 8 20 8" />
+              <line x1="16" y1="13" x2="8" y2="13" />
+              <line x1="16" y1="17" x2="8" y2="17" />
+            </svg>
+          </div>
+          <div class="research-card-title">Surveys &amp; Behavioral Data</div>
+          <div class="research-card-desc">Collected quantitative signal on frequency of gestures, willingness to plan
+            dates, and what makes couples feel "seen" in their relationship.</div>
+        </div>
+        <div class="research-card reveal reveal-delay-1">
+          <div class="research-card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+            </svg>
+          </div>
+          <div class="research-card-title">User Testing (Beta)</div>
+          <div class="research-card-desc">Early prototypes tested with real couples — uncovering surprising insights
+            about trust, vulnerability, and the emotional weight of sending vs. receiving a coupon.</div>
+        </div>
+        <div class="research-card reveal reveal-delay-2">
+          <div class="research-card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path
+                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22" />
+            </svg>
+          </div>
+          <div class="research-card-title">Founder &amp; Stakeholder Alignment</div>
+          <div class="research-card-desc">Weekly syncs with the founding team to align research findings with product
+            vision, roadmap priorities, and technical constraints.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Research Insights -->
+  <section class="section">
+    <div class="container-narrow">
+      <p class="section-label reveal">Key Insights</p>
+      <h2 class="section-title reveal">What couples actually need</h2>
+      <p class="section-body reveal">Three themes emerged consistently across every research method — shaping every
+        design decision that followed.</p>
+
+      <div class="insight-row" style="margin-top: 36px;">
+        <div class="insight-pill reveal">
+          <div class="insight-icon">✦</div>
+          <div class="insight-text"><strong>Small gestures carry big emotional weight.</strong> A handwritten note or a
+            spontaneous plan matters more than grand gestures. The frequency of small, intentional acts is the real
+            predictor of relationship satisfaction.</div>
+        </div>
+        <div class="insight-pill reveal reveal-delay-1">
+          <div class="insight-icon">✦</div>
+          <div class="insight-text"><strong>Planning feels unromantic, but structure enables spontaneity.</strong>
+            Couples want things to feel effortless — yet they need light scaffolding to make gestures happen. The design
+            challenge: make structure invisible.</div>
+        </div>
+        <div class="insight-pill reveal reveal-delay-2">
+          <div class="insight-icon">✦</div>
+          <div class="insight-text"><strong>Vulnerability is the barrier, not effort.</strong> Many users said they knew
+            what their partner wanted — they just felt awkward initiating. Spark had to lower the emotional activation
+            energy, not just the logistical one.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       HMW
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="container-narrow">
+    <div class="hmw-block reveal">
+      <div class="hmw-label">How Might We</div>
+      <p class="hmw-text">How might we make <strong>staying connected</strong> feel as <strong>natural and
+          delightful</strong> as any other daily ritual — for couples who are already in love, but need a little nudge?
+      </p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       IDEATION
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="section section-alt">
+    <div class="container">
+      <p class="section-label reveal">Ideation</p>
+      <h2 class="section-title reveal">Mapping every path<br>through the <em>experience</em></h2>
+      <p class="section-body reveal">
+        Before any pixels, I mapped the full information architecture and user flows for all core interactions — coupon
+        creation, redemption, settings, and the ambassador program. This ensured every edge case was accounted for and
+        the development team had a single source of truth.</p>
+      <p class="section-body reveal" style="margin-top: 16px;">The core interaction had to be simple enough to use in 30
+        seconds, but rich enough to feel personal. Early wireframes went through 12+ rounds before we landed on the
+        final architecture.</p>
+
+
+
+      <!-- User Flow Toggle -->
+      <div style="margin-top: 64px;" class="reveal">
+
+        <!-- Segmented Toggle -->
+        <div style="display: flex; justify-content: center; margin-bottom: 36px;">
+          <div id="flow-toggle" style="
+            display: inline-flex;
+            background: var(--p100);
+            border: 1px solid var(--p200);
+            border-radius: var(--radius-pill);
+            padding: 4px;
+            gap: 2px;
+          ">
+            <button onclick="switchFlow(0)" data-flow-btn="0" style="
+              padding: 8px 22px;
+              border-radius: var(--radius-pill);
+              border: none;
+              cursor: pointer;
+              font-family: 'DM Sans', sans-serif;
+              font-size: 0.875rem;
+              font-weight: 500;
+              letter-spacing: 0.01em;
+              transition: background 0.22s var(--ease-out), color 0.22s var(--ease-out), box-shadow 0.22s var(--ease-out);
+              background: var(--p700);
+              color: #fff;
+              box-shadow: 0 2px 8px rgba(97, 68, 196, 0.22);
+            ">My Coupons</button>
+            <button onclick="switchFlow(1)" data-flow-btn="1" style="
+              padding: 8px 22px;
+              border-radius: var(--radius-pill);
+              border: none;
+              cursor: pointer;
+              font-family: 'DM Sans', sans-serif;
+              font-size: 0.875rem;
+              font-weight: 500;
+              letter-spacing: 0.01em;
+              transition: background 0.22s var(--ease-out), color 0.22s var(--ease-out), box-shadow 0.22s var(--ease-out);
+              background: transparent;
+              color: var(--p700);
+              box-shadow: none;
+            ">Onboarding</button>
+            <button onclick="switchFlow(2)" data-flow-btn="2" style="
+              padding: 8px 22px;
+              border-radius: var(--radius-pill);
+              border: none;
+              cursor: pointer;
+              font-family: 'DM Sans', sans-serif;
+              font-size: 0.875rem;
+              font-weight: 500;
+              letter-spacing: 0.01em;
+              transition: background 0.22s var(--ease-out), color 0.22s var(--ease-out), box-shadow 0.22s var(--ease-out);
+              background: transparent;
+              color: var(--p700);
+              box-shadow: none;
+            ">User Settings</button>
+          </div>
+        </div>
+
+        <!-- Flow Panels -->
+        <div id="flow-panel-0" class="img-block flow-panel-clickable" style="display:block; cursor:zoom-in;"
+          onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+          <img src="Assets/Spark/user-flow1.png" alt="User Flow — My Coupons"
+            style="width:100%;height:auto;display:block; transition: opacity 0.18s ease;" />
+          <div class="flow-zoom-hint">Click to zoom</div>
+        </div>
+        <div id="flow-panel-1" class="img-block flow-panel-clickable" style="display:none; cursor:zoom-in;"
+          onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+          <img src="Assets/Spark/user-flow2.png" alt="User Flow — Onboarding"
+            style="width:100%;height:auto;display:block; transition: opacity 0.18s ease;" />
+          <div class="flow-zoom-hint">Click to zoom</div>
+        </div>
+        <div id="flow-panel-2" class="img-block flow-panel-clickable" style="display:none; cursor:zoom-in;"
+          onclick="openLightbox(this.querySelector('img').src, this.querySelector('img').alt)">
+          <img src="Assets/Spark/user-flow3.png" alt="User Flow — User Settings"
+            style="width:100%;height:auto;display:block; transition: opacity 0.18s ease;" />
+          <div class="flow-zoom-hint">Click to zoom</div>
+        </div>
+      </div>
+
+      <style>
+        .flow-panel-clickable {
+          position: relative;
+        }
+
+        .flow-panel-clickable:hover img {
+          opacity: 0.92;
+        }
+
+        .flow-zoom-hint {
+          position: absolute;
+          bottom: 14px;
+          right: 14px;
+          background: rgba(16, 15, 18, 0.55);
+          color: #fff;
+          font-family: 'DM Sans', sans-serif;
+          font-size: 0.75rem;
+          font-weight: 500;
+          letter-spacing: 0.04em;
+          padding: 5px 12px;
+          border-radius: 100px;
+          backdrop-filter: blur(6px);
+          pointer-events: none;
+          opacity: 0;
+          transform: translateY(4px);
+          transition: opacity 0.18s ease, transform 0.18s ease;
+        }
+
+        .flow-panel-clickable:hover .flow-zoom-hint {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        /* Lightbox */
+        #flow-lightbox {
+          position: fixed;
+          inset: 0;
+          z-index: 9999;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(16, 15, 18, 0);
+          backdrop-filter: blur(0px);
+          transition: background 0.28s var(--ease-out), backdrop-filter 0.28s var(--ease-out), opacity 0.28s var(--ease-out);
+          pointer-events: none;
+          opacity: 0;
+        }
+
+        #flow-lightbox.open {
+          background: rgba(16, 15, 18, 0.82);
+          backdrop-filter: blur(10px);
+          pointer-events: all;
+          opacity: 1;
+        }
+
+        #flow-lightbox-inner {
+          position: relative;
+          max-width: 92vw;
+          max-height: 88vh;
+          transform: scale(0.93) translateY(12px);
+          transition: transform 0.3s var(--ease-spring), opacity 0.28s var(--ease-out);
+          opacity: 0;
+          overflow: auto;
+          border-radius: 12px;
+          box-shadow: 0 32px 80px rgba(16, 15, 18, 0.5), 0 8px 24px rgba(16, 15, 18, 0.3);
+        }
+
+        #flow-lightbox.open #flow-lightbox-inner {
+          transform: scale(1) translateY(0);
+          opacity: 1;
+        }
+
+        #flow-lightbox-img {
+          display: block;
+          width: auto;
+          height: auto;
+          max-width: 100%;
+          max-height: 88vh;
+          border-radius: 12px;
+          cursor: zoom-in;
+          transform-origin: top left;
+          transition: transform 0.3s var(--ease-out);
+          user-select: none;
+        }
+
+        #flow-lightbox-img.zoomed {
+          cursor: zoom-out;
+          max-width: none;
+          max-height: none;
+        }
+
+        #flow-lightbox-close {
+          position: fixed;
+          top: 24px;
+          right: 28px;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          border: none;
+          background: rgba(255, 255, 255, 0.12);
+          color: #fff;
+          font-size: 1.1rem;
+          line-height: 1;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          backdrop-filter: blur(6px);
+          transition: background 0.16s ease, transform 0.16s ease;
+          z-index: 10000;
+        }
+
+        #flow-lightbox-close:hover {
+          background: rgba(255, 255, 255, 0.22);
+          transform: scale(1.08);
+        }
+      </style>
+
+      <!-- Lightbox DOM -->
+      <div id="flow-lightbox" onclick="handleLightboxClick(event)">
+        <div id="flow-lightbox-inner">
+          <img id="flow-lightbox-img" src="" alt="" onclick="toggleZoom(event)" />
+        </div>
+        <button id="flow-lightbox-close" onclick="closeLightbox()" aria-label="Close">✕</button>
+      </div>
+
+      <script>
+        function switchFlow(index) {
+          for (var i = 0; i < 3; i++) {
+            var panel = document.getElementById('flow-panel-' + i);
+            var btn = document.querySelector('[data-flow-btn="' + i + '"]');
+            if (i === index) {
+              panel.style.display = 'block';
+              btn.style.background = 'var(--p700)';
+              btn.style.color = '#fff';
+              btn.style.boxShadow = '0 2px 8px rgba(97, 68, 196, 0.22)';
+            } else {
+              panel.style.display = 'none';
+              btn.style.background = 'transparent';
+              btn.style.color = 'var(--p700)';
+              btn.style.boxShadow = 'none';
+            }
+          }
+        }
+
+        var _lbZoomed = false;
+        var _lbZoomScale = 2.2;
+
+        function openLightbox(src, alt) {
+          var lb = document.getElementById('flow-lightbox');
+          var img = document.getElementById('flow-lightbox-img');
+          img.src = src;
+          img.alt = alt;
+          img.style.transform = 'scale(1)';
+          img.classList.remove('zoomed');
+          _lbZoomed = false;
+          document.body.style.overflow = 'hidden';
+          lb.classList.add('open');
+        }
+
+        function closeLightbox() {
+          var lb = document.getElementById('flow-lightbox');
+          lb.classList.remove('open');
+          document.body.style.overflow = '';
+          _lbZoomed = false;
+        }
+
+        function handleLightboxClick(e) {
+          if (e.target === document.getElementById('flow-lightbox')) {
+            closeLightbox();
+          }
+        }
+
+        function toggleZoom(e) {
+          e.stopPropagation();
+          var img = document.getElementById('flow-lightbox-img');
+          var inner = document.getElementById('flow-lightbox-inner');
+          if (!_lbZoomed) {
+            var rect = img.getBoundingClientRect();
+            var offsetX = (e.clientX - rect.left) / rect.width;
+            var offsetY = (e.clientY - rect.top) / rect.height;
+            img.style.transformOrigin = (offsetX * 100) + '% ' + (offsetY * 100) + '%';
+            img.style.transform = 'scale(' + _lbZoomScale + ')';
+            img.classList.add('zoomed');
+            _lbZoomed = true;
+          } else {
+            img.style.transform = 'scale(1)';
+            img.style.transformOrigin = 'top left';
+            img.classList.remove('zoomed');
+            _lbZoomed = false;
+          }
+        }
+
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') closeLightbox();
+        });
+      </script>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       BRANDING & STYLE GUIDE
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <div class="two-col-wide">
+        <div>
+          <p class="section-label reveal">Branding &amp; Style Guide</p>
+          <h2 class="section-title reveal">A design language built<br>on warmth and <em>play</em></h2>
+
+
+        </div>
+        <div class="reveal reveal-delay-2">
+          <div class="img-block">
+            <img src="Assets/Spark/design-system.png" alt="Spark Design System — Color & Typography"
+              style="width:100%;height:auto;display:block;" />
+          </div>
+          <p class="img-caption">Color tokens, typography scale, and component library — built for consistency across
+            all surfaces.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       INTRODUCING SPARK
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="section section-alt">
+    <div class="container">
+      <p class="section-label reveal">Introduction</p>
+      <h2 class="section-title reveal"><em>Introducing</em> Spark</h2>
+      <div class="reveal" style="margin-top: 32px;">
+        <img src="Assets/Spark/introduction.png" alt="Introducing Spark — Coupon Creation Experience"
+          style="width:100%;max-width:900px;height:auto;display:block;border-radius:16px;margin:0 auto;" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       CORE EXPERIENCE
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <p class="section-label reveal">Core Experience</p>
+      <h2 class="section-title reveal">Four flows that make<br>the <em>experience</em></h2>
+      <div class="flow-grid" style="margin-top:48px;">
+
+        <!-- Flow 01 -->
+        <div class="flow-card reveal">
+          <div class="flow-card-header">
+            <span class="flow-num">01</span>
+            <div>
+              <div class="flow-label">Core Flow</div>
+              <h3 class="flow-title">Browse & Send</h3>
+            </div>
+          </div>
+          <div class="flow-card-body">
+            <div class="flow-steps">
+              <div class="flow-step">
+                <span class="flow-step-num">1</span>
+                <div>
+                  <div class="flow-step-title">Landing on Homepage</div>
+                  <div class="flow-step-body">See a set of default coupons ready to pick. Favorite the ones you love or
+                    scroll through for inspiration.</div>
+                </div>
+              </div>
+              <div class="flow-step">
+                <span class="flow-step-num">2</span>
+                <div>
+                  <div class="flow-step-title">Filter & Search</div>
+                  <div class="flow-step-body">Use categories or the search bar to find the perfect coupon.</div>
+                </div>
+              </div>
+              <div class="flow-step">
+                <span class="flow-step-num">3</span>
+                <div>
+                  <div class="flow-step-title">Pick a Coupon</div>
+                  <div class="flow-step-body">Choose a template or write your own — add visuals, a voice note, or set a
+                    timing.</div>
+                </div>
+              </div>
+              <div class="flow-step">
+                <span class="flow-step-num"
+                  style="color:var(--spark-rose);border-color:var(--spark-rose-border);background:var(--spark-rose-bg);">4</span>
+                <div>
+                  <div class="flow-step-title">Send the Love ♡</div>
+                  <div class="flow-step-body">Your partner receives the coupon blurred — ready to tap, shake, and
+                    reveal.</div>
+                </div>
+              </div>
+            </div>
+            <div class="flow-media flow-media-video">
+              <iframe src="https://player.vimeo.com/video/1118466365?autoplay=1&loop=1&muted=1&background=1&controls=0"
+                allow="autoplay; fullscreen"
+                style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"></iframe>
+            </div>
+          </div>
+        </div>
+
+        <!-- Flow 02 -->
+        <div class="flow-card reveal reveal-delay-1">
+          <div class="flow-card-header">
+            <span class="flow-num">02</span>
+            <div>
+              <div class="flow-label">Core Flow</div>
+              <h3 class="flow-title">Onboarding & Setup</h3>
+            </div>
+          </div>
+          <div class="flow-card-body" style="display:flex;flex-direction:column;">
+            <div class="flow-steps">
+              <div class="flow-step">
+                <span class="flow-step-num">1</span>
+                <div>
+                  <div class="flow-step-title">Getting each partner set up</div>
+                  <div class="flow-step-body">The initial flow establishes individual identity — name, partner's name,
+                    anniversary date — and sets the emotional tone of the app. Every screen was written to feel warm,
+                    not clinical. We A/B tested copy extensively to find the voice that felt right for an intimacy
+                    product.</div>
+                </div>
+              </div>
+            </div>
+            <div class="flow-media flow-media-img">
+              <img src="Assets/Spark/phone-onboarding-welcome.png" alt="Onboarding — Welcome & Setup"
+                style="width:100%;height:auto;display:block;" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Flow 03 -->
+        <div class="flow-card reveal reveal-delay-2">
+          <div class="flow-card-header">
+            <span class="flow-num">03</span>
+            <div>
+              <div class="flow-label">Onboarding 02 — Subscription Conversion</div>
+              <h3 class="flow-title">Paywall</h3>
+            </div>
+          </div>
+          <div class="flow-card-body" style="display:flex;flex-direction:column;">
+            <div class="flow-steps">
+              <div class="flow-step">
+                <span class="flow-step-num">1</span>
+                <div>
+                  <div class="flow-step-title">Converting users to subscribers</div>
+                  <div class="flow-step-body">The second onboarding stage handles the paywall — a particularly sensitive moment in a couples app, where one partner may be more bought-in than the other. I designed a flow that communicated value without creating pressure, using social proof and a clear free trial path to reduce friction.</div>
+                </div>
+              </div>
+            </div>
+            <div class="flow-media flow-media-img">
+              <img src="Assets/Spark/phone-onboarding-paywall.png" alt="Subscription — Paywall"
+                style="width:100%;height:auto;display:block;" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Flow 04 -->
+        <div class="flow-card reveal reveal-delay-3">
+          <div class="flow-card-header">
+            <span class="flow-num">04</span>
+            <div>
+              <div class="flow-label">Core Flow</div>
+              <h3 class="flow-title">The Blurry Reveal</h3>
+            </div>
+          </div>
+          <div class="flow-card-body">
+            <div class="flow-steps">
+              <div class="flow-step">
+                <span class="flow-step-num">1</span>
+                <div>
+                  <div class="flow-step-title">The Surprise</div>
+                  <div class="flow-step-body">Each coupon starts blurry, adding a little surprise to receiving one.
+                  </div>
+                </div>
+              </div>
+              <div class="flow-step">
+                <span class="flow-step-num"
+                  style="color:var(--spark-rose);border-color:var(--spark-rose-border);background:var(--spark-rose-bg);">2</span>
+                <div>
+                  <div class="flow-step-title">Tap or Shake to Reveal</div>
+                  <div class="flow-step-body">Tap or shake your phone to reveal it, then decide whether to accept or
+                    reject.</div>
+                </div>
+              </div>
+            </div>
+            <div class="flow-media flow-media-video">
+              <iframe src="https://player.vimeo.com/video/1118470221?autoplay=1&loop=1&muted=1&background=1&controls=0"
+                allow="autoplay; fullscreen"
+                style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"></iframe>
+            </div>
+          </div>
+        </div>
+
+        <!-- Flow 05 -->
+        <div class="flow-card reveal reveal-delay-3">
+          <div class="flow-card-header">
+            <span class="flow-num">05</span>
+            <div>
+              <div class="flow-label">Ambassador Program</div>
+              <h3 class="flow-title">Turning users into advocates</h3>
+            </div>
+          </div>
+          <div class="flow-card-body" style="display:flex;flex-direction:column;">
+            <div class="flow-steps">
+              <div class="flow-step">
+                <span class="flow-step-num">1</span>
+                <div>
+                  <div class="flow-step-title">Gamified level progression</div>
+                  <div class="flow-step-body">Spark's Ambassador Program gamifies word-of-mouth growth. Users who share Spark with their friends earn real money — and progress through ambassador levels with escalating rewards. Level 1 &amp; 2 ambassadors claim earnings via gift card email; Level 3+ unlock a special card revealing a physical gift.</div>
+                </div>
+              </div>
+              <div class="flow-step">
+                <span class="flow-step-num">2</span>
+                <div>
+                  <div class="flow-step-title">Dashboard built to feel like a reward</div>
+                  <div class="flow-step-body">I designed the full ambassador dashboard: referral code generation, earnings tracker, level progression with clear targets, and social sharing shortcuts. Every element was designed to feel like a reward in itself — not a chore.</div>
+                </div>
+              </div>
+            </div>
+            <div class="flow-media flow-media-img">
+              <img src="Assets/Spark/ambassador.png" alt="Spark Ambassador Program Dashboard"
+                style="width:100%;height:auto;display:block;" />
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       TESTING & QUOTES
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="section">
+    <div class="container">
+      <p class="section-label reveal">Testing &amp; Feedback</p>
+      <h2 class="section-title reveal">What couples said<br>after using Spark</h2>
+      <p class="section-body reveal">Beta testing with real couples revealed how deeply love languages and relationship
+        dynamics shape interaction expectations — and gave us clear signal on what was working and what needed to
+        change.</p>
+
+      <div class="quotes-grid">
+        <div class="quote-card reveal">
+          <p class="quote-text">"I didn't expect to feel this nervous sending my first coupon. But when she accepted it,
+            I genuinely felt closer to her. It's such a small thing, but it wasn't."</p>
+          <p class="quote-attr">— Beta user, in a 3-year relationship</p>
+        </div>
+        <div class="quote-card reveal reveal-delay-1">
+          <p class="quote-text">"The blurry reveal is my favorite part. It makes receiving a coupon feel like a surprise
+            every time, even when I know one is coming."</p>
+          <p class="quote-attr">— Beta user, long-distance couple</p>
+        </div>
+        <div class="quote-card reveal reveal-delay-2">
+          <p class="quote-text">"I loved that I could pause when things got hard. It felt like the app understood that
+            relationships aren't always sunshine — and that's okay."</p>
+          <p class="quote-attr">— Beta user, married 5 years</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       LEARNINGS
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="section section-alt">
+    <div class="container">
+      <p class="section-label reveal">Reflections</p>
+      <h2 class="section-title reveal">What I took away</h2>
+      <div class="learnings-grid">
+        <div class="learning-card reveal">
+          <div class="learning-num">01</div>
+          <div class="learning-title">Designing for intimacy requires balancing excitement with safety</div>
+          <div class="learning-body">Vulnerability is a core part of connection — and it means users are more cautious
+            than in other product contexts. Every interaction had to earn emotional trust before it could ask for
+            emotional investment. Delight is not enough; safety has to come first.</div>
+        </div>
+        <div class="learning-card reveal reveal-delay-1">
+          <div class="learning-num">02</div>
+          <div class="learning-title">Simple, playful interactions create more delight than complexity</div>
+          <div class="learning-body">Early versions had more features — custom reminders, relationship quizzes, shared
+            calendars. Testing showed that none of them mattered as much as making the core coupon flow feel magical.
+            Restraint was the most powerful design decision I made on this project.</div>
+        </div>
+        <div class="learning-card reveal reveal-delay-2">
+          <div class="learning-num">03</div>
+          <div class="learning-title">Love languages shape UX expectations in surprising ways</div>
+          <div class="learning-body">Users who give love through acts of service wanted structured redemption flows.
+            Users who prefer words of affirmation wanted more copy customization. Understanding love languages as a
+            design input — not just a marketing insight — fundamentally changed how we built the coupon composer.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       NEXT CASE STUDY
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="next-section">
+    <div class="container">
+      <p class="next-label reveal">Next Case Study</p>
+      <h2 class="next-title reveal">Math<em>Works</em></h2>
+      <p class="next-desc reveal">Modernizing MATLAB's App Designer — a visual development environment used by over 3
+        million engineers and researchers worldwide.</p>
+      <a href="mathworks.html" class="btn-next reveal">
+        Read the case study
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M2.5 7h9M8 3.5l3.5 3.5L8 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer aria-label="Site footer">
+    <div class="footer-grid">
+      <div>
+        <p class="footer-name">Unnati</p>
+        <p class="footer-tagline">UX Designer · Making things that matter.</p>
+      </div>
+      <ul class="footer-links" role="list">
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#play">Play</a></li>
+      </ul>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <span>© 2026 Unnati — All rights reserved.</span>
+      <span>Made with care ✦</span>
+    </div>
+  </footer>
+
+  <script>
+    // Navbar scroll
+    const nav = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    }, { passive: true });
+
+    // Scroll reveal — only activate after page is fully loaded
+    document.documentElement.classList.add('js-ready');
+
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+
+</html>
