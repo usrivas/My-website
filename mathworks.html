@@ -713,6 +713,51 @@
       margin-top: 40px;
     }
 
+    /* ─── Scope Cards ───────────────────────────────────── */
+    .scope-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .scope-card {
+      background: var(--white);
+      border: 1.5px solid var(--p200);
+      border-radius: var(--radius-md);
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      box-shadow: var(--shadow-card);
+      transition: transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
+    }
+
+    .scope-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-float);
+    }
+
+    .scope-card-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--p100);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--p700);
+      flex-shrink: 0;
+    }
+
+    .scope-card-text {
+      font-size: 0.875rem;
+      line-height: 1.6;
+      color: var(--n700);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      margin: 0;
+    }
+
     .research-card {
       background: var(--white);
       border: 1px solid var(--p200);
@@ -814,9 +859,8 @@
       border: 1px solid var(--p200);
       border-radius: 20px;
       overflow: hidden;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 360px;
+      display: flex;
+      flex-direction: column;
       background: var(--white);
     }
 
@@ -825,6 +869,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      order: 1;
     }
 
     .solution-num {
@@ -878,19 +923,10 @@
 
     .solution-card-img {
       background: var(--p50);
-      border-left: 1px solid var(--p200);
+      border-top: 1px solid var(--p200);
       position: relative;
-      min-height: 320px;
-    }
-
-    .solution-card.flip .solution-card-text {
+      aspect-ratio: 16/9;
       order: 2;
-    }
-
-    .solution-card.flip .solution-card-img {
-      order: 1;
-      border-left: none;
-      border-right: 1px solid var(--p200);
     }
 
     /* ─── BEFORE / AFTER ─────────────────────────────────── */
@@ -1356,24 +1392,8 @@
         grid-template-columns: 1fr;
       }
 
-      .solution-card {
-        grid-template-columns: 1fr;
-      }
-
-      .solution-card.flip .solution-card-text {
-        order: 0;
-      }
-
-      .solution-card.flip .solution-card-img {
-        order: 1;
-        border-right: none;
-        border-top: 1px solid var(--p200);
-      }
-
-      .solution-card-img {
-        border-left: none;
-        border-top: 1px solid var(--p200);
-        min-height: 240px;
+      .hmw-block {
+        padding: 40px 32px;
       }
 
       .before-after {
@@ -1517,6 +1537,17 @@
       </div>
 
     </div>
+
+    <!-- Hero Video -->
+    <div class="container reveal" style="margin-top: 56px; padding-bottom: 0;">
+      <div
+        style="border-radius: 20px; overflow: hidden; aspect-ratio: 16/9; position: relative; background: var(--p100); border: 1px solid var(--p200);">
+        <iframe src="https://player.vimeo.com/video/1077388175?background=1&autoplay=1&loop=1&muted=1" frameborder="0"
+          allow="autoplay; fullscreen" style="position:absolute;top:0;left:0;width:100%;height:100%;"
+          title="MathWorks App Designer — Case Study Overview"></iframe>
+      </div>
+    </div>
+
   </section>
 
   <!-- ═══════════════════════════════════════════════════════════
@@ -1539,18 +1570,6 @@
           <div class="stat-desc">Design review iterations with senior UX designers before final recommendation</div>
         </div>
       </div>
-    </div>
-  </div>
-
-  <!-- ═══════════════════════════════════════════════════════════
-       HERO VIDEO
-  ═══════════════════════════════════════════════════════════ -->
-  <div class="container reveal" style="padding-top: 72px; padding-bottom: 0;">
-    <div
-      style="border-radius: 20px; overflow: hidden; aspect-ratio: 16/9; position: relative; background: var(--p100); border: 1px solid var(--p200);">
-      <iframe src="https://player.vimeo.com/video/1077388175?background=1&autoplay=1&loop=1&muted=1" frameborder="0"
-        allow="autoplay; fullscreen" style="position:absolute;top:0;left:0;width:100%;height:100%;"
-        title="MathWorks App Designer — Case Study Overview"></iframe>
     </div>
   </div>
 
@@ -1598,15 +1617,54 @@
           <p class="section-body reveal" style="margin-top:16px;">This early reframing shaped everything that followed:
             it moved us from a surface-level visual refresh to a purposeful, systems-level redesign.</p>
         </div>
-        <div class="reveal reveal-delay-2">
-          <div class="img-block img-block-tall">
-            <div class="img-placeholder">
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+        <div class="scope-cards-grid reveal reveal-delay-2">
+          <div class="scope-card">
+            <div class="scope-card-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                <circle cx="12" cy="12" r="3" />
                 <path
-                  d="M9 18h6M12 2v4M12 18v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M2 12h4M18 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
+                  d="M12 2v3M12 19v3M4.22 4.22l2.12 2.12M17.66 17.66l2.12 2.12M2 12h3M19 12h3M4.22 19.78l2.12-2.12M17.66 6.34l2.12-2.12" />
               </svg>
-              Stakeholder Interview Notes &amp; Scope Map
             </div>
+            <p class="scope-card-text">Users seek a modern, intuitive interface for a better app development experience.
+            </p>
+          </div>
+          <div class="scope-card">
+            <div class="scope-card-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                <rect x="3" y="3" width="4" height="4" rx="1" />
+                <rect x="10" y="3" width="4" height="4" rx="1" />
+                <rect x="17" y="3" width="4" height="4" rx="1" />
+                <rect x="3" y="10" width="4" height="4" rx="1" />
+                <rect x="10" y="10" width="4" height="4" rx="1" />
+                <rect x="17" y="10" width="4" height="4" rx="1" />
+                <rect x="3" y="17" width="4" height="4" rx="1" />
+                <rect x="10" y="17" width="4" height="4" rx="1" />
+                <rect x="17" y="17" width="4" height="4" rx="1" />
+              </svg>
+            </div>
+            <p class="scope-card-text">Align with the MathWorks design system, Parula.</p>
+          </div>
+          <div class="scope-card">
+            <div class="scope-card-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                <path d="M4 4l4 4-4 4 4 4-4 4" />
+                <path d="M20 4l-4 4 4 4-4 4 4 4" />
+                <path d="M12 4v16" />
+              </svg>
+            </div>
+            <p class="scope-card-text">Streamline integration between App Designer and MATLAB.</p>
+          </div>
+          <div class="scope-card">
+            <div class="scope-card-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+                <rect x="2" y="3" width="20" height="14" rx="2" />
+                <path d="M8 21h8M12 17v4" />
+                <path d="M7 8l3 3 5-5" />
+              </svg>
+            </div>
+            <p class="scope-card-text">App Designer aims to market itself as a versatile prototyping tool with modern
+              design to match advanced competitors.</p>
           </div>
         </div>
       </div>
@@ -1739,13 +1797,14 @@
        FEATURE PRIORITIZATION
   ═══════════════════════════════════════════════════════════ -->
   <section class="section section-alt">
-    <div class="container-narrow">
+    <div class="container">
       <p class="section-label reveal">Prioritizing Research Insights</p>
       <h2 class="section-title reveal">Grounding design direction in real user pain points</h2>
       <p class="section-body reveal">I led a workshop with two UX Researchers to map all research findings onto a
         <strong>Functionality vs. Visual Design impact matrix</strong>. This exercise made the prioritization process
         explicit and defensible — moving us from a long list of possible improvements to a focused set of high-ROI
-        updates.</p>
+        updates.
+      </p>
       <p class="section-body reveal" style="margin-top:16px;">The matrix helped me identify which problems were blocking
         core workflows versus which were aesthetic frustrations — and sequence the work accordingly.</p>
       <div class="reveal"

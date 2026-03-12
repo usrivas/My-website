@@ -102,10 +102,10 @@
       position: sticky;
       top: 0;
       z-index: 200;
-      background: rgba(255, 255, 255, 0.88);
-      backdrop-filter: blur(20px) saturate(160%);
-      -webkit-backdrop-filter: blur(20px) saturate(160%);
-      border-bottom: 1px solid rgba(16, 15, 18, 0.07);
+      background: rgba(255, 255, 255, 0.4);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
       transition: box-shadow 0.3s ease;
     }
 
@@ -294,7 +294,7 @@
     .hero-bg {
       position: absolute;
       inset: 0;
-      background-image: url('./Assets/Hero/hero.png');
+      background-image: url('./Assets/Hero/hero-new.jpeg');
       background-size: cover;
       background-position: center center;
     }
@@ -1003,7 +1003,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background-image: url('./Assets/Hero/hero.png');
+      background-image: url('./Assets/Hero/hero-new.jpeg');
       background-size: cover;
       background-position: center center;
       z-index: 0;
@@ -1480,7 +1480,7 @@
   <!-- ── NAV ─────────────────────────────────────────────────── -->
   <nav id="navbar" aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="/" class="nav-logo" aria-label="Home — Unnati">
+      <a href="index.html" class="nav-logo" aria-label="Home — Unnati">
         <span class="nav-logo-mark" aria-hidden="true">
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path d="M7 1.5C7 1.5 2 4.5 2 8a5 5 0 0010 0c0-3.5-5-6.5-5-6.5z" fill="white" opacity="0.9" />
@@ -1496,7 +1496,7 @@
 
       <div class="nav-actions">
         <a href="#contact" class="btn btn-ghost">Say hello</a>
-        <a href="#work" class="btn btn-primary">View work</a>
+        <a href="#work-grid" class="btn btn-primary">View work</a>
       </div>
     </div>
   </nav>
@@ -1517,13 +1517,12 @@
             Hi, I'm Unnati Srivastava
           </h4>
           <h1 class="hero-title" style="animation:none; opacity:1;">
-            <span id="tw-main"></span><span id="tw-cursor" class="tw-cursor" aria-hidden="true">|</span><br>Product
-            Designer
+            <span id="tw-main"></span><span id="tw-cursor" class="tw-cursor" aria-hidden="true">|</span>
           </h1>
 
 
 
-          <a href="#work" class="hero-scroll-hint" aria-label="Scroll down">
+          <a href="#work-grid" class="hero-scroll-hint" aria-label="Scroll down">
             <div class="hero-scroll-mouse">
               <div class="hero-scroll-wheel"></div>
             </div>
@@ -1581,74 +1580,6 @@
         <h2 class="section-title">Case <em>Studies</em></h2>
         <p class="section-sub">End-to-end product design across Gen AI, SaaS, and mobile — from 0 to 1 and beyond.</p>
 
-        <!-- Crossfill -->
-        <a href="crossfill.html" class="project-card" aria-label="Crossfill case study">
-          <div class="project-img"
-            style="background: linear-gradient(145deg, var(--p200) 0%, #d4c9f8 40%, var(--p300) 100%); display:flex; align-items:center; justify-content:center; padding: 28px;">
-            <div
-              style="width:100%; background:#fff; border-radius:var(--radius-lg); box-shadow:0 2px 6px rgba(16,15,18,0.06),0 12px 40px rgba(16,15,18,0.1); overflow:hidden;">
-              <div class="showcase-card">
-                <div class="showcase-card-header">
-                  <div class="showcase-card-title">
-                    <span class="showcase-dot dot-green" aria-hidden="true"></span>
-                    AI Insight Report
-                    <span class="showcase-tag tag-green">High Confidence</span>
-                  </div>
-                </div>
-                <div class="showcase-body">Optimization opportunities identified across 3 key workflow areas. Estimated
-                  23% efficiency gain.</div>
-              </div>
-              <div class="showcase-card">
-                <div class="showcase-card-header">
-                  <div class="showcase-card-title">
-                    <span class="showcase-dot dot-purple" aria-hidden="true"></span>
-                    Workflow Bottleneck
-                    <span class="showcase-tag tag-purple">Action Required</span>
-                  </div>
-                </div>
-                <div class="showcase-body">Stage 3 processing creating downstream delays. Affects 1,240 active sessions.
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="project-body">
-            <div class="project-tags">
-              <span class="project-tag" style="color:#256d4a; background:#e6f4ef; border:1px solid #bde3d2;">0 → 1
-                Founding</span>
-              <span class="project-tag" style="color:#256d4a; background:#e6f4ef; border:1px solid #bde3d2;">Gen
-                AI</span>
-              <span class="project-tag" style="color:#256d4a; background:#e6f4ef; border:1px solid #bde3d2;">B2B
-                SaaS</span>
-            </div>
-            <h3 class="project-name">Cross<em>fill</em></h3>
-            <p class="project-desc">Founding Product Designer (+ Frontend Engineer) shaping Crossfill's AI-powered
-              optimization workflow — turning a reporting dashboard into an actionable, insight-driven product.</p>
-            <div class="project-meta">
-              <div class="project-meta-item">
-                <span class="project-meta-label">Role</span>
-                <span class="project-meta-val">Founding Designer</span>
-              </div>
-              <div class="project-meta-item">
-                <span class="project-meta-label">Year</span>
-                <span class="project-meta-val">2025 – Present</span>
-              </div>
-              <div class="project-meta-item">
-                <span class="project-meta-label">Type</span>
-                <span class="project-meta-val">0 → 1 Product</span>
-              </div>
-            </div>
-            <div class="project-cta-row">
-              <span class="project-cta">
-                View case study
-                <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                  <path d="M2.5 7h9M8 3.5l3.5 3.5L8 10.5" stroke="currentColor" stroke-width="1.5"
-                    stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              </span>
-            </div>
-          </div>
-        </a>
-
         <!-- MathWorks -->
         <a href="mathworks.html" class="project-card" aria-label="MathWorks case study">
           <div class="project-img" style="padding: 0; overflow: hidden; position: relative; background: #0d1a13;">
@@ -1660,7 +1591,7 @@
           <div class="project-body">
             <div class="project-tags">
               <span class="project-tag"
-                style="color:var(--p700); background:var(--p100); border:1px solid var(--p200);">Internship</span>
+                style="color:var(--p700); background:var(--p100); border:1px solid var(--p200);">Agentic AI</span>
               <span class="project-tag"
                 style="color:var(--p700); background:var(--p100); border:1px solid var(--p200);">SaaS</span>
               <span class="project-tag"
@@ -1672,7 +1603,7 @@
             <div class="project-meta">
               <div class="project-meta-item">
                 <span class="project-meta-label">Role</span>
-                <span class="project-meta-val">Sole UX Designer</span>
+                <span class="project-meta-val">Product Designer</span>
               </div>
               <div class="project-meta-item">
                 <span class="project-meta-label">Year</span>
@@ -1707,8 +1638,8 @@
                 Product</span>
               <span class="project-tag" style="color:#c0445c; background:#fde8ee; border:1px solid #f5beca;">App
                 Design</span>
-              <span class="project-tag" style="color:#c0445c; background:#fde8ee; border:1px solid #f5beca;">iOS &amp;
-                Android</span>
+              <span class="project-tag"
+                style="color:#c0445c; background:#fde8ee; border:1px solid #f5beca;">Shipped</span>
             </div>
             <h3 class="project-name"><em>Spark</em></h3>
             <p class="project-desc">Founding Product Designer on a couples app that helps partners reconnect through
@@ -1716,11 +1647,11 @@
             <div class="project-meta">
               <div class="project-meta-item">
                 <span class="project-meta-label">Role</span>
-                <span class="project-meta-val">Founding Designer</span>
+                <span class="project-meta-val">Founding Product Designer</span>
               </div>
               <div class="project-meta-item">
                 <span class="project-meta-label">Year</span>
-                <span class="project-meta-val">2025 – Present</span>
+                <span class="project-meta-val">2025</span>
               </div>
               <div class="project-meta-item">
                 <span class="project-meta-label">Platform</span>
@@ -1738,6 +1669,75 @@
             </div>
           </div>
         </a>
+
+        <!-- Crossfill — Coming Soon -->
+        <div class="project-card" aria-label="Crossfill case study — coming soon"
+          style="cursor:default; opacity:0.6; pointer-events:none; user-select:none;">
+          <div class="project-img"
+            style="background: linear-gradient(145deg, var(--p200) 0%, #d4c9f8 40%, var(--p300) 100%); display:flex; align-items:center; justify-content:center; padding: 28px; position:relative;">
+            <div
+              style="width:100%; background:#fff; border-radius:var(--radius-lg); box-shadow:0 2px 6px rgba(16,15,18,0.06),0 12px 40px rgba(16,15,18,0.1); overflow:hidden;">
+              <div class="showcase-card">
+                <div class="showcase-card-header">
+                  <div class="showcase-card-title">
+                    <span class="showcase-dot dot-green" aria-hidden="true"></span>
+                    AI Insight Report
+                    <span class="showcase-tag tag-green">High Confidence</span>
+                  </div>
+                </div>
+                <div class="showcase-body">Optimization opportunities identified across 3 key workflow areas. Estimated
+                  23% efficiency gain.</div>
+              </div>
+              <div class="showcase-card">
+                <div class="showcase-card-header">
+                  <div class="showcase-card-title">
+                    <span class="showcase-dot dot-purple" aria-hidden="true"></span>
+                    Workflow Bottleneck
+                    <span class="showcase-tag tag-purple">Action Required</span>
+                  </div>
+                </div>
+                <div class="showcase-body">Stage 3 processing creating downstream delays. Affects 1,240 active sessions.
+                </div>
+              </div>
+            </div>
+            <!-- Coming Soon overlay -->
+            <div
+              style="position:absolute; top:16px; right:16px; background:rgba(16,15,18,0.75); color:#fff; font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; padding:5px 12px; border-radius:100px; backdrop-filter:blur(6px);">
+              Coming Soon</div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="project-tag" style="color:#256d4a; background:#e6f4ef; border:1px solid #bde3d2;">0 → 1
+                Founding</span>
+              <span class="project-tag" style="color:#256d4a; background:#e6f4ef; border:1px solid #bde3d2;">Gen
+                AI</span>
+              <span class="project-tag" style="color:#256d4a; background:#e6f4ef; border:1px solid #bde3d2;">B2B
+                SaaS</span>
+            </div>
+            <h3 class="project-name">Cross<em>fill</em></h3>
+            <p class="project-desc">Founding Product Designer (+ Frontend Engineer) shaping Crossfill's AI-powered
+              optimization workflow — turning a reporting dashboard into an actionable, insight-driven product.</p>
+            <div class="project-meta">
+              <div class="project-meta-item">
+                <span class="project-meta-label">Role</span>
+                <span class="project-meta-val">Founding Designer</span>
+              </div>
+              <div class="project-meta-item">
+                <span class="project-meta-label">Year</span>
+                <span class="project-meta-val">2025 – Present</span>
+              </div>
+              <div class="project-meta-item">
+                <span class="project-meta-label">Type</span>
+                <span class="project-meta-val">0 → 1 Product</span>
+              </div>
+            </div>
+            <div class="project-cta-row">
+              <span class="project-cta" style="color:var(--n500); cursor:default;">
+                Coming soon
+              </span>
+            </div>
+          </div>
+        </div>
 
       </div>
     </section>
@@ -1925,7 +1925,7 @@
         <p class="footer-cta-sub">Let's build something meaningful together.</p>
         <div class="footer-cta-actions">
           <a href="mailto:hello@unnati.design" class="btn btn-purple">Get in touch</a>
-          <a href="#work" class="btn btn-white-outline"
+          <a href="#work-grid" class="btn btn-white-outline"
             style="background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.2) !important;">View
             work</a>
         </div>
@@ -1939,7 +1939,6 @@
         <div>
           <p class="footer-col-title">Work</p>
           <ul class="footer-nav">
-            <li><a href="crossfill.html">Crossfill</a></li>
             <li><a href="mathworks.html">MathWorks</a></li>
             <li><a href="spark.html">Spark</a></li>
           </ul>
@@ -1947,7 +1946,7 @@
         <div>
           <p class="footer-col-title">Navigate</p>
           <ul class="footer-nav">
-            <li><a href="#work">Work</a></li>
+            <li><a href="#work-grid">Work</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#play">Play</a></li>
           </ul>
@@ -2008,6 +2007,7 @@
       const segments = [
         { text: 'Gen AI\u2009+\u20090\u2009', italic: false },
         { text: '\u2192\u00a01', italic: true },
+        { text: '\nProduct Designer', italic: false },
       ];
 
       const mainEl = document.getElementById('tw-main');
@@ -2031,12 +2031,13 @@
         let html = '';
 
         chars.slice(0, typed).forEach(({ ch, italic }) => {
+          let charHtml = ch === '<' ? '&lt;' : ch === '\n' ? '<br>' : ch;
           if (italic) {
             if (!inAccent) { html += '<span class="tw-accent">'; inAccent = true; }
-            html += ch === '<' ? '&lt;' : ch;
+            html += charHtml;
           } else {
             if (inAccent) { html += '</span>'; inAccent = false; }
-            html += ch === '<' ? '&lt;' : ch;
+            html += charHtml;
           }
         });
         if (inAccent) html += '</span>';
