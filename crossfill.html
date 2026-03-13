@@ -38,6 +38,7 @@
       --border-purple-strong: rgba(141, 111, 222, 0.45);
       --radius-card: 20px;
       --radius-pill: 100px;
+      --orange: #e07b3a;
       --shadow-float: 0 32px 80px rgba(0, 0, 0, 0.55), 0 8px 24px rgba(0, 0, 0, 0.35);
       --shadow-glow: 0 0 80px rgba(141, 111, 222, 0.25), 0 0 160px rgba(141, 111, 222, 0.1);
       --shadow-card: 0 2px 12px rgba(141, 111, 222, 0.08), 0 1px 3px rgba(0, 0, 0, 0.06);
@@ -163,17 +164,63 @@
     }
 
     .nav-logo {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.1rem;
-      font-weight: 400;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
       color: var(--text-white);
       text-decoration: none;
       letter-spacing: -0.01em;
+      transition: color 0.2s ease;
     }
 
     .nav-logo:hover {
-      color: var(--p300);
+      color: var(--text-white);
     }
+
+    .nav-logo-mark {
+      width: 28px;
+      height: 28px;
+      background-image: url('./Assets/Hero/hero-new.jpeg');
+      background-size: cover;
+      background-position: center;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      transition: transform 0.3s var(--transition);
+      flex-shrink: 0;
+    }
+
+    .nav-logo-mark svg {
+      display: block;
+      color: white;
+    }
+
+    @keyframes logoWiggle {
+      0% {
+        transform: scale(1) rotate(0deg);
+      }
+
+      25% {
+        transform: scale(1.1) rotate(-10deg);
+      }
+
+      75% {
+        transform: scale(1.1) rotate(10deg);
+      }
+
+      100% {
+        transform: scale(1) rotate(0deg);
+      }
+    }
+
+    .nav-logo:hover .nav-logo-mark {
+      animation: logoWiggle 0.5s var(--transition) forwards;
+    }
+
+
 
     .nav-links {
       display: flex;
@@ -1382,6 +1429,94 @@
       transform: translateY(-2px);
     }
 
+    /* ── MOBILE NAV ────────────────────────────────────────── */
+    .mobile-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 24px;
+      height: 16px;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      z-index: 2000;
+    }
+
+    .mobile-toggle span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: var(--text-white);
+      border-radius: 2px;
+      transition: all 0.3s var(--transition);
+    }
+
+    .mobile-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(16, 15, 18, 0.72);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      z-index: 1500;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s var(--transition);
+    }
+
+    .mobile-overlay-links {
+      list-style: none;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .mobile-overlay-links a {
+      font-size: 32px;
+      font-weight: 500;
+      color: var(--text-white);
+      text-decoration: none;
+      font-family: 'DM Serif Display', serif;
+    }
+
+    .nav-menu-open .mobile-overlay {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .nav-menu-open .mobile-toggle span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .nav-menu-open .mobile-toggle span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-menu-open .mobile-toggle span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    .nav-menu-open {
+      overflow: hidden;
+    }
+
+    @media (max-width: 500px) {
+      .nav-links {
+        display: none !important;
+      }
+
+      .mobile-toggle {
+        display: flex;
+        margin-left: auto;
+        /* Push to the right */
+      }
+    }
+
     /* ─── Footer ────────────────────────────────────────── */
     footer {
       background: var(--bg-dark-2);
@@ -1587,12 +1722,190 @@
   <!-- ─── Navigation ──────────────────────────────────────── -->
   <div class="nav-wrapper">
     <nav id="main-nav">
-      <a href="index.html" class="nav-logo">Unnati</a>
+      <a href="/" class="nav-logo" aria-label="Home — Unnati">
+        <span class="nav-logo-mark" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path
+              d="M12 5c.67 0 1.35.09 2 .26 1.78-2 2.67-2.1 2.67-2.1.5 1.28.17 2.22.08 2.45.6.65.92 1.51.92 2.39 0 3.11-1.9 3.8-3.71 4 .29.25.54.73.54 1.48V17c0 .3 0 .6.17.9" />
+            <path
+              d="M12 5c-.67 0-1.35.09-2 .26-1.78-2-2.67-2.1-2.67-2.1-.5 1.28-.17 2.22-.08 2.45-.6.65-.92 1.51-.92 2.39 0 3.11 1.9 3.8 3.71 4a2.39 2.39 0 0 0-.54 1.48V17c0 .3 0 .6-.17.9" />
+            <path d="M9 13c0-1.5 1-2.5 3-2.5s3 1 3 2.5" />
+            <line x1="8" y1="10" x2="8.01" y2="10" />
+            <line x1="16" y1="10" x2="16.01" y2="10" />
+          </svg>
+        </span>
+        Unnati
+      </a>
       <ul class="nav-links">
-        <li><a href="index.html">Work</a></li>
+        <li><a href="/#work-grid">Work</a></li>
+        <li><a href="Assets/About me/resume.pdf" target="_blank">Resume</a></li>
         <li><a href="https://www.linkedin.com/in/unnati-srivastava/" class="nav-cta">Say hello →</a></li>
       </ul>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </nav>
+  </div>
+
+  <!-- ─── TL;DR CHATBOT ──────────────────────────────────────── -->
+  <div class="chatbot-wrapper">
+    <button class="chat-toggle" id="chatToggle" aria-label="Open summary">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+        <path d="M12 7v6M9 10h6" />
+      </svg>
+      <span>TL;DR</span>
+    </button>
+    <div class="chat-window" id="chatWindow">
+      <div class="chat-header">
+        <div class="chat-title">
+          <span class="ai-sparkle">✦</span>
+          AI Summary
+        </div>
+        <button class="chat-close" id="chatClose">&times;</button>
+      </div>
+      <div class="chat-body">
+        <div class="chat-message" id="chatMessage"></div>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .chatbot-wrapper {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      z-index: 2000;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    .chat-toggle {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 100px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      cursor: pointer;
+      transition: all 0.3s var(--transition);
+      color: var(--text-white);
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .chat-toggle:hover {
+      background: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(141, 111, 222, 0.2);
+    }
+
+    .chat-window {
+      position: absolute;
+      bottom: calc(100% + 16px);
+      right: 0;
+      width: 320px;
+      background: rgba(16, 15, 18, 0.85);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      opacity: 0;
+      transform: translateY(10px) scale(0.95);
+      pointer-events: none;
+      transition: all 0.4s var(--transition);
+      overflow: hidden;
+    }
+
+    .chat-window.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
+    .chat-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .chat-title {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--p500);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .ai-sparkle {
+      font-size: 14px;
+    }
+
+    .chat-close {
+      background: none;
+      border: none;
+      font-size: 24px;
+      line-height: 1;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 4px;
+      transition: color 0.2s;
+    }
+
+    .chat-close:hover {
+      color: var(--text-white);
+    }
+
+    .chat-body {
+      padding: 20px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .chat-message {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-muted);
+      white-space: pre-line;
+    }
+
+    .chat-message strong {
+      color: var(--text-white);
+      font-weight: 600;
+    }
+
+    @media (max-width: 600px) {
+      .chatbot-wrapper {
+        bottom: 24px;
+        right: 24px;
+      }
+
+      .chat-window {
+        width: calc(100vw - 48px);
+        max-width: 320px;
+      }
+    }
+  </style>
+
+  <div class="mobile-overlay" id="mobileOverlay">
+    <ul class="mobile-overlay-links">
+      <li><a href="/#work-grid">Work</a></li>
+      <li><a href="/#about">About</a></li>
+      <li><a href="Assets/About me/resume.pdf" target="_blank">Resume</a></li>
+      <li><a href="https://www.linkedin.com/in/unnati-srivastava/">Contact</a></li>
+    </ul>
   </div>
 
   <!-- ─── Hero ────────────────────────────────────────────── -->
@@ -2118,7 +2431,7 @@
       <h2 class="next-title reveal reveal-delay-1">Spark</h2>
       <p class="next-subtitle reveal reveal-delay-2">Designing the onboarding flow that made early users stick.</p>
       <div class="reveal reveal-delay-3">
-        <a href="spark.html" class="btn-pill btn-primary">View Case Study →</a>
+        <a href="/spark" class="btn-pill btn-primary">View Case Study →</a>
       </div>
     </div>
   </section>
@@ -2126,7 +2439,7 @@
   <!-- ─── Footer ───────────────────────────────────────────── -->
   <footer>
     <div class="footer-inner">
-      <a href="index.html" class="footer-logo">Unnati</a>
+      <a href="/" class="footer-logo">Unnati</a>
       <div class="footer-copy">© 2026 · Product Designer</div>
     </div>
   </footer>
@@ -2154,6 +2467,66 @@
         nav.classList.remove('scrolled');
       }
     }, { passive: true });
+
+    // Mobile menu toggle
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+    const body = document.body;
+
+    if (mobileToggle) {
+      mobileToggle.addEventListener('click', () => {
+        body.classList.toggle('nav-menu-open');
+      });
+    }
+
+    // Close menu when clicking links
+    document.querySelectorAll('.mobile-overlay-links a').forEach(link => {
+      link.addEventListener('click', () => {
+        body.classList.remove('nav-menu-open');
+      });
+    });
+
+    // ── CHATBOT LOGIC ──────────────────────────────────────────
+    const chatToggle = document.getElementById('chatToggle');
+    const chatWindow = document.getElementById('chatWindow');
+    const chatClose = document.getElementById('chatClose');
+    const chatMessage = document.getElementById('chatMessage');
+
+    const summary = `**Problem:** The platform was a passive reporting dashboard, giving users insights but no way to act on them.\n\n**Solution:** Redesigned the core workflow into an "Actions" lead product, allowing task creation directly from data.\n\n**Impact:** Successfully shifted the product from reporting to optimization, significantly increasing platform engagement.`;
+
+    let typing = false;
+
+    function typeWriter(text, i) {
+      if (i < text.length) {
+        chatMessage.innerHTML = text.substring(0, i + 1).replace(/\n/g, '<br>');
+        setTimeout(() => typeWriter(text, i + 1), 10);
+      } else {
+        typing = false;
+      }
+    }
+
+    if (chatToggle) {
+      chatToggle.addEventListener('click', () => {
+        chatWindow.classList.toggle('active');
+        if (chatWindow.classList.contains('active') && chatMessage.innerHTML.trim() === '') {
+          typing = true;
+          typeWriter(summary, 0);
+        }
+      });
+    }
+
+    if (chatClose) {
+      chatClose.addEventListener('click', () => {
+        chatWindow.classList.remove('active');
+      });
+    }
+
+    // Close on click outside
+    document.addEventListener('click', (e) => {
+      if (!chatWindow.contains(e.target) && !chatToggle.contains(e.target)) {
+        chatWindow.classList.remove('active');
+      }
+    });
   </script>
 
 </body>

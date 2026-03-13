@@ -24,19 +24,30 @@ http.createServer((req, res) => {
     let urlPath = req.url.split('?')[0];
     if (urlPath === '/') urlPath = '/index.html';
 
-    const filePath = path.join(__dirname, urlPath);
-    const ext = path.extname(filePath).toLowerCase();
-    const mime = MIME[ext] || 'application/octet-stream';
+    let filePath = path.join(__dirname, urlPath);
+    let ext = path.extname(filePath).toLowerCase();
 
-    fs.readFile(filePath, (err, data) => {
-        if (err) {
-            res.writeHead(404, { 'Content-Type': 'text/plain' });
-            res.end('404 Not Found');
-            return;
-        }
-        res.writeHead(200, { 'Content-Type': mime });
-        res.end(data);
-    });
+    const serveFile = (p, isRetry = false) => {
+        const currentExt = path.extname(p).toLowerCase();
+        const mime = MIME[currentExt] || 'application/octet-stream';
+
+        fs.readFile(p, (err, data) => {
+            if (err) {
+                if (!isRetry && !currentExt) {
+                    const htmlPath = p + '.html';
+                    serveFile(htmlPath, true);
+                    return;
+                }
+                res.writeHead(404, { 'Content-Type': 'text/plain' });
+                res.end('404 Not Found');
+                return;
+            }
+            res.writeHead(200, { 'Content-Type': mime });
+            res.end(data);
+        });
+    };
+
+    serveFile(filePath);
 }).listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });
