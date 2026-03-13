@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="Assets/Hero/logo.svg">
   <title>Unnati Srivastava Portfolio</title>
   <meta name="description"
     content="UX Portfolio of Unnati Srivastava — thoughtful design, playful experiments, and meaningful product stories." />
@@ -74,328 +75,11 @@
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
     }
 
-    /* ── ANNOUNCEMENT BAR ───────────────────────────────────── */
-    .announcement-bar {
-      background: var(--black);
-      color: rgba(255, 255, 255, 0.8);
-      text-align: center;
-      font-size: 13px;
-      font-weight: 300;
-      letter-spacing: 0.01em;
-      padding: 10px 20px;
-      line-height: 1.4;
-    }
-
-    .announcement-bar a {
-      color: var(--p300);
-      text-decoration: underline;
-      text-decoration-color: transparent;
-      transition: text-decoration-color 0.2s ease;
-    }
-
-    .announcement-bar a:hover {
-      text-decoration-color: var(--p300);
-    }
-
-    /* ── NAV ────────────────────────────────────────────────── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 200;
-      background: rgba(255, 255, 255, 0.4);
-      backdrop-filter: blur(24px) saturate(180%);
-      -webkit-backdrop-filter: blur(24px) saturate(180%);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-      transition: box-shadow 0.3s ease;
-    }
-
-    nav.scrolled {
-      box-shadow: 0 2px 20px rgba(16, 15, 18, 0.08);
-    }
-
-    .nav-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 40px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      gap: 32px;
-    }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--black);
-      text-decoration: none;
-      letter-spacing: -0.01em;
-      flex-shrink: 0;
-    }
-
-    .nav-logo-mark {
-      width: 28px;
-      height: 28px;
-      background-image: url('./Assets/Hero/hero-new.jpeg');
-      background-size: cover;
-      background-position: center;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      transition: transform 0.3s var(--ease-spring);
-    }
-
-    .nav-logo-mark svg {
-      display: block;
-      color: white;
-    }
-
-    @keyframes logoWiggle {
-      0% {
-        transform: scale(1) rotate(0deg);
-      }
-
-      25% {
-        transform: scale(1.1) rotate(-10deg);
-      }
-
-      75% {
-        transform: scale(1.1) rotate(10deg);
-      }
-
-      100% {
-        transform: scale(1) rotate(0deg);
-      }
-    }
-
-    .nav-logo:hover .nav-logo-mark {
-      animation: logoWiggle 0.5s var(--ease-spring) forwards;
-    }
-
-    .nav-logo:focus-visible {
-      outline: 2px solid var(--p500);
-      outline-offset: 3px;
-      border-radius: 4px;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 2px;
-      list-style: none;
-      flex: 1;
-    }
-
-    .nav-links a {
-      font-size: 14px;
-      font-weight: 400;
-      color: var(--n700);
-      text-decoration: none;
-      padding: 6px 14px;
-      border-radius: 100px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      transition: color 0.2s ease, background 0.2s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--black);
-      background: rgba(16, 15, 18, 0.05);
-    }
-
-    .nav-links a:focus-visible {
-      outline: 2px solid var(--p500);
-      outline-offset: 2px;
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      font-family: 'DM Sans', Arial, sans-serif;
-      font-size: 14px;
-      font-weight: 500;
-      text-decoration: none;
-      border-radius: 100px;
-      cursor: pointer;
-      border: none;
-      transition: transform 0.2s var(--ease-spring), box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
-    }
-
-    .btn:active {
-      transform: scale(0.97) !important;
-    }
-
-    .btn:focus-visible {
-      outline: 2px solid var(--p500);
-      outline-offset: 3px;
-    }
-
-    .btn-ghost {
-      padding: 8px 18px;
-      color: var(--n700);
-      background: transparent;
-    }
-
-    .btn-ghost:hover {
-      color: var(--black);
-      background: rgba(16, 15, 18, 0.05);
-    }
-
-    .btn-outline {
-      padding: 8px 18px;
-      color: var(--black);
-      background: transparent;
-      border: 1.5px solid rgba(16, 15, 18, 0.18) !important;
-    }
-
-    .btn-outline:hover {
-      border-color: rgba(16, 15, 18, 0.3) !important;
-      transform: translateY(-1px);
-    }
-
-    .btn-primary {
-      padding: 9px 20px;
-      color: #fff;
-      background: var(--black);
-      box-shadow: 0 1px 4px rgba(16, 15, 18, 0.2);
-    }
-
-    .btn-primary:hover {
-      background: var(--p900);
-      box-shadow: 0 4px 16px rgba(46, 31, 107, 0.3);
-      transform: translateY(-1px);
-    }
-
-    .btn-purple {
-      padding: 15px 32px;
-      font-size: 16px;
-      color: #fff;
-      background: var(--p700);
-      box-shadow: 0 2px 12px rgba(97, 68, 196, 0.35);
-    }
-
-    .btn-purple:hover {
-      background: var(--p900);
-      box-shadow: 0 6px 24px rgba(46, 31, 107, 0.4);
-      transform: translateY(-2px);
-    }
-
-    .btn-white-outline {
-      padding: 15px 32px;
-      font-size: 16px;
-      color: var(--black);
-      background: rgba(255, 255, 255, 0.9);
-      border: 1.5px solid rgba(16, 15, 18, 0.15) !important;
-    }
-
-    .btn-white-outline:hover {
-      background: #fff;
-      border-color: rgba(16, 15, 18, 0.25) !important;
-      transform: translateY(-2px);
-    }
-
-    /* ── MOBILE NAV ────────────────────────────────────────── */
-    .mobile-toggle {
-      display: none;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 24px;
-      height: 16px;
-      background: none;
-      border: none;
-      padding: 0;
-      cursor: pointer;
-      z-index: 2000;
-    }
-
-    .mobile-toggle span {
-      display: block;
-      width: 100%;
-      height: 2px;
-      background-color: var(--black);
-      border-radius: 2px;
-      transition: all 0.3s var(--ease-out);
-    }
-
-    .mobile-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(255, 255, 255, 0.72);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      z-index: 1500;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s var(--ease-out);
-    }
-
-    .mobile-overlay-links {
-      list-style: none;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-    }
-
-    .mobile-overlay-links a {
-      font-size: 32px;
-      font-weight: 500;
-      color: var(--black);
-      text-decoration: none;
-      font-family: 'DM Serif Display', serif;
-    }
-
-    .nav-menu-open .mobile-overlay {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .nav-menu-open .mobile-toggle span:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
-    }
-
-    .nav-menu-open .mobile-toggle span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .nav-menu-open .mobile-toggle span:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
-    }
-
-    .nav-menu-open {
-      overflow: hidden;
-    }
-
-    @media (max-width: 500px) {
-
-      .nav-links,
-      .nav-actions {
-        display: none !important;
-      }
-
-      .mobile-toggle {
-        display: flex;
-        margin-left: auto;
-        /* Push to the right */
-      }
-    }
-
     /* ── HERO ───────────────────────────────────────────────── */
+    [data-theme="dark"] .hero-bg {
+      background-image: url('./Assets/Hero/hero-night');
+    }
+
     .hero {
       position: relative;
       overflow: hidden;
@@ -1584,62 +1268,174 @@
         justify-content: center;
       }
     }
+
+    /* ── DARK MODE ────────────────────────────────────────────── */
+    [data-theme="dark"] {
+      --white: #09090b;
+      --near-white: #18181b;
+      --bg-card: #27272a;
+      --black: #fafafa;
+      --n700: #a1a1aa;
+      --n500: #71717a;
+      --n300: #3f3f46;
+      --n100: #27272a;
+      --p100: rgba(97, 68, 196, 0.18);
+      --p200: rgba(97, 68, 196, 0.28);
+      --p700: #b49ef5;
+    }
+
+    [data-theme="dark"] .writing-list,
+    [data-theme="dark"] .writing-item {
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    [data-theme="dark"] ::-webkit-scrollbar-track {
+      background: var(--white);
+    }
+
+    [data-theme="dark"] .project-card {
+      background: #18181b;
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    [data-theme="dark"] .project-card:hover {
+      border-color: rgba(149, 115, 255, 0.3);
+      box-shadow: 0 20px 60px rgba(97, 68, 196, 0.2), 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    [data-theme="dark"] .skill-pill {
+      background: #27272a;
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    [data-theme="dark"] .project-tag[style*="#fde8ee"] {
+      background: rgba(192, 68, 92, 0.15) !important;
+      border-color: rgba(192, 68, 92, 0.25) !important;
+      color: #f07a91 !important;
+    }
+
+    [data-theme="dark"] .project-tag[style*="#e6f4ef"] {
+      background: rgba(37, 109, 74, 0.18) !important;
+      border-color: rgba(37, 109, 74, 0.3) !important;
+      color: #5ec995 !important;
+    }
+
+    [data-theme="dark"] .project-cta {
+      border-color: rgba(255, 255, 255, 0.2);
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    [data-theme="dark"] .project-card:hover .project-cta {
+      color: #fff;
+    }
+
+    /* ── DARK MODE: keep intentionally-dark sections dark ──── */
+    /* Footer stays dark — do not let --black inversion flip it white */
+    [data-theme="dark"] footer {
+      background: #09090b;
+      color: var(--near-white);
+    }
+
+    /* Work section gets a dark tinted background */
+    [data-theme="dark"] .work-section {
+      background: #111113;
+    }
+
+    /* Skills section also uses --p50 — keep dark */
+    [data-theme="dark"] .skills-section {
+      background: #111113;
+    }
+
+    /* Experience item hover — keep dark, not the light --p50 flash */
+    [data-theme="dark"] .experience-item:hover {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.06);
+    }
+
+    /* exp-period badge in dark mode */
+    [data-theme="dark"] .exp-period {
+      background: rgba(97, 68, 196, 0.18);
+      border-color: rgba(97, 68, 196, 0.28);
+      color: var(--p700);
+    }
+
+    /* Experience list dividers */
+    [data-theme="dark"] .experience-list,
+    [data-theme="dark"] .experience-item {
+      border-color: rgba(255, 255, 255, 0.07);
+    }
+
+    /* Feature row dividers */
+    [data-theme="dark"] .feature-row {
+      border-color: rgba(255, 255, 255, 0.07);
+    }
+
+    /* Section labels / eyebrows on dark bg in work section */
+    [data-theme="dark"] .section-label {
+      background: rgba(97, 68, 196, 0.18);
+      border-color: rgba(97, 68, 196, 0.28);
+    }
+
+    /* Feature eyebrow same treatment */
+    [data-theme="dark"] .feature-eyebrow {
+      background: rgba(97, 68, 196, 0.18);
+      border-color: rgba(97, 68, 196, 0.28);
+    }
+
+    /* btn-purple in dark mode */
+    [data-theme="dark"] .btn-purple {
+      background: var(--p700);
+      color: #fff;
+    }
+
+    [data-theme="dark"] .btn-purple:hover {
+      background: #c5b0ff;
+      color: #1a1020;
+    }
+
+    /* ── THEME TOGGLE ─────────────────────────────────────────── */
+    .btn-theme-toggle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(16, 15, 18, 0.15);
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--n700);
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s var(--ease-spring);
+      flex-shrink: 0;
+    }
+
+    .btn-theme-toggle:hover {
+      background: rgba(16, 15, 18, 0.06);
+      border-color: rgba(16, 15, 18, 0.25);
+      color: var(--black);
+      transform: scale(1.08);
+    }
+
+    .btn-theme-toggle:active {
+      transform: scale(0.95);
+    }
+
+    .btn-theme-toggle:focus-visible {
+      outline: 2px solid var(--p500);
+      outline-offset: 3px;
+    }
   </style>
+  <script>
+    (function () {
+      var saved = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = saved ? saved : (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
 </head>
 
 <body>
-
-  <!-- ── ANNOUNCEMENT BAR ─────────────────────────────────────── -->
-  <div class="announcement-bar" role="banner">
-    Available for new opportunities · <a href="https://www.linkedin.com/in/unnati-srivastava/">Let's talk</a>
-  </div>
-
-  <!-- ── NAV ─────────────────────────────────────────────────── -->
-  <nav id="navbar" aria-label="Main navigation">
-    <div class="nav-inner">
-      <a href="/" class="nav-logo" aria-label="Home — Unnati">
-        <span class="nav-logo-mark" aria-hidden="true">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <path
-              d="M12 5c.67 0 1.35.09 2 .26 1.78-2 2.67-2.1 2.67-2.1.5 1.28.17 2.22.08 2.45.6.65.92 1.51.92 2.39 0 3.11-1.9 3.8-3.71 4 .29.25.54.73.54 1.48V17c0 .3 0 .6.17.9" />
-            <path
-              d="M12 5c-.67 0-1.35.09-2 .26-1.78-2-2.67-2.1-2.67-2.1-.5 1.28-.17 2.22-.08 2.45-.6.65-.92 1.51-.92 2.39 0 3.11 1.9 3.8 3.71 4a2.39 2.39 0 0 0-.54 1.48V17c0 .3 0 .6-.17.9" />
-            <path d="M9 13c0-1.5 1-2.5 3-2.5s3 1 3 2.5" />
-            <line x1="8" y1="10" x2="8.01" y2="10" />
-            <line x1="16" y1="10" x2="16.01" y2="10" />
-          </svg>
-        </span>
-        Unnati
-      </a>
-
-      <ul class="nav-links" role="list">
-        <li><a href="#work-grid">Work</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="Assets/About me/resume.pdf" target="_blank">Resume</a></li>
-      </ul>
-
-      <div class="nav-actions">
-        <a href="https://www.linkedin.com/in/unnati-srivastava/" class="btn btn-ghost">Say hello</a>
-        <a href="#work-grid" class="btn btn-primary">View work</a>
-      </div>
-
-      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-  </nav>
-
-  <div class="mobile-overlay" id="mobileOverlay">
-    <ul class="mobile-overlay-links">
-      <li><a href="/#work-grid">Work</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="Assets/About me/resume.pdf" target="_blank">Resume</a></li>
-      <li><a href="https://www.linkedin.com/in/unnati-srivastava/">Contact</a></li>
-    </ul>
-  </div>
 
   <!-- ── HERO ────────────────────────────────────────────────── -->
   <main>
@@ -1699,7 +1495,7 @@
               As Founding Product Designer (+ Frontend Engineer) at Crossfill, I turned a reporting dashboard into an
               actionable, insight-driven Gen AI product — shaping the 0→1 journey for a B2B SaaS workflow.
             </p>
-            <a href="/crossfill" class="feature-link">
+            <a href="crossfill.html" class="feature-link">
               Crossfill case study
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
                 <path d="M2.5 7h9M8 3.5l3.5 3.5L8 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
@@ -1721,7 +1517,7 @@
         <p class="section-sub">End-to-end product design across Gen AI, SaaS, and mobile — from 0 to 1 and beyond.</p>
 
         <!-- MathWorks -->
-        <a href="/mathworks" class="project-card" aria-label="MathWorks case study">
+        <a href="mathworks.html" class="project-card" aria-label="MathWorks case study">
           <div class="project-img" style="padding: 0; overflow: hidden; position: relative; background: #0d1a13;">
             <iframe src="https://player.vimeo.com/video/1077388175?autoplay=1&muted=1&loop=1&background=1&quality=auto"
               style="position:absolute; top:0; left:0; width:100%; height:100%; border:none; pointer-events:none;"
@@ -1767,7 +1563,7 @@
         </a>
 
         <!-- Spark -->
-        <a href="/spark" class="project-card" aria-label="Spark case study">
+        <a href="spark.html" class="project-card" aria-label="Spark case study">
           <div class="project-img" style="padding: 0; overflow: hidden;">
             <img src="Assets/Spark/hero-image.png" alt="Spark app hero"
               style="width:100%; height:100%; object-fit:cover; display:block;" />
@@ -1882,65 +1678,6 @@
       </div>
     </section>
 
-    <!-- ── PHILOSOPHY / ABOUT ────────────────────────────────── -->
-    <section id="about" class="philosophy-section" aria-label="Design philosophy">
-      <div class="philosophy-bg" aria-hidden="true"></div>
-      <div class="philosophy-inner">
-        <div class="philosophy-glass">
-          <div class="philosophy-eyebrow">The Design Philosophy</div>
-          <h2 class="philosophy-title">
-            Designing with <em>intent</em>,<br>building with care.
-          </h2>
-          <p class="philosophy-body">
-            I believe great design is invisible — it gets out of the way and lets the user accomplish their goal with
-            clarity and delight. I bring together product thinking, visual craft, and engineering fluency to create
-            experiences that feel inevitable.
-          </p>
-
-          <div class="philosophy-grid" role="list">
-            <div class="philosophy-card" role="listitem">
-              <div class="philosophy-card-icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(201,184,245,0.9)"
-                  stroke-width="1.5">
-                  <circle cx="12" cy="12" r="3" />
-                  <path
-                    d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
-                </svg>
-              </div>
-              <p class="philosophy-card-title">Gen AI + 0 → 1</p>
-              <p class="philosophy-card-body">I specialize in building products from scratch — defining the problem, the
-                system, the experience, and the visual language all at once.</p>
-            </div>
-
-            <div class="philosophy-card" role="listitem">
-              <div class="philosophy-card-icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(201,184,245,0.9)"
-                  stroke-width="1.5">
-                  <path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" />
-                </svg>
-              </div>
-              <p class="philosophy-card-title">Frontend fluency</p>
-              <p class="philosophy-card-body">I write production-grade HTML, CSS, and React — bridging the gap between
-                design intent and engineering execution without losing fidelity.</p>
-            </div>
-
-            <div class="philosophy-card" role="listitem">
-              <div class="philosophy-card-icon" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(201,184,245,0.9)"
-                  stroke-width="1.5">
-                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                  <circle cx="9" cy="7" r="4" />
-                  <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
-                </svg>
-              </div>
-              <p class="philosophy-card-title">User-centered always</p>
-              <p class="philosophy-card-body">Every decision — visual, structural, interactive — traces back to a real
-                user need, grounded in research, testing, and direct observation.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
 
     <!-- ── EXPERIENCE ────────────────────────────────────────── -->
     <section id="experience" class="experience-section" aria-label="Experience">
@@ -2080,15 +1817,15 @@
         <div>
           <p class="footer-col-title">Work</p>
           <ul class="footer-nav">
-            <li><a href="/mathworks">MathWorks</a></li>
-            <li><a href="/spark">Spark</a></li>
+            <li><a href="mathworks.html">MathWorks</a></li>
+            <li><a href="spark.html">Spark</a></li>
           </ul>
         </div>
         <div>
           <p class="footer-col-title">Navigate</p>
           <ul class="footer-nav">
             <li><a href="#work-grid">Work</a></li>
-            <li><a href="#about">About</a></li>
+            <li><a href="about.html">About</a></li>
             <li><a href="#play">Play</a></li>
           </ul>
         </div>
@@ -2246,24 +1983,8 @@
     // Initial call
     handleParallax();
 
-    // Mobile menu toggle
-    const mobileToggle = document.getElementById('mobileToggle');
-    const mobileOverlay = document.getElementById('mobileOverlay');
-    const body = document.body;
-
-    if (mobileToggle) {
-      mobileToggle.addEventListener('click', () => {
-        body.classList.toggle('nav-menu-open');
-      });
-    }
-
-    // Close menu when clicking links
-    document.querySelectorAll('.mobile-overlay-links a').forEach(link => {
-      link.addEventListener('click', () => {
-        body.classList.remove('nav-menu-open');
-      });
-    });
   </script>
+  <script src="nav-component.js"></script>
 
 </body>
 

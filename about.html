@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About — Unnati Srivastava</title>
+    <meta name="description"
+        content="Learn more about Unnati's design philosophy and recent writing on UX research and product design." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"
+        rel="stylesheet" />
+
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --white: #ffffff;
+            --near-white: #fafafa;
+            --black: #100f12;
+            --p900: #2e1f6b;
+            --p700: #6144c4;
+            --p600: #7c5cbf;
+            --p500: #9b7fe8;
+            --p300: #c9b8f5;
+            --p200: #e4dbff;
+            --p100: #f3efff;
+            --p50: #faf8ff;
+            --n700: #5a5869;
+            --n500: #9a98a6;
+            --n300: #cccad6;
+            --n100: #fafafa;
+            --orange: #e07b3a;
+            --bg-card: #f3efff;
+            --radius-sm: 0.75rem;
+            --radius-md: 1.25rem;
+            --radius-lg: 2rem;
+            --radius-xl: 2.5rem;
+            --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+            --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --transition: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'DM Sans', Arial, sans-serif;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.5;
+            font-weight: 300;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* ── GRAIN ──────────────────────────────────────────────── */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 500;
+            pointer-events: none;
+            opacity: 0.22;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+        }
+
+        /* ── PHILOSOPHY SECTION ───────────────────────────────── */
+        [data-theme="dark"] .philosophy-bg {
+            background-image: url('./Assets/Hero/hero-night');
+        }
+
+        .philosophy-section {
+            position: relative;
+            padding: 120px 40px;
+            overflow: hidden;
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .philosophy-bg {
+            position: absolute;
+            inset: -20% -10%;
+            background-image: url('./Assets/Hero/hero-new.jpeg');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.25;
+            filter: grayscale(100%) brightness(0.4);
+            will-change: transform;
+        }
+
+        .philosophy-inner {
+            position: relative;
+            z-index: 2;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .philosophy-glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(24px) saturate(1.2);
+            -webkit-backdrop-filter: blur(24px) saturate(1.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 40px;
+            padding: 80px;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .philosophy-glass {
+                padding: 40px 30px;
+                border-radius: 24px;
+            }
+        }
+
+        .philosophy-eyebrow {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--p300);
+            margin-bottom: 24px;
+        }
+
+        .philosophy-title {
+            font-family: 'DM Serif Display', Georgia, serif;
+            font-size: clamp(32px, 5vw, 56px);
+            line-height: 1.1;
+            margin-bottom: 32px;
+            max-width: 700px;
+        }
+
+        .philosophy-title em {
+            font-style: italic;
+            color: var(--p300);
+        }
+
+        .philosophy-body {
+            font-size: 18px;
+            font-weight: 300;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 640px;
+            margin-bottom: 64px;
+        }
+
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+        }
+
+        .philosophy-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            padding: 32px;
+            transition: transform 0.3s var(--ease-out), background 0.3s ease;
+        }
+
+        .philosophy-card:hover {
+            background: rgba(255, 255, 255, 0.07);
+            transform: translateY(-4px);
+        }
+
+        .philosophy-card-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(201, 184, 245, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .philosophy-card-title {
+            font-size: 17px;
+            font-weight: 500;
+            color: var(--white);
+            margin-bottom: 12px;
+        }
+
+        .philosophy-card-body {
+            font-size: 14px;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.65);
+        }
+
+        /* ── WRITING SECTION ──────────────────────────────────── */
+        .writing-section {
+            padding: 120px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--p700);
+            margin-bottom: 48px;
+        }
+
+        .writing-title-big {
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(40px, 6vw, 64px);
+            font-weight: 400;
+            color: var(--black);
+            margin-bottom: 80px;
+        }
+
+        .writing-list {
+            display: flex;
+            flex-direction: column;
+            border-top: 1px solid rgba(16, 15, 18, 0.08);
+        }
+
+        .writing-item {
+            display: flex;
+            padding: 48px 0;
+            border-bottom: 1px solid rgba(16, 15, 18, 0.08);
+            transition: background 0.3s var(--transition);
+        }
+
+        .writing-year {
+            width: 120px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--black);
+            flex-shrink: 0;
+        }
+
+        .writing-content {
+            flex: 1;
+            max-width: 720px;
+        }
+
+        .writing-link-title {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            font-family: 'DM Serif Display', serif;
+            font-size: clamp(22px, 3vw, 30px);
+            font-weight: 400;
+            color: var(--black);
+            text-decoration: none;
+            margin-bottom: 16px;
+            line-height: 1.2;
+            transition: color 0.3s var(--transition);
+        }
+
+        .writing-link-title:hover {
+            color: var(--p700);
+        }
+
+        .writing-link-title svg {
+            transition: transform 0.3s var(--ease-spring);
+        }
+
+        .writing-link-title:hover svg {
+            transform: translate(2px, -2px);
+        }
+
+        .writing-desc {
+            font-size: 16px;
+            font-weight: 300;
+            color: var(--n700);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+
+            .philosophy-section,
+            .writing-section {
+                padding: 80px 24px;
+            }
+
+            .writing-item {
+                flex-direction: column;
+                gap: 16px;
+                padding: 32px 0;
+            }
+
+            .writing-year {
+                width: auto;
+                font-size: 14px;
+            }
+
+            .writing-content {
+                max-width: none;
+            }
+        }
+
+        /* ── FOOTER ────────────────────────────────────────────── */
+        footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 80px 40px 40px;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 64px;
+            margin-bottom: 80px;
+        }
+
+        .footer-brand {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .footer-brand-sub {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .footer-col-title {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--p300);
+            margin-bottom: 24px;
+        }
+
+        .footer-nav {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-nav a {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-nav a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        @media (max-width: 900px) {
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* ── DARK MODE ────────────────────────────────────────────── */
+        [data-theme="dark"] {
+            --white: #09090b;
+            --near-white: #18181b;
+            --bg-card: #27272a;
+            --black: #fafafa;
+            --n700: #a1a1aa;
+            --n500: #71717a;
+            --n300: #3f3f46;
+            --n100: #27272a;
+        }
+
+        [data-theme="dark"] .writing-list,
+        [data-theme="dark"] .writing-item {
+            border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        [data-theme="dark"] .btn-outline {
+            border-color: rgba(255, 255, 255, 0.2) !important;
+            color: var(--black);
+        }
+
+        [data-theme="dark"] .btn-outline:hover {
+            border-color: rgba(255, 255, 255, 0.35) !important;
+        }
+    </style>
+    <script>
+        (function () {
+            var saved = localStorage.getItem('theme');
+            var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            var theme = saved ? saved : (prefersDark ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', theme);
+        })();
+    </script>
+</head>
+
+<body>
+
+    <main>
+        <!-- ── PHILOSOPHY SECTION ───────────────────────────────── -->
+        <section id="about" class="philosophy-section">
+            <div class="philosophy-bg" aria-hidden="true"></div>
+            <div class="philosophy-inner">
+                <div class="philosophy-glass">
+                    <div class="philosophy-eyebrow">The Design Philosophy</div>
+                    <h2 class="philosophy-title">
+                        Designing with <em>intent</em>,<br>building with care.
+                    </h2>
+                    <p class="philosophy-body">
+                        I believe great design is invisible — it gets out of the way and lets the user accomplish their
+                        goal with
+                        clarity and delight. I bring together product thinking, visual craft, and engineering fluency to
+                        create
+                        experiences that feel inevitable.
+                    </p>
+
+                    <div class="philosophy-grid" role="list">
+                        <div class="philosophy-card" role="listitem">
+                            <div class="philosophy-card-icon" aria-hidden="true">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                    stroke="rgba(201,184,245,0.9)" stroke-width="1.5">
+                                    <circle cx="12" cy="12" r="3" />
+                                    <path
+                                        d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83" />
+                                </svg>
+                            </div>
+                            <p class="philosophy-card-title">Gen AI + 0 → 1</p>
+                            <p class="philosophy-card-body">I specialize in building products from scratch — defining
+                                the problem, the
+                                system, the experience, and the visual language all at once.</p>
+                        </div>
+
+                        <div class="philosophy-card" role="listitem">
+                            <div class="philosophy-card-icon" aria-hidden="true">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                    stroke="rgba(201,184,245,0.9)" stroke-width="1.5">
+                                    <path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" />
+                                </svg>
+                            </div>
+                            <p class="philosophy-card-title">Frontend fluency</p>
+                            <p class="philosophy-card-body">I write production-grade HTML, CSS, and React — bridging the
+                                gap between
+                                design intent and engineering execution without losing fidelity.</p>
+                        </div>
+
+                        <div class="philosophy-card" role="listitem">
+                            <div class="philosophy-card-icon" aria-hidden="true">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                                    stroke="rgba(201,184,245,0.9)" stroke-width="1.5">
+                                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                                    <circle cx="9" cy="7" r="4" />
+                                    <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+                                </svg>
+                            </div>
+                            <p class="philosophy-card-title">User-centered always</p>
+                            <p class="philosophy-card-body">Every decision — visual, structural, interactive — traces
+                                back to a real
+                                user need, grounded in research, testing, and direct observation.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ── WRITING SECTION ──────────────────────────────────── -->
+        <section class="writing-section" id="writing">
+            <div class="writing-inner">
+                <div class="section-label">Writing</div>
+                <h2 class="writing-title-big">Writing</h2>
+
+                <div class="writing-list">
+                    <!-- Item 1 -->
+                    <div class="writing-item">
+                        <div class="writing-year">2025</div>
+                        <div class="writing-content">
+                            <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=6Cnl7vUAAAAJ&citation_for_view=6Cnl7vUAAAAJ:u5HHmVD_uO8C"
+                                class="writing-link-title" target="_blank">
+                                Who’s There? Mystery Calling for UX Research
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                                    <polyline points="7 7 17 7 17 17"></polyline>
+                                </svg>
+                            </a>
+                            <p class="writing-desc">A deep dive into mystery calling as a unique and effective
+                                methodology for UX research, exploring human behaviors and service design.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="writing-item">
+                        <div class="writing-year">2025</div>
+                        <div class="writing-content">
+                            <a href="https://scholar.google.com/citations?view_op=view_citation&hl=en&user=6Cnl7vUAAAAJ&citation_for_view=6Cnl7vUAAAAJ:u-x6o8ySG0sC"
+                                class="writing-link-title" target="_blank">
+                                Recommendations from Arizona budtenders to mystery callers regarding morning sickness
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                                    <polyline points="7 7 17 7 17 17"></polyline>
+                                </svg>
+                            </a>
+                            <p class="writing-desc">Examining the intersection of health communication and retail
+                                experiences through mystery calling research in specialized environments.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="writing-item">
+                        <div class="writing-year">2024</div>
+                        <div class="writing-content">
+                            <a href="https://medium.com/@usrivas4/how-to-overcome-imposter-syndrome-as-a-junior-ux-designer-1699adfe1d8d"
+                                class="writing-link-title" target="_blank">
+                                How to overcome imposter syndrome as a Junior UX Designer
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                                    <polyline points="7 7 17 7 17 17"></polyline>
+                                </svg>
+                            </a>
+                            <p class="writing-desc">Sharing personal reflections and actionable strategies for
+                                early-career designers to build confidence and navigate the industry.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="writing-item">
+                        <div class="writing-year">2024</div>
+                        <div class="writing-content">
+                            <a href="https://medium.com/@usrivas4/exploring-research-methods-for-human-systems-engineers-to-improve-products-processes-and-64f7163376fa"
+                                class="writing-link-title" target="_blank">
+                                Exploring Research Methods for Human Systems Engineers to Improve Products, Processes,
+                                and Websites: A Focus on UX
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                                    <polyline points="7 7 17 7 17 17"></polyline>
+                                </svg>
+                            </a>
+                            <p class="writing-desc">Bridging the gap between human systems engineering and modern UX
+                                practices through diverse research methodologies.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ── FOOTER ────────────────────────────────────────────── -->
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div>
+                    <p class="footer-brand">Unnati</p>
+                    <p class="footer-brand-sub">Product Designer · Making things that matter.</p>
+                </div>
+                <div>
+                    <p class="footer-col-title">Work</p>
+                    <ul class="footer-nav">
+                        <li><a href="mathworks.html">MathWorks</a></li>
+                        <li><a href="spark.html">Spark</a></li>
+                        <li><a href="crossfill.html">Crossfill</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="footer-col-title">Navigate</p>
+                    <ul class="footer-nav">
+                        <li><a href="index.html#work-grid">Work</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="Assets/About%20me/resume.pdf" target="_blank">Resume</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="footer-col-title">Connect</p>
+                    <ul class="footer-nav">
+                        <li><a href="https://www.linkedin.com/in/unnati-srivastava/">Say hello</a></li>
+                        <li><a href="https://medium.com/@usrivas4">Medium</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <span>© 2026 Unnati — All rights reserved.</span>
+                <span>Made with care ✦</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Parallax logic
+        const philoBg = document.querySelector('.philosophy-bg');
+        const philoSection = document.getElementById('about');
+
+        function handleParallax() {
+            const scrollY = window.pageYOffset;
+            if (philoBg && philoSection) {
+                const rect = philoSection.getBoundingClientRect();
+                const winHeight = window.innerHeight;
+                if (rect.top < winHeight && rect.bottom > 0) {
+                    const sectionOffset = philoSection.offsetTop;
+                    const relativeScroll = scrollY - sectionOffset + (winHeight / 2);
+                    philoBg.style.transform = `translate3d(0, ${relativeScroll * 0.18}px, 0)`;
+                }
+            }
+        }
+
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    handleParallax();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+
+        handleParallax();
+
+    </script>
+    <script src="nav-component.js"></script>
+
+</body>
+
+</html>

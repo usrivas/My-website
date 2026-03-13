@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="Assets/Hero/logo.svg">
   <title>MathWorks — Unnati Srivastava</title>
   <meta name="description"
     content="Case study: Modernizing MATLAB App Designer for 3 million users. UX Design Internship at MathWorks, 2023." />
@@ -113,291 +114,6 @@
       max-width: 780px;
       margin: 0 auto;
       padding: 0 40px;
-    }
-
-    /* ─── ANNOUNCEMENT BAR ───────────────────────────────── */
-    .announcement-bar {
-      background: var(--black);
-      color: rgba(255, 255, 255, 0.75);
-      text-align: center;
-      font-size: 13px;
-      font-weight: 300;
-      letter-spacing: 0.01em;
-      padding: 10px 20px;
-      line-height: 1.4;
-    }
-
-    .announcement-bar a {
-      color: var(--p300);
-      text-decoration: underline;
-      text-decoration-color: transparent;
-      transition: text-decoration-color 0.2s ease;
-    }
-
-    .announcement-bar a:hover {
-      text-decoration-color: var(--p300);
-    }
-
-    /* ─── NAV ────────────────────────────────────────────── */
-    nav#navbar {
-      position: sticky;
-      top: 0;
-      z-index: 200;
-      background: rgba(255, 255, 255, 0.88);
-      backdrop-filter: blur(20px) saturate(160%);
-      -webkit-backdrop-filter: blur(20px) saturate(160%);
-      border-bottom: 1px solid rgba(16, 15, 18, 0.07);
-      transition: box-shadow 0.3s ease;
-    }
-
-    nav#navbar.scrolled {
-      box-shadow: 0 2px 20px rgba(16, 15, 18, 0.08);
-    }
-
-    .nav-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 40px;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      gap: 32px;
-    }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--black);
-      text-decoration: none;
-      letter-spacing: -0.01em;
-      flex-shrink: 0;
-    }
-
-    .nav-logo-mark {
-      width: 28px;
-      height: 28px;
-      background-image: url('./Assets/Hero/hero-new.jpeg');
-      background-size: cover;
-      background-position: center;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      transition: transform 0.3s var(--ease-spring);
-    }
-
-    .nav-logo-mark svg {
-      display: block;
-      color: white;
-    }
-
-    @keyframes logoWiggle {
-      0% {
-        transform: scale(1) rotate(0deg);
-      }
-
-      25% {
-        transform: scale(1.1) rotate(-10deg);
-      }
-
-      75% {
-        transform: scale(1.1) rotate(10deg);
-      }
-
-      100% {
-        transform: scale(1) rotate(0deg);
-      }
-    }
-
-    .nav-logo:hover .nav-logo-mark {
-      animation: logoWiggle 0.5s var(--ease-spring) forwards;
-    }
-
-    .nav-logo:focus-visible {
-      outline: 2px solid var(--p500);
-      outline-offset: 3px;
-      border-radius: 4px;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 2px;
-      list-style: none;
-      flex: 1;
-    }
-
-    .nav-links a {
-      font-size: 14px;
-      font-weight: 400;
-      color: var(--n700);
-      text-decoration: none;
-      padding: 6px 14px;
-      border-radius: 100px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      transition: color 0.2s ease, background 0.2s ease;
-    }
-
-    .nav-links a:hover {
-      color: var(--black);
-      background: rgba(16, 15, 18, 0.05);
-    }
-
-    .nav-links a:focus-visible {
-      outline: 2px solid var(--p500);
-      outline-offset: 2px;
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-
-    .btn-actions-nav {
-      padding: 9px 20px;
-    }
-
-    /* ── MOBILE NAV ────────────────────────────────────────── */
-    .mobile-toggle {
-      display: none;
-      flex-direction: column;
-      justify-content: space-between;
-      width: 24px;
-      height: 16px;
-      background: none;
-      border: none;
-      padding: 0;
-      cursor: pointer;
-      z-index: 2000;
-    }
-
-    .mobile-toggle span {
-      display: block;
-      width: 100%;
-      height: 2px;
-      background-color: var(--black);
-      border-radius: 2px;
-      transition: all 0.3s var(--ease-out);
-    }
-
-    .mobile-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(255, 255, 255, 0.72);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      z-index: 1500;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s var(--ease-out);
-    }
-
-    .mobile-overlay-links {
-      list-style: none;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-    }
-
-    .mobile-overlay-links a {
-      font-size: 32px;
-      font-weight: 500;
-      color: var(--black);
-      text-decoration: none;
-      font-family: 'DM Serif Display', serif;
-    }
-
-    .nav-menu-open .mobile-overlay {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .nav-menu-open .mobile-toggle span:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
-    }
-
-    .nav-menu-open .mobile-toggle span:nth-child(2) {
-      opacity: 0;
-    }
-
-    .nav-menu-open .mobile-toggle span:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
-    }
-
-    .nav-menu-open {
-      overflow: hidden;
-    }
-
-    @media (max-width: 500px) {
-
-      .nav-links,
-      .nav-actions {
-        display: none !important;
-      }
-
-      .mobile-toggle {
-        display: flex;
-        margin-left: auto;
-        /* Push to the right */
-      }
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      font-family: 'DM Sans', Arial, sans-serif;
-      font-size: 14px;
-      font-weight: 500;
-      text-decoration: none;
-      border-radius: 100px;
-      cursor: pointer;
-      border: none;
-      transition: transform 0.2s var(--ease-spring), box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
-    }
-
-    .btn:active {
-      transform: scale(0.97) !important;
-    }
-
-    .btn:focus-visible {
-      outline: 2px solid var(--p500);
-      outline-offset: 3px;
-    }
-
-    .btn-ghost {
-      padding: 8px 18px;
-      color: var(--n700);
-      background: transparent;
-    }
-
-    .btn-ghost:hover {
-      color: var(--black);
-      background: rgba(16, 15, 18, 0.05);
-    }
-
-    .btn-primary-nav {
-      padding: 9px 20px;
-      color: #fff;
-      background: var(--black);
-      box-shadow: 0 1px 4px rgba(16, 15, 18, 0.2);
-    }
-
-    .btn-primary-nav:hover {
-      background: var(--p900);
-      box-shadow: 0 4px 16px rgba(46, 31, 107, 0.3);
-      transform: translateY(-1px);
     }
 
     /* ─── CASE HERO ──────────────────────────────────────── */
@@ -559,7 +275,7 @@
 
     /* ─── STATS BAR ──────────────────────────────────────── */
     .stats-bar {
-      background: var(--black);
+      background: var(--p900);
       padding: 56px 0;
     }
 
@@ -571,7 +287,7 @@
 
     .stat-item {
       padding: 0 52px;
-      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      border-right: 1px solid rgba(255, 255, 255, 0.12);
       text-align: center;
     }
 
@@ -586,7 +302,7 @@
       font-style: italic;
       line-height: 1;
       letter-spacing: -0.03em;
-      color: var(--near-white);
+      color: rgba(255, 255, 255, 0.92);
       margin-bottom: 10px;
     }
 
@@ -598,7 +314,7 @@
     .stat-desc {
       font-size: 13.5px;
       font-weight: 300;
-      color: rgba(250, 250, 250, 0.5);
+      color: rgba(255, 255, 255, 0.5);
       line-height: 1.55;
       max-width: 200px;
       margin: 0 auto;
@@ -760,7 +476,7 @@
 
     /* ─── HMW BLOCK ──────────────────────────────────────── */
     .hmw-block {
-      background: var(--black);
+      background: var(--p900);
       border-radius: 20px;
       padding: 56px 64px;
       position: relative;
@@ -809,7 +525,7 @@
       font-weight: 400;
       font-style: italic;
       line-height: 1.4;
-      color: rgba(255, 255, 255, 0.9);
+      color: rgba(255, 255, 255, 0.92);
       max-width: 680px;
       position: relative;
       z-index: 1;
@@ -1047,40 +763,95 @@
 
     /* ─── BEFORE / AFTER ─────────────────────────────────── */
     .before-after {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
       margin-top: 40px;
     }
 
-    .ba-card {
+    /* ─── DRAG SLIDER ─────────────────────────────────────── */
+    .ba-slider {
+      position: relative;
       border-radius: 16px;
       overflow: hidden;
       border: 1px solid var(--p200);
+      user-select: none;
+      cursor: ew-resize;
     }
 
-    .ba-label {
-      padding: 13px 18px;
-      font-size: 11.5px;
+    .ba-slider img {
+      display: block;
+      width: 100%;
+      height: auto;
+      pointer-events: none;
+    }
+
+    .ba-after-layer {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      width: 50%;
+    }
+
+    .ba-after-layer img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      /* match the base image width exactly */
+      width: var(--ba-slider-width, 100%);
+      max-width: none;
+      height: auto;
+    }
+
+    .ba-divider {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: #fff;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    .ba-handle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 40px;
+      height: 40px;
+      background: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+      pointer-events: none;
+    }
+
+    .ba-handle svg {
+      color: #555;
+    }
+
+    .ba-label-pill {
+      position: absolute;
+      bottom: 14px;
+      padding: 5px 12px;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(6px);
+      color: #fff;
+      font-size: 11px;
       font-weight: 600;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
+      border-radius: 20px;
+      pointer-events: none;
     }
 
-    .ba-before .ba-label {
-      background: rgba(16, 15, 18, 0.04);
-      color: var(--n500);
+    .ba-label-before {
+      left: 14px;
     }
 
-    .ba-after .ba-label {
-      background: var(--p100);
-      color: var(--p700);
-    }
-
-    .ba-img {
-      aspect-ratio: 4/3;
-      position: relative;
-      background: var(--p50);
+    .ba-label-after {
+      right: 14px;
     }
 
     /* ─── QUOTES ─────────────────────────────────────────── */
@@ -1227,7 +998,7 @@
 
     /* ─── BEHIND THE SCENES ──────────────────────────────── */
     .bts-section {
-      background: var(--black);
+      background: var(--p900);
       border-bottom: none;
     }
 
@@ -1261,8 +1032,8 @@
       overflow: hidden;
       aspect-ratio: 4/3;
       position: relative;
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.07);
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .bts-photo:first-child {
@@ -1347,8 +1118,8 @@
 
     /* ─── FOOTER ─────────────────────────────────────────── */
     footer {
-      background: var(--black);
-      color: var(--near-white);
+      background: var(--p900);
+      color: rgba(255, 255, 255, 0.85);
       padding: 52px 40px 40px;
     }
 
@@ -1587,7 +1358,7 @@
 
       .stat-item {
         border-right: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15);
         padding: 0 0 40px;
       }
 
@@ -1673,54 +1444,224 @@
         gap: 16px;
       }
     }
+
+    /* ── DARK MODE ────────────────────────────────────────────── */
+    [data-theme="dark"] {
+      --white: #09090b;
+      --near-white: #18181b;
+      --bg-card: #27272a;
+      --black: #fafafa;
+      --n700: #a1a1aa;
+      --n500: #71717a;
+      --n300: #3f3f46;
+      --n100: #27272a;
+      --p100: rgba(97, 68, 196, 0.18);
+      --p200: rgba(97, 68, 196, 0.28);
+      --p700: #b49ef5;
+      --divider: rgba(255, 255, 255, 0.08);
+      --divider-light: rgba(255, 255, 255, 0.05);
+    }
+
+    /* ── Scrollbar & selection ── */
+    [data-theme="dark"] ::-webkit-scrollbar-track {
+      background: var(--white);
+    }
+    [data-theme="dark"] ::selection {
+      background: #2e1f6b;
+      color: #fafafa;
+    }
+
+    /* ── Section labels / eyebrows ── */
+    [data-theme="dark"] .section-label {
+      color: var(--p700);
+    }
+
+    /* ── section-alt (p50 tinted bg) → dark tint ── */
+    [data-theme="dark"] .section-alt {
+      background: #111113;
+    }
+
+    /* ── Next section (also uses p50) → dark ── */
+    [data-theme="dark"] .next-section {
+      background: #111113;
+    }
+
+    /* ── Cards: scope, research, quote ── */
+    [data-theme="dark"] .scope-card,
+    [data-theme="dark"] .research-card,
+    [data-theme="dark"] .quote-card {
+      background: #18181b;
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+    [data-theme="dark"] .scope-card:hover,
+    [data-theme="dark"] .research-card:hover {
+      border-color: rgba(149, 115, 255, 0.3);
+      box-shadow: 0 8px 32px rgba(97, 68, 196, 0.2), 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    /* ── img-block (placeholder areas) ── */
+    [data-theme="dark"] .img-block {
+      background: #18181b;
+    }
+
+    /* ── Meta strip ── */
+    [data-theme="dark"] .meta-strip {
+      background: #111113;
+      border-color: rgba(255, 255, 255, 0.07);
+    }
+    [data-theme="dark"] .meta-item {
+      border-color: rgba(255, 255, 255, 0.07);
+    }
+
+    /* ── Stats bar ── */
+    [data-theme="dark"] .stats-bar {
+      background: #09090b;
+    }
+    [data-theme="dark"] .stat-item {
+      border-right-color: rgba(255, 255, 255, 0.07);
+      border-bottom-color: rgba(255, 255, 255, 0.07);
+    }
+    [data-theme="dark"] .stat-big {
+      color: rgba(255, 255, 255, 0.85);
+    }
+    [data-theme="dark"] .stat-desc {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    /* ── HMW block ── */
+    [data-theme="dark"] .hmw-block {
+      background: #09090b;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+    [data-theme="dark"] .hmw-text {
+      color: rgba(255, 255, 255, 0.85);
+    }
+
+    /* ── Solution cards ── */
+    [data-theme="dark"] .solution-card {
+      background: #18181b;
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+    [data-theme="dark"] .solution-card-img {
+      background: #111113;
+      border-color: rgba(255, 255, 255, 0.07);
+    }
+
+    /* ── Before/after slider ── */
+    [data-theme="dark"] .ba-divider {
+      background: rgba(255, 255, 255, 0.7);
+    }
+    [data-theme="dark"] .ba-handle {
+      background: rgba(255, 255, 255, 0.9);
+    }
+    [data-theme="dark"] .ba-handle svg {
+      color: #27272a;
+    }
+
+    /* ── Constraint / learning cards ── */
+    [data-theme="dark"] .constraint-card,
+    [data-theme="dark"] .learning-card {
+      background: #18181b;
+      border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    /* ── Behind the scenes ── */
+    [data-theme="dark"] .bts-section {
+      background: #09090b;
+    }
+    [data-theme="dark"] .bts-title {
+      color: rgba(255, 255, 255, 0.85);
+    }
+    [data-theme="dark"] .bts-body {
+      color: rgba(255, 255, 255, 0.45);
+    }
+    [data-theme="dark"] .bts-photo {
+      background: rgba(255, 255, 255, 0.03);
+      border-color: rgba(255, 255, 255, 0.06);
+    }
+
+    /* ── btn-next CTA ── */
+    [data-theme="dark"] .btn-next {
+      background: var(--p700);
+      color: #18181b;
+      border: none;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+    [data-theme="dark"] .btn-next:hover {
+      background: #c5b0ff;
+      color: #1a1020;
+    }
+
+    /* ── Footer — stays dark, matches homepage ── */
+    [data-theme="dark"] footer {
+      background: #09090b;
+    }
+    [data-theme="dark"] .footer-tagline {
+      color: rgba(255, 255, 255, 0.35);
+    }
+    [data-theme="dark"] .footer-links a {
+      color: rgba(255, 255, 255, 0.4);
+    }
+    [data-theme="dark"] .footer-links a:hover {
+      color: rgba(255, 255, 255, 0.85);
+    }
+    [data-theme="dark"] .footer-divider {
+      background: rgba(255, 255, 255, 0.06);
+    }
+    [data-theme="dark"] .footer-bottom {
+      color: rgba(255, 255, 255, 0.22);
+    }
+
+    /* ── Sidebar TOC ── */
+    [data-theme="dark"] .toc-link {
+      color: rgba(255, 255, 255, 0.35);
+    }
+    [data-theme="dark"] .toc-link.active {
+      color: rgba(255, 255, 255, 0.85);
+    }
+    [data-theme="dark"] .toc-link .line {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    [data-theme="dark"] .toc-link.active .line {
+      background: rgba(255, 255, 255, 0.85);
+    }
+
+    /* ── Chatbot widget ── */
+    [data-theme="dark"] .chat-toggle {
+      background: rgba(24, 24, 27, 0.85);
+      border-color: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.85);
+    }
+    [data-theme="dark"] .chat-toggle:hover {
+      background: rgba(39, 39, 42, 0.95);
+    }
+    [data-theme="dark"] .chat-window {
+      background: rgba(18, 18, 20, 0.95);
+      border-color: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+    [data-theme="dark"] .chat-header {
+      border-bottom-color: rgba(255, 255, 255, 0.06);
+    }
+    [data-theme="dark"] .chat-message {
+      color: rgba(255, 255, 255, 0.65);
+    }
+    [data-theme="dark"] .chat-message strong {
+      color: rgba(255, 255, 255, 0.88);
+    }
+
   </style>
+  <script>
+    (function() {
+      var saved = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = saved ? saved : (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
 </head>
 
 <body>
-
-  <!-- ANNOUNCEMENT BAR -->
-  <div class="announcement-bar" role="banner">
-    Available for new opportunities · <a href="https://www.linkedin.com/in/unnati-srivastava/">Let's talk</a>
-  </div>
-
-  <!-- NAV -->
-  <nav id="navbar" aria-label="Main navigation">
-    <div class="nav-inner">
-      <a href="/" class="nav-logo" aria-label="Home — Unnati">
-        <span class="nav-logo-mark" aria-hidden="true">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <path
-              d="M12 5c.67 0 1.35.09 2 .26 1.78-2 2.67-2.1 2.67-2.1.5 1.28.17 2.22.08 2.45.6.65.92 1.51.92 2.39 0 3.11-1.9 3.8-3.71 4 .29.25.54.73.54 1.48V17c0 .3 0 .6.17.9" />
-            <path
-              d="M12 5c-.67 0-1.35.09-2 .26-1.78-2-2.67-2.1-2.67-2.1-.5 1.28-.17 2.22-.08 2.45-.6.65-.92 1.51-.92 2.39 0 3.11 1.9 3.8 3.71 4a2.39 2.39 0 0 0-.54 1.48V17c0 .3 0 .6-.17.9" />
-            <path d="M9 13c0-1.5 1-2.5 3-2.5s3 1 3 2.5" />
-            <line x1="8" y1="10" x2="8.01" y2="10" />
-            <line x1="16" y1="10" x2="16.01" y2="10" />
-          </svg>
-        </span>
-        Unnati
-      </a>
-
-      <ul class="nav-links" role="list">
-        <li><a href="/#work">Work</a></li>
-        <li><a href="/#about">About</a></li>
-        <li><a href="/#play">Play</a></li>
-        <li><a href="Assets/About me/resume.pdf" target="_blank">Resume</a></li>
-      </ul>
-
-      <div class="nav-actions">
-        <a href="https://www.linkedin.com/in/unnati-srivastava/" class="btn btn-ghost">Say hello</a>
-        <a href="/#work-grid" class="btn btn-primary-nav">View work</a>
-      </div>
-
-      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-  </nav>
 
   <!-- ─── TL;DR CHATBOT ──────────────────────────────────────── -->
   <div class="chatbot-wrapper">
@@ -1871,15 +1812,6 @@
     }
   </style>
 
-  <div class="mobile-overlay" id="mobileOverlay">
-    <ul class="mobile-overlay-links">
-      <li><a href="/#work-grid">Work</a></li>
-      <li><a href="/#about">About</a></li>
-      <li><a href="Assets/About me/resume.pdf" target="_blank">Resume</a></li>
-      <li><a href="https://www.linkedin.com/in/unnati-srivastava/">Contact</a></li>
-    </ul>
-  </div>
-
   <!-- ═══════════════════════════════════════════════════════════
        CASE HERO
   ═══════════════════════════════════════════════════════════ -->
@@ -1888,9 +1820,9 @@
     <div class="container">
 
       <nav class="case-breadcrumb" aria-label="Breadcrumb">
-        <a href="/">Home</a>
+        <a href="index.html">Home</a>
         <span aria-hidden="true">→</span>
-        <a href="/#work-grid">Work</a>
+        <a href="index.html#work-grid">Work</a>
         <span aria-hidden="true">→</span>
         <span aria-current="page">MathWorks</span>
       </nav>
@@ -2222,7 +2154,7 @@
           blocking
           core workflows versus which were aesthetic frustrations — and sequence the work accordingly.</p>
         <div class="reveal"
-          style="margin-top: 40px; border-radius: 16px; overflow: hidden; border: 1px solid var(--p200); aspect-ratio: 16/9; position: relative; background: var(--p50);">
+          style="margin-top: 40px; border-radius: 16px; overflow: hidden; border: 1px solid var(--p200); aspect-ratio: 16/9; position: relative; background: #0a0a0c;">
           <iframe src="https://player.vimeo.com/video/1078524728?background=1&autoplay=1&loop=1&muted=1" frameborder="0"
             allow="autoplay; fullscreen" style="position:absolute;top:0;left:0;width:100%;height:100%;"
             title="Prioritizing Research Insights"></iframe>
@@ -2347,29 +2279,26 @@
         <h2 class="section-title reveal">The transformation</h2>
         <p class="section-body reveal">Side-by-side comparison of the original App Designer interface and the proposed
           redesign — same core structure, dramatically improved clarity, hierarchy, and visual language.</p>
-        <div class="before-after reveal" style="margin-top: 40px;">
-          <div class="ba-card ba-before">
-            <div class="ba-label">Before</div>
-            <div class="ba-img">
-              <div class="img-placeholder">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-                  <rect x="3" y="3" width="18" height="18" rx="2" />
-                </svg>
-                Original App Designer interface
-              </div>
+        <div class="before-after reveal">
+          <div class="ba-slider" id="baSlider">
+            <!-- Base: After image (full width, visible on right) -->
+            <img src="Assets/Hero/MathWorks/after.png" alt="After redesign" id="baBeforeImg">
+            <!-- Overlay: Before image (clipped, visible on left) -->
+            <div class="ba-after-layer" id="baAfterLayer">
+              <img src="Assets/Hero/MathWorks/before.png" alt="Before redesign" id="baAfterImg">
             </div>
-          </div>
-          <div class="ba-card ba-after">
-            <div class="ba-label">After</div>
-            <div class="ba-img">
-              <div class="img-placeholder" style="color: var(--p600);">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
-                  <rect x="3" y="3" width="18" height="18" rx="2" />
-                  <path d="M9 11l3 3 5-5" />
-                </svg>
-                Redesigned App Designer interface
-              </div>
+            <!-- Divider line + handle -->
+            <div class="ba-divider" id="baDivider"></div>
+            <div class="ba-handle" id="baHandleBtn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18l-6-6 6-6" />
+                <path d="M15 6l6 6-6 6" />
+              </svg>
             </div>
+            <!-- Labels -->
+            <span class="ba-label-pill ba-label-before">Before</span>
+            <span class="ba-label-pill ba-label-after">After</span>
           </div>
         </div>
       </div>
@@ -2493,7 +2422,7 @@
       <h2 class="next-title reveal"><em>Spark</em></h2>
       <p class="next-desc reveal">Designing a 0→1 couples app that helps partners reconnect through playful,
         personalized coupons — as the Founding Product Designer.</p>
-      <a href="/spark" class="btn-next reveal">
+      <a href="spark.html" class="btn-next reveal">
         Read the case study
         <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
           <path d="M2.5 7h9M8 3.5l3.5 3.5L8 10.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
@@ -2511,9 +2440,9 @@
         <p class="footer-tagline">UX Designer · Making things that matter.</p>
       </div>
       <ul class="footer-links" role="list">
-        <li><a href="/#work">Work</a></li>
-        <li><a href="/#about">About</a></li>
-        <li><a href="/#play">Play</a></li>
+        <li><a href="index.html#work">Work</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#play">Play</a></li>
       </ul>
     </div>
     <div class="footer-divider"></div>
@@ -2523,12 +2452,41 @@
     </div>
   </footer>
 
+  <script src="nav-component.js"></script>
   <script>
-    // Navbar scroll
-    const nav = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 20);
-    }, { passive: true });
+    // ─── Before / After drag slider ───────────────────────────
+    (function () {
+      const slider = document.getElementById('baSlider');
+      const afterLayer = document.getElementById('baAfterLayer');
+      const divider = document.getElementById('baDivider');
+      const handle = document.getElementById('baHandleBtn');
+      if (!slider) return;
+
+      let dragging = false;
+
+      function syncAfterImgWidth() {
+        slider.style.setProperty('--ba-slider-width', slider.offsetWidth + 'px');
+      }
+      syncAfterImgWidth();
+      window.addEventListener('resize', syncAfterImgWidth);
+
+      function setPosition(x) {
+        const rect = slider.getBoundingClientRect();
+        let pct = Math.min(Math.max((x - rect.left) / rect.width, 0), 1);
+        const pctPx = (pct * 100).toFixed(2) + '%';
+        afterLayer.style.width = pctPx;
+        divider.style.left = pctPx;
+        handle.style.left = pctPx;
+      }
+
+      slider.addEventListener('mousedown', e => { dragging = true; setPosition(e.clientX); e.preventDefault(); });
+      window.addEventListener('mousemove', e => { if (dragging) setPosition(e.clientX); });
+      window.addEventListener('mouseup', () => { dragging = false; });
+
+      slider.addEventListener('touchstart', e => { dragging = true; setPosition(e.touches[0].clientX); }, { passive: true });
+      window.addEventListener('touchmove', e => { if (dragging) setPosition(e.touches[0].clientX); }, { passive: true });
+      window.addEventListener('touchend', () => { dragging = false; });
+    })();
 
     // Scroll reveal — only activate after page is fully loaded
     document.documentElement.classList.add('js-ready');
@@ -2563,24 +2521,6 @@
 
       trackedSections.forEach(section => tocObserver.observe(section));
     }
-
-    // Mobile menu toggle
-    const mobileToggle = document.getElementById('mobileToggle');
-    const mobileOverlay = document.getElementById('mobileOverlay');
-    const body = document.body;
-
-    if (mobileToggle) {
-      mobileToggle.addEventListener('click', () => {
-        body.classList.toggle('nav-menu-open');
-      });
-    }
-
-    // Close menu when clicking links
-    document.querySelectorAll('.mobile-overlay-links a').forEach(link => {
-      link.addEventListener('click', () => {
-        body.classList.remove('nav-menu-open');
-      });
-    });
 
     // ── CHATBOT LOGIC ──────────────────────────────────────────
     const chatToggle = document.getElementById('chatToggle');

@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="Assets/Hero/logo.svg">
   <title>Crossfill Actions — Unnati Srivastava</title>
   <meta name="description"
     content="Case study: Crossfill Actions — Designing the optimization workflow that turned a reporting dashboard into an actionable product." />
@@ -1714,7 +1715,101 @@
         border-bottom: 1px solid rgba(255, 255, 255, 0.06);
       }
     }
+
+    /* ── DARK MODE ────────────────────────────────────────────── */
+    [data-theme="dark"] {
+      --white: #09090b;
+      --near-white: #18181b;
+      --bg-card: #27272a;
+      --black: #fafafa;
+      --n700: #a1a1aa;
+      --n500: #71717a;
+      --n300: #3f3f46;
+      --n100: #27272a;
+      --divider: rgba(255, 255, 255, 0.08);
+      --divider-light: rgba(255, 255, 255, 0.05);
+    }
+    [data-theme="dark"] nav {
+      background: rgba(9, 9, 11, 0.88);
+      border-bottom-color: rgba(255, 255, 255, 0.07);
+    }
+    [data-theme="dark"] nav.scrolled {
+      box-shadow: 0 2px 20px rgba(0,0,0,0.4);
+    }
+    [data-theme="dark"] .nav-links a:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+    [data-theme="dark"] .btn-ghost:hover {
+      background: rgba(255, 255, 255, 0.06);
+    }
+    [data-theme="dark"] .mobile-overlay {
+      background: rgba(9, 9, 11, 0.92);
+    }
+    [data-theme="dark"] .btn-outline {
+      border-color: rgba(255, 255, 255, 0.2) !important;
+      color: var(--black);
+    }
+    [data-theme="dark"] .btn-outline:hover {
+      border-color: rgba(255, 255, 255, 0.35) !important;
+    }
+    [data-theme="dark"] ::-webkit-scrollbar-track {
+      background: var(--white);
+    }
+    [data-theme="dark"] ::selection {
+      background: #2e1f6b;
+      color: #fafafa;
+    }
+
+    /* ── THEME TOGGLE ─────────────────────────────────────────── */
+    .btn-theme-toggle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(16, 15, 18, 0.15);
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--n700);
+      transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s var(--ease-spring);
+      flex-shrink: 0;
+    }
+    .btn-theme-toggle:hover {
+      background: rgba(16, 15, 18, 0.06);
+      border-color: rgba(16, 15, 18, 0.25);
+      color: var(--black);
+      transform: scale(1.08);
+    }
+    .btn-theme-toggle:active {
+      transform: scale(0.95);
+    }
+    .btn-theme-toggle:focus-visible {
+      outline: 2px solid var(--p500);
+      outline-offset: 3px;
+    }
+    [data-theme="dark"] .btn-theme-toggle {
+      border-color: rgba(255, 255, 255, 0.15);
+      color: var(--n700);
+    }
+    [data-theme="dark"] .btn-theme-toggle:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.3);
+      color: var(--black);
+    }
+    .icon-sun { display: none; }
+    .icon-moon { display: block; }
+    [data-theme="dark"] .icon-sun { display: block; }
+    [data-theme="dark"] .icon-moon { display: none; }
   </style>
+  <script>
+    (function() {
+      var saved = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = saved ? saved : (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
 </head>
 
 <body>
@@ -1722,7 +1817,7 @@
   <!-- ─── Navigation ──────────────────────────────────────── -->
   <div class="nav-wrapper">
     <nav id="main-nav">
-      <a href="/" class="nav-logo" aria-label="Home — Unnati">
+      <a href="index.html" class="nav-logo" aria-label="Home — Unnati">
         <span class="nav-logo-mark" aria-hidden="true">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
             stroke-linecap="round" stroke-linejoin="round">
@@ -1738,10 +1833,26 @@
         Unnati
       </a>
       <ul class="nav-links">
-        <li><a href="/#work-grid">Work</a></li>
-        <li><a href="Assets/About me/resume.pdf" target="_blank">Resume</a></li>
+        <li><a href="index.html#work-grid">Work</a></li>
+        <li><a href="Assets/About%20me/resume.pdf" target="_blank">Resume</a></li>
         <li><a href="https://www.linkedin.com/in/unnati-srivastava/" class="nav-cta">Say hello →</a></li>
       </ul>
+      <button id="themeToggle" class="btn-theme-toggle" aria-label="Toggle dark mode">
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/>
+          <line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/>
+          <line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+      </button>
       <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
         <span></span>
         <span></span>
@@ -1901,9 +2012,9 @@
 
   <div class="mobile-overlay" id="mobileOverlay">
     <ul class="mobile-overlay-links">
-      <li><a href="/#work-grid">Work</a></li>
-      <li><a href="/#about">About</a></li>
-      <li><a href="Assets/About me/resume.pdf" target="_blank">Resume</a></li>
+      <li><a href="index.html#work-grid">Work</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="Assets/About%20me/resume.pdf" target="_blank">Resume</a></li>
       <li><a href="https://www.linkedin.com/in/unnati-srivastava/">Contact</a></li>
     </ul>
   </div>
@@ -2431,7 +2542,7 @@
       <h2 class="next-title reveal reveal-delay-1">Spark</h2>
       <p class="next-subtitle reveal reveal-delay-2">Designing the onboarding flow that made early users stick.</p>
       <div class="reveal reveal-delay-3">
-        <a href="/spark" class="btn-pill btn-primary">View Case Study →</a>
+        <a href="spark.html" class="btn-pill btn-primary">View Case Study →</a>
       </div>
     </div>
   </section>
@@ -2439,7 +2550,7 @@
   <!-- ─── Footer ───────────────────────────────────────────── -->
   <footer>
     <div class="footer-inner">
-      <a href="/" class="footer-logo">Unnati</a>
+      <a href="index.html" class="footer-logo">Unnati</a>
       <div class="footer-copy">© 2026 · Product Designer</div>
     </div>
   </footer>
@@ -2485,6 +2596,17 @@
         body.classList.remove('nav-menu-open');
       });
     });
+
+    // Theme toggle
+    var themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+      themeToggle.addEventListener('click', function() {
+        var current = document.documentElement.getAttribute('data-theme');
+        var next = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+      });
+    }
 
     // ── CHATBOT LOGIC ──────────────────────────────────────────
     const chatToggle = document.getElementById('chatToggle');
